@@ -5,7 +5,7 @@ namespace MaleficsTest
 {
     public class Tests
     {
-        private Board _board;
+        private Board _board = new();
 
         [SetUp]
         public void Setup()

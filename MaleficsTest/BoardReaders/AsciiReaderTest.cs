@@ -6,7 +6,7 @@ namespace MaleficsTest.BoardReaders
     [TestFixture]
     public class AsciiReaderTest
     {
-        private AsciiReader _reader;
+        private AsciiReader _reader = new();
 
         [SetUp]
         public void Setup()
