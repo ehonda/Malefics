@@ -13,12 +13,12 @@ namespace Malefics.BoardReaders
         {
             var rows = board.Split(ROW_END);
 
-            var nodesWithPositions = rows
+            var nodePositions = rows
                 .Reverse()
                 .SelectMany((row, y) => row
-                    .Select((node, x) => (ParseNode(node), new Position(x, y))));
+                    .Select((node, x) => (new Position(x, y), ParseNode(node))));
 
-            return new(nodesWithPositions.ToDictionary(np => np.Item2, np => np.Item1));
+            return new(nodePositions);
         }
 
         private static Node ParseNode(char node)
