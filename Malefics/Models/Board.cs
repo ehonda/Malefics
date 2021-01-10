@@ -4,6 +4,8 @@ using System.Linq;
 
 namespace Malefics.Models
 {
+    using Path = IEnumerable<Position>;
+
     public class Board
     {
         private readonly IDictionary<Position, Node> _nodes
@@ -22,5 +24,9 @@ namespace Malefics.Models
 
         public bool IsUsable(Position position)
             => _nodes.ContainsKey(position);
+
+        public bool IsValid(Path path)
+            => path.IsPath()
+            && path.All(IsUsable);
     }
 }
