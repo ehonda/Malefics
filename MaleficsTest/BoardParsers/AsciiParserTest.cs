@@ -1,4 +1,4 @@
-﻿using Malefics.BoardReaders;
+﻿using Malefics.Parsers;
 using NUnit.Framework;
 
 namespace MaleficsTest.BoardReaders

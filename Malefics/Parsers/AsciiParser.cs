@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace Malefics.BoardReaders
+namespace Malefics.Parsers
 {
     public class AsciiParser
     {
