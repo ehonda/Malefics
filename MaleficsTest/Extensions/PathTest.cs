@@ -67,8 +67,18 @@ namespace MaleficsTest.Extensions
             var p = Path.AxisParallel(new(0, 0), new(0, 1));
             var e = Enumerable.Empty<Position>();
 
-            Assert.That(p.JoinPathTo(e), Is.EqualTo(p));
-            Assert.That(e.JoinPathTo(p), Is.EqualTo(p));
+            Assert.That(p.JoinPathTo(e), Is.EquivalentTo(p));
+            Assert.That(e.JoinPathTo(p), Is.EquivalentTo(p));
+        }
+
+        [Test]
+        public void Joining_With_Neighboring_Single_Element_Gives_Back_Original_Path()
+        {
+            var p = Path.AxisParallel(new(0, 0), new(0, 1));
+            var s = new[] { new Position(0, 1) };
+
+            Assert.That(p.JoinPathTo(s), Is.EquivalentTo(p));
+            Assert.That(s.JoinPathTo(s), Is.EquivalentTo(s));
         }
 
         [Test]
