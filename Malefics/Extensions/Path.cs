@@ -56,5 +56,11 @@ namespace Malefics.Extensions
                 .Zip(endpoints.Skip(1))
                 .Select(points => Path.AxisParallel(points.First, points.Second))
                 .Aggregate(JoinPathTo);
+
+        public static bool AllDistinct(this IEnumerable<Position> p)
+        {
+            var q = p.ToArray();
+            return q.Distinct().Count() == q.Count();
+        }
     }
 }

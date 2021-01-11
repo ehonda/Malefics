@@ -29,6 +29,7 @@ namespace Malefics.Models
 
         public bool IsLegalPath(Path path)
             => path.IsPath()
-            && path.All(IsTraversable);
+            && path.All(IsTraversable)
+            && path.AllDistinct();
     }
 }

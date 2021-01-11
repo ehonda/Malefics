@@ -52,5 +52,14 @@ namespace MaleficsTest
             Assert.False(_board.IsLegalPath(
                 Path.AxisParallel(new(0, 0), new(0, 3))));
         }
+
+        [Test]
+        public void A_Path_Backtracking_Is_Not_Legal()
+        {
+            _board = _parser.Parse("...");
+
+            Assert.False(_board.IsLegalPath(
+                Path.AxisParallelSegments(new(0, 0), new(2, 0), new(1, 0))));
+        }
     }
 }
