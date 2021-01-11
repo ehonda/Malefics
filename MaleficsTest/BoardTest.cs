@@ -24,5 +24,12 @@ namespace MaleficsTest
             _board = _parser.Parse("..");
             Assert.True(_board.IsValidPath(Path.AxisParallel(new(0, 0), new(1, 0))));
         }
+
+        [Test]
+        public void A_Straight_Path_Over_An_Unusable_Node_Is_Not_Valid()
+        {
+            _board = _parser.Parse(". .");
+            Assert.False(_board.IsValidPath(Path.AxisParallel(new(0, 0), new(2, 0))));
+        }
     }
 }
