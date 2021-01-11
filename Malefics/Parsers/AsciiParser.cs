@@ -29,9 +29,9 @@ namespace Malefics.Parsers
         private static Node? ParseNode(char node)
             => node switch
             {
-                EMPTY_NODE => new(),
+                EMPTY_NODE => Node.Unoccupied(),
                 WALL => null,
-                BARRICADE => new Node { OccupyingPiece = new Barricade() },
+                BARRICADE => Node.OccupiedBy(new Barricade()),
                 _ => throw new ArgumentException($"Unkown node encoding: {node}")
             };
     }
