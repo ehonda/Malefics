@@ -19,28 +19,28 @@ namespace MaleficsTest
         }
 
         [Test]
-        public void A_Straight_Path_Over_Unoccupied_Usable_Nodes_Is_Valid()
+        public void A_Straight_Path_Over_Unoccupied_Usable_Nodes_Is_Traversable()
         {
             _board = _parser.Parse("..");
-            Assert.True(_board.IsValidPath(Path.AxisParallel(new(0, 0), new(1, 0))));
+            Assert.True(_board.IsTraversable(Path.AxisParallel(new(0, 0), new(1, 0))));
         }
 
         [Test]
-        public void A_Straight_Path_Over_An_Unusable_Node_Is_Not_Valid()
+        public void A_Straight_Path_Over_An_Unusable_Node_Is_Not_Traversable()
         {
             _board = _parser.Parse(". .");
-            Assert.False(_board.IsValidPath(Path.AxisParallel(new(0, 0), new(2, 0))));
+            Assert.False(_board.IsTraversable(Path.AxisParallel(new(0, 0), new(2, 0))));
         }
 
         [Test]
-        public void A_Path_Around_A_Corner_Is_Valid()
+        public void A_Path_Around_A_Corner_Is_Traversable()
         {
             _board = _parser.Parse(string.Join('\n',
                 "  .",
                 "  .",
                 "..."));
 
-            Assert.True(_board.IsValidPath(
+            Assert.True(_board.IsTraversable(
                 Path.AxisParallelSegments(new(0, 0), new(2, 0), new(2, 2))));
         }
     }
