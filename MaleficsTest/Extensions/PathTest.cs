@@ -62,6 +62,16 @@ namespace MaleficsTest.Extensions
         }
 
         [Test]
+        public void Empty_Path_Is_Neutral_Element_In_Joining()
+        {
+            var p = Path.AxisParallel(new(0, 0), new(0, 1));
+            var e = Enumerable.Empty<Position>();
+
+            Assert.That(p.JoinPathTo(e), Is.EqualTo(p));
+            Assert.That(e.JoinPathTo(p), Is.EqualTo(p));
+        }
+
+        [Test]
         public void Joining_Paths_Throws_If_They_Are_Not_Connected()
         {
             var p = Path.AxisParallel(new(0, 0), new(2, 0));

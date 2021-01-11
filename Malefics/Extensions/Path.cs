@@ -36,10 +36,15 @@ namespace Malefics.Extensions
             throw new ArgumentException($"{start} and {end} have no equal coordinate");
         }
 
-        // TODO: Handle empty case
         public static IEnumerable<Position> JoinPathTo(
             this IEnumerable<Position> p, IEnumerable<Position> q)
         {
+            if (!p.Any())
+                return q;
+
+            if (!q.Any())
+                return p;
+
             if (p.Last() != q.First())
                 throw new ArgumentException($"Can't join path ending in {p.Last()} " +
                     $"with path starting in {q.First()}");
