@@ -69,5 +69,13 @@ namespace MaleficsTest.Extensions
 
             Assert.That(p, Is.EquivalentTo(expectedPath));
         }
+
+        [Test]
+        public void Segments_From_Less_Than_Two_Endpoints_Throws()
+        {
+            Assert.Catch<ArgumentException>(() => Path.AxisParallelSegments());
+            Assert.Catch<ArgumentException>(
+                () => Path.AxisParallelSegments(new Position(0, 0)));
+        }
     }
 }

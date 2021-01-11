@@ -50,12 +50,17 @@ namespace Malefics.Extensions
             return p.Concat(q.Skip(1));
         }
 
-        // TODO: Handle empty case
         public static IEnumerable<Position> AxisParallelSegments(params Position[] endpoints)
-            => endpoints
-                .Zip(endpoints.Skip(1))
-                .Select(points => Path.AxisParallel(points.First, points.Second))
-                .Aggregate(JoinPathTo);
+            => endpoints switch
+            {
+                Position[] { Length: < 2 } => throw new ArgumentException(
+                    "Can't construct segments path from less than 2 endpoints."),
+
+                _ => endpoints
+                    .Zip(endpoints.Skip(1))
+                    .Select(points => AxisParallel(points.First, points.Second))
+                    .Aggregate(JoinPathTo)
+            };
 
         public static bool AllDistinct(this IEnumerable<Position> p)
         {
