@@ -1,4 +1,5 @@
 ﻿using Malefics.Extensions;
+using Malefics.Models;
 using System;
 using System.Linq;
 
@@ -8,7 +9,7 @@ namespace Malefics
     {
         static void Main(string[] args)
         {
-            Console.WriteLine($"{Path.AxisParallelSegments().Any()}");
+            Console.WriteLine($"{Path.AxisParallelSegments(new Position(0, 0)).Any()}");
         }
     }
 }
