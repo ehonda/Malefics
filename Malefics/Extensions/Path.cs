@@ -10,9 +10,6 @@ namespace Malefics.Extensions
         public static bool IsPath(this IEnumerable<Position> positions)
         {
             var positionsEnumerated = positions.ToArray();
-            if (positionsEnumerated.Length < 2)
-                return false;
-
             return positionsEnumerated
                 .Zip(positionsEnumerated.Skip(1))
                 .Aggregate(

@@ -2,11 +2,28 @@
 using Malefics.Models;
 using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace MaleficsTest.Extensions
 {
     public class PathTest
     {
+        [Test]
+        public void Empty_Is_A_Path()
+            => Assert.IsTrue(Enumerable.Empty<Position>().IsPath());
+
+        [Test]
+        public void Single_Position_Is_A_Path()
+            => Assert.IsTrue(new[] { new Position(0, 0) }.IsPath());
+
+        [Test]
+        public void Non_Neighboring_Positions_Are_Not_A_Path()
+            => Assert.IsFalse(new[] { new Position(0, 0), new(1, 1) }.IsPath());
+
+        [Test]
+        public void Neighboring_Positions_Are_A_Path()
+            => Assert.IsTrue(new[] { new Position(0, 0), new(0, 1), new(1, 1) }.IsPath());
+
         [Test]
         public void Axis_Parallel_Paths_In_All_Directions()
         {
