@@ -25,7 +25,7 @@ namespace Malefics.Models
         public bool IsUsable(Position position)
             => _nodes.ContainsKey(position);
 
-        public bool IsTraversable(Path path)
+        public bool IsLegalPath(Path path)
             => path.IsPath()
             && path.All(IsUsable);
     }
