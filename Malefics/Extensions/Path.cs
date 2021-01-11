@@ -39,17 +39,19 @@ namespace Malefics.Extensions
         public static IEnumerable<Position> JoinPathTo(
             this IEnumerable<Position> p, IEnumerable<Position> q)
         {
-            if (!p.Any())
+            var p_ = p.ToArray();
+            if (!p_.Any())
                 return q;
 
-            if (!q.Any())
-                return p;
+            var q_0 = q.FirstOrDefault();
+            if (q_0 is null)
+                return p_;
 
-            if (p.Last() != q.First())
-                throw new ArgumentException($"Can't join path ending in {p.Last()} " +
-                    $"with path starting in {q.First()}");
+            if (p_.Last() != q_0)
+                throw new ArgumentException($"Can't join path ending in {p_.Last()} " +
+                    $"with path starting in {q_0}");
 
-            return p.Concat(q.Skip(1));
+            return p_.Concat(q.Skip(1));
         }
 
         public static IEnumerable<Position> AxisParallelSegments(params Position[] endpoints)
