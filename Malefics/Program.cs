@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Malefics.Extensions;
+using System;
+using System.Linq;
 
 namespace Malefics
 {
@@ -6,7 +8,7 @@ namespace Malefics
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine($"{Path.AxisParallelSegments().Any()}");
         }
     }
 }
