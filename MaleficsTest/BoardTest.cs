@@ -31,5 +31,17 @@ namespace MaleficsTest
             _board = _parser.Parse(". .");
             Assert.False(_board.IsValidPath(Path.AxisParallel(new(0, 0), new(2, 0))));
         }
+
+        [Test]
+        public void A_Path_Around_A_Corner_Is_Valid()
+        {
+            _board = _parser.Parse(string.Join('\n',
+                "  .",
+                "  .",
+                "..."));
+
+            Assert.True(_board.IsValidPath(
+                Path.AxisParallelSegments(new(0, 0), new(2, 0), new(2, 2))));
+        }
     }
 }

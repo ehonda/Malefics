@@ -52,5 +52,22 @@ namespace MaleficsTest.Extensions
 
             Assert.Catch<ArgumentException>(() => p.JoinPathTo(q));
         }
+
+        [Test]
+        public void Create_Path_From_Segments_Through_Endpoints()
+        {
+            var p = Path.AxisParallelSegments(new(0, 0), new(1, 0), new(1, 3));
+
+            var expectedPath = new Position[]
+            {
+                new(0, 0),
+                new(1, 0),
+                new(1, 1),
+                new(1, 2),
+                new(1, 3)
+            };
+
+            Assert.That(p, Is.EquivalentTo(expectedPath));
+        }
     }
 }

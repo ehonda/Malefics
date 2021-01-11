@@ -39,6 +39,7 @@ namespace Malefics.Extensions
             throw new ArgumentException($"{start} and {end} have no equal coordinate");
         }
 
+        // TODO: Handle empty case
         public static IEnumerable<Position> JoinPathTo(
             this IEnumerable<Position> p, IEnumerable<Position> q)
         {
@@ -48,5 +49,12 @@ namespace Malefics.Extensions
 
             return p.Concat(q.Skip(1));
         }
+
+        // TODO: Handle empty case
+        public static IEnumerable<Position> AxisParallelSegments(params Position[] endpoints)
+            => endpoints
+                .Zip(endpoints.Skip(1))
+                .Select(points => Path.AxisParallel(points.First, points.Second))
+                .Aggregate(JoinPathTo);
     }
 }
