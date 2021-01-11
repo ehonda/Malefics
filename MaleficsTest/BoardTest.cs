@@ -1,3 +1,4 @@
+using Malefics.Extensions;
 using Malefics.Models;
 using Malefics.Parsers;
 using NUnit.Framework;
@@ -21,7 +22,7 @@ namespace MaleficsTest
         public void A_Straight_Path_Over_Unoccupied_Usable_Nodes_Is_Valid()
         {
             _board = _parser.Parse("..");
-            Assert.True(_board.IsValid(new[] { new Position(0, 0), new(1, 0) }));
+            Assert.True(_board.IsValid(Path.AxisParallel(new(0, 0), new(1, 0))));
         }
     }
 }
