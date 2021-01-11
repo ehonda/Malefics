@@ -15,19 +15,19 @@ namespace MaleficsTest.BoardReaders
         }
 
         [Test]
-        public void Undeclared_Node_Is_Unusable()
+        public void Undeclared_Node_Is_Not_Traversable()
         {
             var asciiBoard = "";
             var board = _parser.Parse(asciiBoard);
-            Assert.False(board.IsUsable(new(0, 0)));
+            Assert.False(board.IsTraversable(new(0, 0)));
         }
 
         [Test]
-        public void Empty_Node_Is_Usable()
+        public void Empty_Node_Is_Traversable()
         {
             var asciiBoard = ".";
             var board = _parser.Parse(asciiBoard);
-            Assert.True(board.IsUsable(new(0, 0)));
+            Assert.True(board.IsTraversable(new(0, 0)));
         }
     }
 }

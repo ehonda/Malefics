@@ -23,12 +23,12 @@ namespace Malefics.Models
             => _nodes = nodePositions.ToDictionary(Pair.First, Pair.Second);
 
 
-        public bool IsUsable(Position position)
+        public bool IsTraversable(Position position)
             => _nodes.ContainsKey(position)
             && _nodes[position].OccupyingPiece is not Barricade;
 
         public bool IsLegalPath(Path path)
             => path.IsPath()
-            && path.All(IsUsable);
+            && path.All(IsTraversable);
     }
 }
