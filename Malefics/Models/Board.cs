@@ -1,4 +1,5 @@
 ﻿using Malefics.Extensions;
+using Malefics.Models.Pieces;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,7 +24,8 @@ namespace Malefics.Models
 
 
         public bool IsUsable(Position position)
-            => _nodes.ContainsKey(position);
+            => _nodes.ContainsKey(position)
+            && _nodes[position].OccupyingPiece is not Barricade;
 
         public bool IsLegalPath(Path path)
             => path.IsPath()

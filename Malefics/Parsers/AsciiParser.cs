@@ -1,4 +1,5 @@
 ﻿using Malefics.Models;
+using Malefics.Models.Pieces;
 using System;
 using System.Linq;
 
@@ -9,6 +10,7 @@ namespace Malefics.Parsers
         private readonly string ROW_END = "\n";
         private const char EMPTY_NODE = '.';
         private const char WALL = ' ';
+        private const char BARRICADE = 'o';
 
         public Board Parse(string board)
         {
@@ -29,6 +31,7 @@ namespace Malefics.Parsers
             {
                 EMPTY_NODE => new(),
                 WALL => null,
+                BARRICADE => new Node { OccupyingPiece = new Barricade() },
                 _ => throw new ArgumentException($"Unkown node encoding: {node}")
             };
     }

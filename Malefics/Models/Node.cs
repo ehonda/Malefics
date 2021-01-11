@@ -1,4 +1,6 @@
-﻿namespace Malefics.Models
+﻿using Malefics.Models.Pieces;
+
+namespace Malefics.Models
 {
     public class Node
     {
