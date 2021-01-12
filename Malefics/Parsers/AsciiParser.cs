@@ -26,12 +26,12 @@ namespace Malefics.Parsers
             return new(nodePositions!);
         }
 
-        private static Node? ParseNode(char node)
+        private static Tile? ParseNode(char node)
             => node switch
             {
-                EMPTY_NODE => Node.Unoccupied(),
+                EMPTY_NODE => Tile.Unoccupied(),
                 WALL => null,
-                BARRICADE => Node.OccupiedBy(new Barricade()),
+                BARRICADE => Tile.OccupiedBy(new Barricade()),
                 _ => throw new ArgumentException($"Unkown node encoding: {node}")
             };
     }

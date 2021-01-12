@@ -9,17 +9,17 @@ namespace Malefics.Models
 
     public class Board
     {
-        private readonly IDictionary<Position, Node> _nodes
-            = new Dictionary<Position, Node>();
+        private readonly IDictionary<Position, Tile> _nodes
+            = new Dictionary<Position, Tile>();
 
         public Board()
         {
         }
 
-        public Board(IDictionary<Position, Node> nodes)
+        public Board(IDictionary<Position, Tile> nodes)
             => _nodes = nodes;
 
-        public Board(IEnumerable<(Position, Node)> nodePositions)
+        public Board(IEnumerable<(Position, Tile)> nodePositions)
             => _nodes = nodePositions.ToDictionary(Pair.First, Pair.Second);
 
 
