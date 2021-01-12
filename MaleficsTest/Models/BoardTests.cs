@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace MaleficsTest
 {
     [TestFixture]
-    public class BoardTest
+    public class BoardTests
     {
         private Board _board = new();
         private BoardParser _parser = new();
