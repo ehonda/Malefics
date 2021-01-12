@@ -1,7 +1,7 @@
 ﻿using Malefics.Parsers.Ascii;
 using NUnit.Framework;
 
-namespace MaleficsTest.BoardReaders
+namespace MaleficsTest.Parsers.Ascii
 {
     [TestFixture]
     public class AsciiParserTest
