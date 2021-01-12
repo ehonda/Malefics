@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Malefics.Parsers.Ascii
 {
-    public class AsciiParser
+    public class BoardParser
     {
         private readonly string ROW_END = "\n";
         private const char EMPTY_NODE = '.';

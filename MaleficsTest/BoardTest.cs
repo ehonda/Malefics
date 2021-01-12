@@ -9,7 +9,7 @@ namespace MaleficsTest
     public class BoardTest
     {
         private Board _board = new();
-        private AsciiParser _parser = new();
+        private BoardParser _parser = new();
 
         [SetUp]
         public void Setup()

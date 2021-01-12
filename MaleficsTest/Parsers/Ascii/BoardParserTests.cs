@@ -4,9 +4,9 @@ using NUnit.Framework;
 namespace MaleficsTest.Parsers.Ascii
 {
     [TestFixture]
-    public class AsciiParserTest
+    public class BoardParserTests
     {
-        private AsciiParser _parser = new();
+        private BoardParser _parser = new();
 
         [SetUp]
         public void Setup()
