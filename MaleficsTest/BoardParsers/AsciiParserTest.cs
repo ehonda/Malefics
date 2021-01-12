@@ -15,7 +15,7 @@ namespace MaleficsTest.BoardReaders
         }
 
         [Test]
-        public void Undeclared_Node_Is_Not_Traversable()
+        public void The_Empty_String_Is_Parsed_As_All_Rock_Tiles()
         {
             var asciiBoard = "";
             var board = _parser.Parse(asciiBoard);
@@ -23,7 +23,7 @@ namespace MaleficsTest.BoardReaders
         }
 
         [Test]
-        public void Empty_Node_Is_Traversable()
+        public void An_Unoccupied_Road_Tile_Is_Traversable()
         {
             var asciiBoard = ".";
             var board = _parser.Parse(asciiBoard);
