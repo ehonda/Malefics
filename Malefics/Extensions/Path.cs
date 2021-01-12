@@ -69,7 +69,7 @@ namespace Malefics.Extensions
         public static bool AllDistinct(this IEnumerable<Position> p)
         {
             var q = p.ToArray();
-            return q.Distinct().Count() == q.Count();
+            return q.Distinct().Count() == q.Length;
         }
     }
 }
