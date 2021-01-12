@@ -1,4 +1,5 @@
-﻿using Malefics.Models;
+﻿using Malefics.Enums;
+using Malefics.Models;
 using Malefics.Models.Pieces;
 using System;
 
@@ -9,6 +10,7 @@ namespace Malefics.Parsers.Ascii
         private const char ROCK = ' ';
         private const char ROAD = '.';
         private const char BARRICADE = 'o';
+        private const char PLAYER_RED = 'r';
 
         public Tile Parse(char tile)
             => tile switch
@@ -19,6 +21,11 @@ namespace Malefics.Parsers.Ascii
                 {
                     Terrain = Terrain.Road, 
                     OccupyingPiece = new Barricade() 
+                },
+                PLAYER_RED => new()
+                {
+                    Terrain = Terrain.Road,
+                    OccupyingPiece = new Pawn { Player = Player.Red }
                 },
                 _ => throw new ArgumentException($"Unkown tile encoding: {tile}")
             };
