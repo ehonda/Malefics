@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace MaleficsTest.Extensions
 {
-    public class PathTest
+    public class PathTests
     {
         [Test]
         public void Empty_Is_A_Path()
