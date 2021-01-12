@@ -19,21 +19,21 @@ namespace MaleficsTest
         }
 
         [Test]
-        public void A_Straight_Path_Over_Unoccupied_Usable_Nodes_Is_Legal()
+        public void A_Straight_Path_Over_Unoccupied_Road_Tiles_Is_Legal()
         {
             _board = _parser.Parse("..");
             Assert.True(_board.IsLegalPath(Path.AxisParallel(new(0, 0), new(1, 0))));
         }
 
         [Test]
-        public void A_Straight_Path_Over_An_Unusable_Node_Is_Not_Legal()
+        public void A_Straight_Path_Over_A_Rock_Tile_Is_Not_Legal()
         {
             _board = _parser.Parse(". .");
             Assert.False(_board.IsLegalPath(Path.AxisParallel(new(0, 0), new(2, 0))));
         }
 
         [Test]
-        public void A_Path_Around_A_Corner_Is_Legal()
+        public void A_Path_Over_Road_Tiles_Around_A_Corner_Is_Legal()
         {
             _board = _parser.Parse(string.Join('\n',
                 "  .",
@@ -54,7 +54,7 @@ namespace MaleficsTest
         }
 
         [Test]
-        public void A_Path_Backtracking_Is_Not_Legal()
+        public void A_Path_Over_Road_Tiles_That_Backtracks_Is_Not_Legal()
         {
             _board = _parser.Parse("...");
 
