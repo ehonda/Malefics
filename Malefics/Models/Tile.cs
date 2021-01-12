@@ -4,6 +4,8 @@ namespace Malefics.Models
 {
     public class Tile
     {
+        public Terrain Terrain { get; init; }
+
         public IPiece? OccupyingPiece { get; set; }
 
         public bool IsOccupied() => OccupyingPiece is not null;
