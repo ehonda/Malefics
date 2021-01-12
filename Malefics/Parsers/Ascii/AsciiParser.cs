@@ -3,7 +3,7 @@ using Malefics.Models.Pieces;
 using System;
 using System.Linq;
 
-namespace Malefics.Parsers
+namespace Malefics.Parsers.Ascii
 {
     public class AsciiParser
     {

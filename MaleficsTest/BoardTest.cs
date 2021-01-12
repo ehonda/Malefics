@@ -1,6 +1,6 @@
 using Malefics.Extensions;
 using Malefics.Models;
-using Malefics.Parsers;
+using Malefics.Parsers.Ascii;
 using NUnit.Framework;
 
 namespace MaleficsTest
