@@ -1,11 +1,18 @@
 ﻿using Malefics.Enums;
 using Malefics.Models;
 using Sprache;
+using System.Collections.Generic;
 
 namespace Malefics.Parsers.Ascii
 {
+    // TODO: Split up Tile/Board Parser into nicely named
+    // (we don't want another 'Tile' in our namespace here)
+    // static subclasses
     public static class Grammar
     {
+        // Tile Parser
+        // ------------------------------------------------------------------
+
         private const char ROCK = ' ';
         private const char ROAD = '.';
         private const char BARRICADE = 'o';
@@ -28,5 +35,19 @@ namespace Malefics.Parsers.Ascii
             .Or(Road)
             .Or(Barricade)
             .Or(RedPawn);
+
+
+        // Tile Parser
+        // ------------------------------------------------------------------
+
+        public static readonly Parser<IEnumerable<Tile>> BoardRow =
+            Tile.Until(Parse.LineTerminator);
+            //from tiles in Parse.Many(Tile)
+            //from _ in Parse.String(ROW_END)
+            //select tiles;
+
+        //public static readonly Parser<Board> Board =
+        //    from rows in Parse.Many(BoardRow)
+        //    select rows.
     }
 }
