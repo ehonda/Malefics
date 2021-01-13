@@ -48,6 +48,6 @@ namespace Malefics.Parsers.Ascii
         //select tiles;
 
         public static readonly Parser<Board> Board 
-            = Parse.Many(BoardRow).Select(rows => new Board(rows));
+            = Parse.Many(BoardRow).Select(Models.Board.FromReversedTileRows);
     }
 }
