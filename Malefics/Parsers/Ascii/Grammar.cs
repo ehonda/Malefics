@@ -2,6 +2,7 @@
 using Malefics.Models;
 using Sprache;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Malefics.Parsers.Ascii
 {
@@ -42,12 +43,11 @@ namespace Malefics.Parsers.Ascii
 
         public static readonly Parser<IEnumerable<Tile>> BoardRow =
             Tile.Until(Parse.LineTerminator);
-            //from tiles in Parse.Many(Tile)
-            //from _ in Parse.String(ROW_END)
-            //select tiles;
+        //from tiles in Parse.Many(Tile)
+        //from _ in Parse.String(ROW_END)
+        //select tiles;
 
-        //public static readonly Parser<Board> Board =
-        //    from rows in Parse.Many(BoardRow)
-        //    select rows.
+        public static readonly Parser<Board> Board 
+            = Parse.Many(BoardRow).Select(rows => new Board(rows));
     }
 }

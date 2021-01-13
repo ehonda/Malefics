@@ -17,14 +17,15 @@ namespace Malefics.Parsers.Ascii
 
             //var rows = Grammar.BoardRow.Parse(board);
 
-            var rows = Sprache.Parse.Many(Grammar.BoardRow).Parse(board);
+            //var rows = Sprache.Parse.Many(Grammar.BoardRow).Parse(board);
 
-            var nodePositions = rows
-                .Reverse()
-                .SelectMany((row, y) => row
-                    .Select((tile, x) => (new Models.Position(x, y), tile)));
+            //var nodePositions = rows
+            //    .Reverse()
+            //    .SelectMany((row, y) => row
+            //        .Select((tile, x) => (new Models.Position(x, y), tile)));
 
-            return new(nodePositions);
+            //return new(nodePositions);
+            return Grammar.Board.Parse(board);
         }
     }
 }
