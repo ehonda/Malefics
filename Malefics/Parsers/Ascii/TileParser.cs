@@ -1,6 +1,7 @@
 ﻿using Malefics.Enums;
 using Malefics.Models;
 using Malefics.Models.Pieces;
+using Sprache;
 using System;
 
 namespace Malefics.Parsers.Ascii
@@ -15,7 +16,7 @@ namespace Malefics.Parsers.Ascii
         public Tile Parse(char tile)
             => tile switch
             {
-                ROCK => new() { Terrain = Terrain.Rock },
+                ROCK => Grammar.Rock.Parse(tile.ToString()),
                 ROAD => new() { Terrain = Terrain.Road },
                 BARRICADE => new() 
                 {
