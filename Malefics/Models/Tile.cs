@@ -13,5 +13,11 @@ namespace Malefics.Models
         public static Tile Rock() => new() { Terrain = Terrain.Rock };
 
         public static Tile Road() => new() { Terrain = Terrain.Road };
+
+        public static Tile Barricade() => new()
+        {
+            Terrain = Terrain.Road,
+            OccupyingPiece = new Barricade()
+        };
     }
 }

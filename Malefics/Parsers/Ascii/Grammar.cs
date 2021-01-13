@@ -10,5 +10,8 @@ namespace Malefics.Parsers.Ascii
 
         public static readonly Parser<Tile> Road
             = Parse.Char('.').Return(Tile.Road());
+
+        public static readonly Parser<Tile> Barricade
+            = Parse.Char('o').Return(Tile.Barricade());
     }
 }

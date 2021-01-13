@@ -18,11 +18,7 @@ namespace Malefics.Parsers.Ascii
             {
                 ROCK => Grammar.Rock.Parse(tile.ToString()),
                 ROAD => Grammar.Road.Parse(tile.ToString()),
-                BARRICADE => new() 
-                {
-                    Terrain = Terrain.Road, 
-                    OccupyingPiece = new Barricade() 
-                },
+                BARRICADE => Grammar.Barricade.Parse(tile.ToString()),
                 PLAYER_RED => new()
                 {
                     Terrain = Terrain.Road,
