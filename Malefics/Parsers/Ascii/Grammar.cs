@@ -6,6 +6,6 @@ namespace Malefics.Parsers.Ascii
     public static class Grammar
     {
         public static readonly Parser<Tile> Rock
-            = Parse.Char(' ').Return(new Tile() { Terrain = Terrain.Rock });
+            = Parse.Char(' ').Return(Tile.Rock());
     }
 }
