@@ -1,4 +1,5 @@
-﻿using Malefics.Models;
+﻿using Malefics.Enums;
+using Malefics.Models;
 using Sprache;
 
 namespace Malefics.Parsers.Ascii
@@ -13,5 +14,8 @@ namespace Malefics.Parsers.Ascii
 
         public static readonly Parser<Tile> Barricade
             = Parse.Char('o').Return(Tile.Barricade());
+
+        public static readonly Parser<Tile> RedPawn
+            = Parse.Char('r').Return(Tile.Pawn(Player.Red));
     }
 }

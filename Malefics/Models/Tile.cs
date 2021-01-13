@@ -1,4 +1,5 @@
-﻿using Malefics.Models.Pieces;
+﻿using Malefics.Enums;
+using Malefics.Models.Pieces;
 
 namespace Malefics.Models
 {
@@ -18,6 +19,12 @@ namespace Malefics.Models
         {
             Terrain = Terrain.Road,
             OccupyingPiece = new Barricade()
+        };
+
+        public static Tile Pawn(Player player) => new()
+        {
+            Terrain = Terrain.Road,
+            OccupyingPiece = new Pawn { Player = player }
         };
     }
 }

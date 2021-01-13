@@ -1,6 +1,4 @@
-﻿using Malefics.Enums;
-using Malefics.Models;
-using Malefics.Models.Pieces;
+﻿using Malefics.Models;
 using Sprache;
 using System;
 
@@ -19,11 +17,7 @@ namespace Malefics.Parsers.Ascii
                 ROCK => Grammar.Rock.Parse(tile.ToString()),
                 ROAD => Grammar.Road.Parse(tile.ToString()),
                 BARRICADE => Grammar.Barricade.Parse(tile.ToString()),
-                PLAYER_RED => new()
-                {
-                    Terrain = Terrain.Road,
-                    OccupyingPiece = new Pawn { Player = Player.Red }
-                },
+                PLAYER_RED => Grammar.RedPawn.Parse(tile.ToString()),
                 _ => throw new ArgumentException($"Unkown tile encoding: {tile}")
             };
     }
