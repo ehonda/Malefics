@@ -12,15 +12,21 @@ namespace Malefics.Parsers.Ascii
         private const char PAWN_RED = 'r';
 
         public static readonly Parser<Tile> Rock
-            = Parse.Char(ROCK).Return(Tile.Rock());
+            = Parse.Char(ROCK).Return(Models.Tile.Rock());
 
         public static readonly Parser<Tile> Road
-            = Parse.Char(ROAD).Return(Tile.Road());
+            = Parse.Char(ROAD).Return(Models.Tile.Road());
 
         public static readonly Parser<Tile> Barricade
-            = Parse.Char(BARRICADE).Return(Tile.Barricade());
+            = Parse.Char(BARRICADE).Return(Models.Tile.Barricade());
 
         public static readonly Parser<Tile> RedPawn
-            = Parse.Char(PAWN_RED).Return(Tile.Pawn(Player.Red));
+            = Parse.Char(PAWN_RED).Return(Models.Tile.Pawn(Player.Red));
+
+        public static readonly Parser<Tile> Tile
+            = Rock
+            .Or(Road)
+            .Or(Barricade)
+            .Or(RedPawn);
     }
 }
