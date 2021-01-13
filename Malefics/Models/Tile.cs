@@ -11,5 +11,7 @@ namespace Malefics.Models
         public bool IsOccupied() => OccupyingPiece is not null;
 
         public static Tile Rock() => new() { Terrain = Terrain.Rock };
+
+        public static Tile Road() => new() { Terrain = Terrain.Road };
     }
 }

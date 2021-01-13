@@ -17,7 +17,7 @@ namespace Malefics.Parsers.Ascii
             => tile switch
             {
                 ROCK => Grammar.Rock.Parse(tile.ToString()),
-                ROAD => new() { Terrain = Terrain.Road },
+                ROAD => Grammar.Road.Parse(tile.ToString()),
                 BARRICADE => new() 
                 {
                     Terrain = Terrain.Road, 
