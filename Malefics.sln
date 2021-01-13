@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Malefics", "Malefics\Malefics.csproj", "{15F50EF3-DD7C-468F-A049-2AEE87C18AFC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaleficsTest", "MaleficsTest\MaleficsTest.csproj", "{8BD0D3EA-09D1-416D-84E3-41D566BCB8E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaleficsTests", "MaleficsTest\MaleficsTests.csproj", "{8BD0D3EA-09D1-416D-84E3-41D566BCB8E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
