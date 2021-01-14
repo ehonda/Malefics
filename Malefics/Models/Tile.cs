@@ -9,10 +9,15 @@ namespace Malefics.Models
     {
         public Terrain Terrain { get; init; }
 
-        public IEnumerable<IPiece> OccupyingPieces { get; set; }
-            = Enumerable.Empty<IPiece>();
+        private IList<IPiece> _occupyingPieces = new List<IPiece>();
 
-        public bool IsOccupied() => OccupyingPieces is not null;
+        public IList<IPiece> OccupyingPieces 
+        { 
+            get => _occupyingPieces;
+            init => _occupyingPieces = value.ToList();
+        }
+
+        public bool IsOccupied() => OccupyingPieces.Any();
 
         public static Tile Rock() => new() { Terrain = Terrain.Rock };
 
