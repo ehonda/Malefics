@@ -30,6 +30,16 @@ namespace MaleficsTest.Parsers.Ascii
         }
 
         [Test]
+        public void A_Blue_Pawn_Is_Parsed_With_A_Road_Tile()
+        {
+            var tile = Grammar.Tile.Parse("b");
+
+            Assert.That(tile.Terrain, Is.EqualTo(Terrain.Road));
+            Assert.That(tile.OccupyingPiece, Is.InstanceOf<Pawn>()
+                .And.Matches<Pawn>(p => p.Player == Player.Blue));
+        }
+
+        [Test]
         public void Parse_Empty_Red_House()
         {
             var tile = Grammar.Tile.Parse("R0");

@@ -19,6 +19,7 @@ namespace Malefics.Parsers.Ascii
         private const char ROAD = '.';
         private const char BARRICADE = 'o';
         private const char PAWN_RED = 'r';
+        private const char PAWN_BLUE = 'b';
         private const char HOUSE_RED = 'R';
 
         public static readonly Parser<Tile> Rock
@@ -33,6 +34,9 @@ namespace Malefics.Parsers.Ascii
         public static readonly Parser<Tile> RedPawn
             = Parse.Char(PAWN_RED).Return(Models.Tile.Pawn(Player.Red));
 
+        public static readonly Parser<Tile> BluePawn
+            = Parse.Char(PAWN_BLUE).Return(Models.Tile.Pawn(Player.Blue));
+
         public static readonly Parser<Tile> RedHouse =
             from player in Parse.Char(HOUSE_RED)
             from pawns in Parse.Numeric
@@ -43,6 +47,7 @@ namespace Malefics.Parsers.Ascii
             .Or(Road)
             .Or(Barricade)
             .Or(RedPawn)
+            .Or(BluePawn)
             .Or(RedHouse);
 
         // Board Parser
