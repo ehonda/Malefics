@@ -1,6 +1,5 @@
 ﻿using Malefics.Enums;
 using Malefics.Models;
-using Malefics.Models.Pieces;
 using Sprache;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +14,9 @@ namespace Malefics.Parsers.Ascii
         // Tile Parser
         // ------------------------------------------------------------------
 
+        // Encodings
+        // # # # # # # # # # # # # # # # # #
+
         private const char ROCK = ' ';
         private const char ROAD = '.';
         private const char BARRICADE = 'o';
@@ -22,32 +24,54 @@ namespace Malefics.Parsers.Ascii
         private const char PAWN_BLUE = 'b';
         private const char HOUSE_RED = 'R';
 
+        private static char PawnEncoding(Player player)
+            => player switch
+            {
+                Player.Red => PAWN_RED,
+                Player.Blue => PAWN_BLUE,
+                _ => ' '
+            };
+
+        private static Parser<Tile> EncodedAs(this Tile tile, char encoding)
+            => Parse.Char(encoding).Return(tile);
+
+        // Simple terrain and pieces
+        // # # # # # # # # # # # # # # # # #
+
         public static readonly Parser<Tile> Rock
-            = Parse.Char(ROCK).Return(Models.Tile.Rock());
+            = Models.Tile.Rock().EncodedAs(ROCK);
 
         public static readonly Parser<Tile> Road
-            = Parse.Char(ROAD).Return(Models.Tile.Road());
+            = Models.Tile.Road().EncodedAs(ROAD);
 
         public static readonly Parser<Tile> Barricade
-            = Parse.Char(BARRICADE).Return(Models.Tile.Barricade());
+            = Models.Tile.Barricade().EncodedAs(BARRICADE);
 
-        public static readonly Parser<Tile> RedPawn
-            = Parse.Char(PAWN_RED).Return(Models.Tile.Pawn(Player.Red));
+        // Pawns
+        // # # # # # # # # # # # # # # # # #
 
-        public static readonly Parser<Tile> BluePawn
-            = Parse.Char(PAWN_BLUE).Return(Models.Tile.Pawn(Player.Blue));
+        public static readonly Parser<Tile> AnyPawn
+            = Pawn(Player.Red).Or(Pawn(Player.Blue));
+
+        public static Parser<Tile> Pawn(Player player)
+            => Models.Tile.Pawn(player).EncodedAs(PawnEncoding(player));
+
+        // Houses
+        // # # # # # # # # # # # # # # # # #
 
         public static readonly Parser<Tile> RedHouse =
             from player in Parse.Char(HOUSE_RED)
             from pawns in Parse.Numeric
             select new Tile() { Terrain = Terrain.House };
 
+        // Main parser
+        // # # # # # # # # # # # # # # # # #
+
         public static readonly Parser<Tile> Tile
             = Rock
             .Or(Road)
             .Or(Barricade)
-            .Or(RedPawn)
-            .Or(BluePawn)
+            .Or(AnyPawn)
             .Or(RedHouse);
 
         // Board Parser
