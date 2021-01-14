@@ -28,5 +28,14 @@ namespace MaleficsTest.Parsers.Ascii
             Assert.That(tile.OccupyingPiece, Is.InstanceOf<Pawn>()
                 .And.Matches<Pawn>(p => p.Player == Player.Red));
         }
+
+        [Test]
+        public void Parse_Empty_Red_House()
+        {
+            var tile = Grammar.Tile.Parse("R0");
+
+            Assert.That(tile.Terrain, Is.EqualTo(Terrain.House));
+            Assert.That(tile.OccupyingPiece, Is.Null);
+        }
     }
 }
