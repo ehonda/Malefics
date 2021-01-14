@@ -16,7 +16,8 @@ namespace MaleficsTest.Parsers.Ascii
             var tile = Grammar.Tile.Parse("o");
             
             Assert.That(tile.Terrain, Is.EqualTo(Terrain.Road));
-            Assert.That(tile.OccupyingPiece, Is.InstanceOf<Barricade>());
+            Assert.That(tile.OccupyingPieces, Has.Exactly(1).Items
+                .And.Exactly(1).Items.TypeOf<Barricade>());
         }
 
         [Test]
@@ -25,7 +26,8 @@ namespace MaleficsTest.Parsers.Ascii
             var tile = Grammar.Tile.Parse("r");
 
             Assert.That(tile.Terrain, Is.EqualTo(Terrain.Road));
-            Assert.That(tile.OccupyingPiece, Is.InstanceOf<Pawn>()
+            Assert.That(tile.OccupyingPieces, Has.Exactly(1).Items
+                .And.Exactly(1).Items.TypeOf<Pawn>()
                 .And.Matches<Pawn>(p => p.Player == Player.Red));
         }
 
@@ -35,7 +37,8 @@ namespace MaleficsTest.Parsers.Ascii
             var tile = Grammar.Tile.Parse("b");
 
             Assert.That(tile.Terrain, Is.EqualTo(Terrain.Road));
-            Assert.That(tile.OccupyingPiece, Is.InstanceOf<Pawn>()
+            Assert.That(tile.OccupyingPieces, Has.Exactly(1).Items
+                .And.Exactly(1).Items.TypeOf<Pawn>()
                 .And.Matches<Pawn>(p => p.Player == Player.Blue));
         }
 
@@ -45,7 +48,7 @@ namespace MaleficsTest.Parsers.Ascii
             var tile = Grammar.Tile.Parse("R0");
 
             Assert.That(tile.Terrain, Is.EqualTo(Terrain.House));
-            Assert.That(tile.OccupyingPiece, Is.Null);
+            Assert.That(tile.OccupyingPieces, Is.Empty);
         }
     }
 }

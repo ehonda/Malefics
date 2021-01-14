@@ -1,5 +1,7 @@
 ﻿using Malefics.Enums;
 using Malefics.Models.Pieces;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Malefics.Models
 {
@@ -7,9 +9,10 @@ namespace Malefics.Models
     {
         public Terrain Terrain { get; init; }
 
-        public IPiece? OccupyingPiece { get; set; }
+        public IEnumerable<IPiece> OccupyingPieces { get; set; }
+            = Enumerable.Empty<IPiece>();
 
-        public bool IsOccupied() => OccupyingPiece is not null;
+        public bool IsOccupied() => OccupyingPieces is not null;
 
         public static Tile Rock() => new() { Terrain = Terrain.Rock };
 
@@ -18,13 +21,13 @@ namespace Malefics.Models
         public static Tile Barricade() => new()
         {
             Terrain = Terrain.Road,
-            OccupyingPiece = new Barricade()
+            OccupyingPieces = new[] { new Barricade() }
         };
 
         public static Tile Pawn(Player player) => new()
         {
             Terrain = Terrain.Road,
-            OccupyingPiece = new Pawn { Player = player }
+            OccupyingPieces = new[] { new Pawn { Player = player } }
         };
     }
 }
