@@ -20,10 +20,9 @@ namespace Malefics.Models
             _occupyingPieces.Add(piece);
         }
 
-        public void RemoveFirst() => _occupyingPieces.RemoveAt(0);
+        public void Remove(IPiece piece) => _occupyingPieces.Remove(piece);
 
-        public bool IsBarricaded() => _occupyingPieces
-            .Contains(new Barricade());
+        public bool IsBarricaded() => _occupyingPieces.Contains(new Barricade());
 
         public bool IsOccupied() => _occupyingPieces.Any();
 

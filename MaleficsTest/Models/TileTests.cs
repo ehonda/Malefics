@@ -30,7 +30,7 @@ namespace MaleficsTests.Models
         public void A_Pawn_Can_Be_Removed_From_A_House()
         {
             var house = Tile.House(Player.Red, 1);
-            house.RemoveFirst();
+            house.Remove(new Pawn(Player.Red));
 
             Assert.That(house.IsOccupied, Is.False);
         }
