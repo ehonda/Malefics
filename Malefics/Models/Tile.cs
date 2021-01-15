@@ -1,6 +1,6 @@
-﻿using System;
-using Malefics.Enums;
+﻿using Malefics.Enums;
 using Malefics.Models.Pieces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,12 +11,6 @@ namespace Malefics.Models
         public Terrain Terrain { get; init; }
 
         private IList<IPiece> _occupyingPieces = new List<IPiece>();
-
-        //public IList<IPiece> OccupyingPieces
-        //{
-        //    get => _occupyingPieces;
-        //    init => _occupyingPieces = value.ToList();
-        //}
 
         public void Add(IPiece piece)
         {
@@ -29,8 +23,7 @@ namespace Malefics.Models
         public void RemoveFirst() => _occupyingPieces.RemoveAt(0);
 
         public bool IsBarricaded() => _occupyingPieces
-            .Select(piece => piece.GetType())
-            .Contains(typeof(Barricade));
+            .Contains(new Barricade());
 
         public bool IsOccupied() => _occupyingPieces.Any();
 
