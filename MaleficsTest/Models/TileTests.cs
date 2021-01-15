@@ -2,6 +2,7 @@
 using Malefics.Models;
 using Malefics.Models.Pieces;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 
 namespace MaleficsTests.Models
@@ -9,6 +10,14 @@ namespace MaleficsTests.Models
     [TestFixture]
     public class TileTests
     {
+        //[Test]
+        //public void No_Piece_Can_Be_Added_To_A_Tile_With_Rock_Terrain()
+        //{
+        //    var tile = Tile.Rock();
+        //    Assert.Catch<InvalidOperationException>(
+        //        () => tile.OccupyingPieces.Add(new Barricade()));
+        //}
+
         [Test]
         public void A_Pawn_Can_Be_Added_To_An_Empty_House()
         {

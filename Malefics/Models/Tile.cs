@@ -12,10 +12,13 @@ namespace Malefics.Models
         private IList<IPiece> _occupyingPieces = new List<IPiece>();
 
         public IList<IPiece> OccupyingPieces 
-        { 
+        {
             get => _occupyingPieces;
             init => _occupyingPieces = value.ToList();
         }
+
+        public void Add(IPiece piece)
+            => _occupyingPieces.Add(piece);
 
         public bool IsOccupied() => OccupyingPieces.Any();
 
