@@ -4,7 +4,7 @@ using Malefics.Parsers.Ascii;
 using NUnit.Framework;
 using Sprache;
 
-namespace MaleficsTest
+namespace MaleficsTests.Models
 {
     [TestFixture]
     public class BoardTests

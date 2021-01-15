@@ -5,7 +5,7 @@ using Malefics.Parsers.Ascii;
 using NUnit.Framework;
 using Sprache;
 
-namespace MaleficsTest.Parsers.Ascii
+namespace MaleficsTests.Parsers.Ascii
 {
     [TestFixture]
     public class TileParserTests

@@ -1,10 +1,10 @@
-﻿using Malefics.Extensions;
+﻿using System;
+using System.Linq;
+using Malefics.Extensions;
 using Malefics.Models;
 using NUnit.Framework;
-using System;
-using System.Linq;
 
-namespace MaleficsTest.Extensions
+namespace MaleficsTests.Extensions
 {
     public class PathTests
     {
