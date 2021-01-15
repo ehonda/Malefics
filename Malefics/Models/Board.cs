@@ -33,7 +33,7 @@ namespace Malefics.Models
         public bool IsTraversable(Position position)
             => _nodes.ContainsKey(position)
             && _nodes[position].Terrain is Terrain.Road
-            && _nodes[position].OccupyingPieces is not Barricade;
+            && !_nodes[position].IsBarricaded();
 
         public bool IsLegalPath(Path path)
             => path.IsPath()

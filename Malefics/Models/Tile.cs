@@ -12,11 +12,11 @@ namespace Malefics.Models
 
         private IList<IPiece> _occupyingPieces = new List<IPiece>();
 
-        public IList<IPiece> OccupyingPieces
-        {
-            get => _occupyingPieces;
-            init => _occupyingPieces = value.ToList();
-        }
+        //public IList<IPiece> OccupyingPieces
+        //{
+        //    get => _occupyingPieces;
+        //    init => _occupyingPieces = value.ToList();
+        //}
 
         public void Add(IPiece piece)
         {
@@ -28,7 +28,11 @@ namespace Malefics.Models
 
         public void RemoveFirst() => _occupyingPieces.RemoveAt(0);
 
-        public bool IsOccupied() => OccupyingPieces.Any();
+        public bool IsBarricaded() => _occupyingPieces
+            .Select(piece => piece.GetType())
+            .Contains(typeof(Barricade));
+
+        public bool IsOccupied() => _occupyingPieces.Any();
 
         public static Tile Rock() => new() { Terrain = Terrain.Rock };
 
@@ -37,13 +41,23 @@ namespace Malefics.Models
         public static Tile Barricade() => new()
         {
             Terrain = Terrain.Road,
-            OccupyingPieces = new[] { new Barricade() }
+            _occupyingPieces = new[] { new Barricade() }
         };
 
         public static Tile Pawn(Player player) => new()
         {
             Terrain = Terrain.Road,
-            OccupyingPieces = new[] { new Pawn { Player = player } }
+            _occupyingPieces = new[] { new Pawn { Player = player } }
+        };
+
+        public static Tile House(Player player, int numberOfPawns) => new()
+        {
+            Terrain = Terrain.House,
+            _occupyingPieces = Enumerable
+                .Repeat(0, numberOfPawns)
+                .Select(_ => new Pawn { Player = player })
+                .AsEnumerable<IPiece>()
+                .ToList()
         };
     }
 }

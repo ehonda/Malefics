@@ -23,20 +23,16 @@ namespace MaleficsTests.Models
             var house = new Tile { Terrain = Terrain.House };
             house.Add(new Pawn { Player = Player.Red });
 
-            Assert.That(house.OccupyingPieces, Has.Exactly(1).Items);
+            Assert.That(house.IsOccupied(), Is.True);
         }
 
         [Test]
         public void A_Pawn_Can_Be_Removed_From_A_House()
         {
-            var house = new Tile 
-            {
-                Terrain = Terrain.House, 
-                OccupyingPieces = new[] { new Pawn { Player = Player.Red } }
-            };
+            var house = Tile.House(Player.Red, 1);
             house.RemoveFirst();
 
-            Assert.That(house.OccupyingPieces, Is.Empty);
+            Assert.That(house.IsOccupied, Is.False);
         }
     }
 }
