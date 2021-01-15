@@ -47,7 +47,7 @@ namespace Malefics.Models
         public static Tile Pawn(Player player) => new()
         {
             Terrain = Terrain.Road,
-            _occupyingPieces = new[] { new Pawn { Player = player } }
+            _occupyingPieces = new[] { new Pawn(player) }
         };
 
         public static Tile House(Player player, int numberOfPawns) => new()
@@ -55,7 +55,7 @@ namespace Malefics.Models
             Terrain = Terrain.House,
             _occupyingPieces = Enumerable
                 .Repeat(0, numberOfPawns)
-                .Select(_ => new Pawn { Player = player })
+                .Select(_ => new Pawn(player))
                 .AsEnumerable<IPiece>()
                 .ToList()
         };

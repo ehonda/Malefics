@@ -21,7 +21,7 @@ namespace MaleficsTests.Models
         public void A_Pawn_Can_Be_Added_To_An_Empty_House()
         {
             var house = new Tile { Terrain = Terrain.House };
-            house.Add(new Pawn { Player = Player.Red });
+            house.Add(new Pawn(Player.Red));
 
             Assert.That(house.IsOccupied(), Is.True);
         }

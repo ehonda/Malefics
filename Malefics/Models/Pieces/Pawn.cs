@@ -2,8 +2,7 @@
 
 namespace Malefics.Models.Pieces
 {
-    public class Pawn : IPiece
+    public record Pawn(Player Player) : IPiece
     {
-        public Player Player { get; init; }
     }
 }
