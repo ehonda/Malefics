@@ -14,7 +14,7 @@ namespace MaleficsTests.Models.Tiles
             var house = Tile.House(Player.Red, 0);
             house.Put(new Pawn(Player.Red));
 
-            Assert.That((house as House)!.IsOccupied(), Is.True);
+            Assert.That(house.IsOccupied(), Is.True);
         }
 
         [Test]
@@ -23,7 +23,7 @@ namespace MaleficsTests.Models.Tiles
             var house = Tile.House(Player.Red, 1);
             house.Take();
 
-            Assert.That((house as House)!.IsOccupied, Is.False);
+            Assert.That(house.IsOccupied, Is.False);
         }
     }
 }
