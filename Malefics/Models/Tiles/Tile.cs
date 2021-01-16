@@ -1,4 +1,5 @@
-﻿using Malefics.Enums;
+﻿using System;
+using Malefics.Enums;
 using Malefics.Models.Pieces;
 
 namespace Malefics.Models.Tiles
@@ -24,6 +25,9 @@ namespace Malefics.Models.Tiles
 
         /// <inheritdoc />
         public abstract void Add(IPiece piece);
+
+        /// <inheritdoc />
+        public virtual IPiece Take() => throw new NotImplementedException();
 
         #endregion
     }

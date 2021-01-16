@@ -18,13 +18,14 @@ namespace Malefics.Models.Tiles
         public override void Add(IPiece piece) => ++_pawns;
 
         /// <inheritdoc />
-        public void Remove(IPiece piece)
+        public override IPiece Take()
         {
             if (_pawns == 0)
                 throw new InvalidOperationException(
                     "Can't remove a piece from an empty house.");
 
             --_pawns;
+            return new Pawn(_player);
         }
 
         /// <inheritdoc />

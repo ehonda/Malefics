@@ -7,5 +7,7 @@ namespace Malefics.Models.Tiles
         public bool IsTraversable();
 
         public void Add(IPiece piece);
+
+        public IPiece Take();
     }
 }
