@@ -11,7 +11,7 @@ namespace Malefics.Models.Tiles
     {
         protected IList<IPiece> _occupyingPieces = new List<IPiece>();
 
-        public void Remove(IPiece piece) => _occupyingPieces.Remove(piece);
+        public virtual void Remove(IPiece piece) => _occupyingPieces.Remove(piece);
 
         public bool IsBarricaded() => _occupyingPieces.Contains(new Barricade());
 
@@ -25,14 +25,8 @@ namespace Malefics.Models.Tiles
 
         public static ITile Pawn(Player player) => new Road(new Pawn(player));
 
-        public static Tile House(Player player, int numberOfPawns) => new House(player)
-        {
-            _occupyingPieces = Enumerable
-                .Repeat(0, numberOfPawns)
-                .Select(_ => new Pawn(player))
-                .AsEnumerable<IPiece>()
-                .ToList()
-        };
+        public static Tile House(Player player, uint pawns)
+            => new House(player, pawns);
 
         #region Implementation of ITile
 
