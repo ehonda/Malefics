@@ -12,6 +12,12 @@ namespace Malefics.Models.Tiles
             => throw new InvalidTileOperationException("Can't add piece to a rock tile.");
 
         /// <inheritdoc />
+        public override IPiece Take()
+            => throw new InvalidTileOperationException(
+                "Can't take a piece from a rock tile.");
+
+
+        /// <inheritdoc />
         public override bool IsTraversable() => false;
 
         #endregion

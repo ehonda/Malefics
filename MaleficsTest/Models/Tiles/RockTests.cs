@@ -14,6 +14,11 @@ namespace MaleficsTests.Models.Tiles
                 () => Tile.Rock().Put(new Barricade()));
 
         [Test]
+        public void A_Rock_Can_Not_Be_Taken_From()
+            => Assert.Catch<InvalidTileOperationException>(
+                () => Tile.Rock().Take());
+
+        [Test]
         public void A_Rock_Tile_Is_Not_Traversable()
             => Assert.That(Tile.Rock().IsTraversable, Is.False);
     }
