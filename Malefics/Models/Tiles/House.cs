@@ -4,7 +4,7 @@ using Malefics.Models.Pieces;
 
 namespace Malefics.Models.Tiles
 {
-    public class House : Tile, ITile
+    public class House : ITile
     {
         private readonly Player _player;
         private uint _pawns;
@@ -15,7 +15,7 @@ namespace Malefics.Models.Tiles
         #region Overrides of Tile
 
         /// <inheritdoc />
-        public override void Put(IPiece piece)
+        public void Put(IPiece piece)
         {
             if (piece is Pawn pawn)
             {
@@ -31,7 +31,7 @@ namespace Malefics.Models.Tiles
         }
 
         /// <inheritdoc />
-        public override IPiece Take()
+        public IPiece Take()
         {
             if (_pawns == 0)
                 throw new InvalidTileOperationException(
@@ -42,10 +42,10 @@ namespace Malefics.Models.Tiles
         }
 
         /// <inheritdoc />
-        public override bool IsTraversable() => false;
+        public bool IsTraversable() => false;
 
         /// <inheritdoc />
-        public override bool IsOccupied() => _pawns != 0;
+        public bool IsOccupied() => _pawns != 0;
 
         #endregion
     }
