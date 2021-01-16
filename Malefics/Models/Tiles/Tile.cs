@@ -6,10 +6,6 @@ namespace Malefics.Models.Tiles
     // TODO: Convert to subclasses Road, Rock, etc. of ITile - Tests for subclasses!
     public abstract class Tile : ITile
     {
-        public virtual void Remove(IPiece piece) { }
-
-        public virtual bool IsOccupied() => false;
-
         public static ITile Rock() => new Rock();
 
         public static ITile Road() => new Road();

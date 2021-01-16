@@ -18,7 +18,7 @@ namespace Malefics.Models.Tiles
         public override void Add(IPiece piece) => ++_pawns;
 
         /// <inheritdoc />
-        public override void Remove(IPiece piece)
+        public void Remove(IPiece piece)
         {
             if (_pawns == 0)
                 throw new InvalidOperationException(
@@ -31,7 +31,7 @@ namespace Malefics.Models.Tiles
         public override bool IsTraversable() => false;
 
         /// <inheritdoc />
-        public override bool IsOccupied() => _pawns != 0;
+        public bool IsOccupied() => _pawns != 0;
 
         #endregion
     }
