@@ -20,9 +20,13 @@ namespace MaleficsTests.Models.Tiles
             => Assert.That(new House(Player.Red, pawns).IsTraversable(), Is.False);
 
         [Test]
-        public void Putting_A_Pawn_In_An_Empty_House_Occupies_It()
+        [TestCase(0u)]
+        [TestCase(1u)]
+        [TestCase(2u)]
+        public void A_Pawn_Can_Be_Put_In_A_House_Of_The_Right_Color_And_It_Is_Then_Occupied(
+            uint pawnsInHouse)
         {
-            var house = Tile.House(Player.Red, 0);
+            var house = Tile.House(Player.Red, pawnsInHouse);
             house.Put(new Pawn(Player.Red));
 
             Assert.That(house.IsOccupied(), Is.True);
