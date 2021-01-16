@@ -21,5 +21,9 @@ namespace MaleficsTests.Models.Tiles
         [Test]
         public void A_Rock_Tile_Is_Not_Traversable()
             => Assert.That(Tile.Rock().IsTraversable, Is.False);
+
+        [Test]
+        public void A_Rock_Is_Never_Occupied()
+            => Assert.That(Tile.Rock().IsOccupied, Is.False);
     }
 }
