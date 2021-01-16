@@ -29,6 +29,9 @@ namespace Malefics.Models.Tiles
         /// <inheritdoc />
         public virtual IPiece Take() => throw new NotImplementedException();
 
+        /// <inheritdoc />
+        public virtual bool IsOccupied() => false;
+
         #endregion
     }
 }

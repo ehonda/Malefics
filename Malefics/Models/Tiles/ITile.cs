@@ -9,5 +9,7 @@ namespace Malefics.Models.Tiles
         public void Add(IPiece piece);
 
         public IPiece Take();
+
+        public bool IsOccupied();
     }
 }

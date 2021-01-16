@@ -32,7 +32,7 @@ namespace Malefics.Models.Tiles
         public override bool IsTraversable() => false;
 
         /// <inheritdoc />
-        public bool IsOccupied() => _pawns != 0;
+        public override bool IsOccupied() => _pawns != 0;
 
         #endregion
     }
