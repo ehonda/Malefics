@@ -1,14 +1,12 @@
 ﻿using Malefics.Enums;
-using Malefics.Models;
 using Malefics.Models.Pieces;
-using NUnit.Framework;
-using System;
 using Malefics.Models.Tiles;
+using NUnit.Framework;
 
-namespace MaleficsTests.Models
+namespace MaleficsTests.Models.Tiles
 {
     [TestFixture]
-    public class TileTests
+    public class HouseTests
     {
         [Test]
         public void A_Pawn_Can_Be_Added_To_An_Empty_House()
