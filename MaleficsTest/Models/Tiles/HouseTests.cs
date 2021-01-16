@@ -9,7 +9,7 @@ namespace MaleficsTests.Models.Tiles
     public class HouseTests
     {
         [Test]
-        public void A_Pawn_Can_Be_Added_To_An_Empty_House()
+        public void Putting_A_Pawn_In_An_Empty_House_Occupies_It()
         {
             var house = Tile.House(Player.Red, 0);
             house.Put(new Pawn(Player.Red));
@@ -18,12 +18,11 @@ namespace MaleficsTests.Models.Tiles
         }
 
         [Test]
-        public void A_Pawn_Can_Be_Removed_From_A_House()
+        public void Taking_From_A_Non_Empty_House_Retrieves_A_Pawn_Of_The_Houses_Player()
         {
             var house = Tile.House(Player.Red, 1);
-            house.Take();
 
-            Assert.That(house.IsOccupied, Is.False);
+            Assert.That(house.Take(), Is.EqualTo(new Pawn(Player.Red)));
         }
     }
 }
