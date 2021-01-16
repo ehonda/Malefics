@@ -32,34 +32,34 @@ namespace Malefics.Parsers.Ascii
                 _ => ' '
             };
 
-        private static Parser<Tile> EncodedAs(this Tile tile, char encoding)
+        private static Parser<ITile> EncodedAs(this ITile tile, char encoding)
             => Parse.Char(encoding).Return(tile);
 
         // Simple terrain and pieces
         // # # # # # # # # # # # # # # # # #
 
-        public static readonly Parser<Tile> Rock
+        public static readonly Parser<ITile> Rock
             = Models.Tile.Rock().EncodedAs(ROCK);
 
-        public static readonly Parser<Tile> Road
+        public static readonly Parser<ITile> Road
             = Models.Tile.Road().EncodedAs(ROAD);
 
-        public static readonly Parser<Tile> Barricade
+        public static readonly Parser<ITile> Barricade
             = Models.Tile.Barricade().EncodedAs(BARRICADE);
 
         // Pawns
         // # # # # # # # # # # # # # # # # #
 
-        public static readonly Parser<Tile> AnyPawn
+        public static readonly Parser<ITile> AnyPawn
             = Pawn(Player.Red).Or(Pawn(Player.Blue));
 
-        public static Parser<Tile> Pawn(Player player)
+        public static Parser<ITile> Pawn(Player player)
             => Models.Tile.Pawn(player).EncodedAs(PawnEncoding(player));
 
         // Houses
         // # # # # # # # # # # # # # # # # #
 
-        public static readonly Parser<Tile> RedHouse =
+        public static readonly Parser<ITile> RedHouse =
             from player in Parse.Char(HOUSE_RED)
             from pawns in Parse.Numeric
             select new Tile() { Terrain = Terrain.House };
@@ -67,7 +67,7 @@ namespace Malefics.Parsers.Ascii
         // Main parser
         // # # # # # # # # # # # # # # # # #
 
-        public static readonly Parser<Tile> Tile
+        public static readonly Parser<ITile> Tile
             = Rock
             .Or(Road)
             .Or(Barricade)
@@ -77,10 +77,10 @@ namespace Malefics.Parsers.Ascii
         // Board Parser
         // ------------------------------------------------------------------
 
-        public static readonly Parser<IEnumerable<Tile>> BoardRow =
+        public static readonly Parser<IEnumerable<ITile>> BoardRow =
             Tile.Until(Parse.LineTerminator);
 
         public static readonly Parser<Board> Board 
-            = Parse.Many(BoardRow).Select(Models.Board.FromReversedTileRows);
+            = BoardRow.Many().Select(Models.Board.FromReversedTileRows);
     }
 }

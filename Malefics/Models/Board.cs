@@ -39,7 +39,7 @@ namespace Malefics.Models
             && path.All(IsTraversable)
             && path.AllDistinct();
 
-        public static Board FromReversedTileRows(IEnumerable<IEnumerable<Tile>> rows)
+        public static Board FromReversedTileRows(IEnumerable<IEnumerable<ITile>> rows)
             => new(rows);
     }
 }

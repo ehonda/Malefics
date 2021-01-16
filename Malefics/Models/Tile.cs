@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Malefics.Models
 {
-    // TODO: Convert to subclasses Road, Rock, etc. of ITile
+    // TODO: Convert to subclasses Road, Rock, etc. of ITile - Tests for subclasses!
     public class Tile : ITile
     {
         public Terrain Terrain { get; init; }
@@ -27,17 +27,17 @@ namespace Malefics.Models
 
         public bool IsOccupied() => _occupyingPieces.Any();
 
-        public static Tile Rock() => new() { Terrain = Terrain.Rock };
+        public static ITile Rock() => new Tile() { Terrain = Terrain.Rock };
 
-        public static Tile Road() => new() { Terrain = Terrain.Road };
+        public static ITile Road() => new Tile() { Terrain = Terrain.Road };
 
-        public static Tile Barricade() => new()
+        public static ITile Barricade() => new Tile()
         {
             Terrain = Terrain.Road,
             _occupyingPieces = new[] { new Barricade() }
         };
 
-        public static Tile Pawn(Player player) => new()
+        public static ITile Pawn(Player player) => new Tile()
         {
             Terrain = Terrain.Road,
             _occupyingPieces = new[] { new Pawn(player) }
