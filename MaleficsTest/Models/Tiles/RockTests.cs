@@ -1,5 +1,4 @@
-﻿using Malefics.Enums;
-using Malefics.Exceptions;
+﻿using Malefics.Exceptions;
 using Malefics.Models.Pieces;
 using Malefics.Models.Tiles;
 using MaleficsTests.Models.Pieces.TestCases;
