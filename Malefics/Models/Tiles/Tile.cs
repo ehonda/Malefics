@@ -31,7 +31,7 @@ namespace Malefics.Models.Tiles
             _occupyingPieces = new[] { new Pawn(player) }
         };
 
-        public static Tile House(Player player, int numberOfPawns) => new House()
+        public static Tile House(Player player, int numberOfPawns) => new House(player)
         {
             _occupyingPieces = Enumerable
                 .Repeat(0, numberOfPawns)

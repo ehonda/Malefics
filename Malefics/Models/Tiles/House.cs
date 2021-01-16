@@ -1,9 +1,15 @@
-﻿using Malefics.Models.Pieces;
+﻿using Malefics.Enums;
+using Malefics.Models.Pieces;
 
 namespace Malefics.Models.Tiles
 {
     public class House : Tile, ITile
     {
+        private readonly Player _player;
+
+        public House(Player player)
+            => _player = player;
+
         #region Overrides of Tile
 
         /// <inheritdoc />
