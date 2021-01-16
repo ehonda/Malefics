@@ -36,6 +36,10 @@ namespace Malefics.Models.Tiles
         public override bool IsTraversable()
             => _occupyingPiece is not Pieces.Barricade;
 
+        /// <inheritdoc />
+        public override bool IsOccupied()
+            => _occupyingPiece is not null;
+
         #endregion
     }
 }
