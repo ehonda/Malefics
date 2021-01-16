@@ -11,7 +11,7 @@ namespace Malefics.Models.Tiles
     {
         public Terrain Terrain { get; init; }
 
-        private IList<IPiece> _occupyingPieces = new List<IPiece>();
+        protected IList<IPiece> _occupyingPieces = new List<IPiece>();
 
         public void Add(IPiece piece)
         {
@@ -56,12 +56,7 @@ namespace Malefics.Models.Tiles
         #region Implementation of ITile
 
         /// <inheritdoc />
-        public bool IsTraversable()
-            => Terrain switch
-            {
-                Terrain.Road => !IsBarricaded(),
-                _ => false
-            };
+        public virtual bool IsTraversable() => true;
 
         #endregion
     }
