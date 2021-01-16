@@ -1,5 +1,4 @@
 ﻿using Malefics.Extensions;
-using Malefics.Models.Pieces;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,20 +8,20 @@ namespace Malefics.Models
 
     public class Board
     {
-        private readonly IDictionary<Position, Tile> _nodes
-            = new Dictionary<Position, Tile>();
+        private readonly IDictionary<Position, ITile> _nodes
+            = new Dictionary<Position, ITile>();
 
         public Board()
         {
         }
 
-        public Board(IDictionary<Position, Tile> nodes)
+        public Board(IDictionary<Position, ITile> nodes)
             => _nodes = nodes;
 
-        public Board(IEnumerable<(Position, Tile)> nodePositions)
+        public Board(IEnumerable<(Position, ITile)> nodePositions)
             => _nodes = nodePositions.ToDictionary(Pair.First, Pair.Second);
 
-        public Board(IEnumerable<IEnumerable<Tile>> rows)
+        public Board(IEnumerable<IEnumerable<ITile>> rows)
             => _nodes = rows
                 .Reverse()
                 .SelectMany((row, y) => row
@@ -32,8 +31,8 @@ namespace Malefics.Models
 
         public bool IsTraversable(Position position)
             => _nodes.ContainsKey(position)
-            && _nodes[position].Terrain is Terrain.Road
-            && !_nodes[position].IsBarricaded();
+            && ((_nodes[position] as Tile)!).Terrain is Terrain.Road
+            && !((_nodes[position] as Tile)!).IsBarricaded();
 
         public bool IsLegalPath(Path path)
             => path.IsPath()

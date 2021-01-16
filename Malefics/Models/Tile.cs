@@ -6,7 +6,8 @@ using System.Linq;
 
 namespace Malefics.Models
 {
-    public class Tile
+    // TODO: Convert to subclasses Road, Rock, etc. of ITile
+    public class Tile : ITile
     {
         public Terrain Terrain { get; init; }
 
