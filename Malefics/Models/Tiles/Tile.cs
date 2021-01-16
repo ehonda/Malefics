@@ -8,8 +8,6 @@ namespace Malefics.Models.Tiles
     {
         public virtual void Remove(IPiece piece) { }
 
-        public bool IsBarricaded() => false;
-
         public virtual bool IsOccupied() => false;
 
         public static ITile Rock() => new Rock();
