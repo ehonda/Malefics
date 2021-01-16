@@ -27,7 +27,7 @@ namespace Malefics.Models.Tiles
         public abstract void Put(IPiece piece);
 
         /// <inheritdoc />
-        public virtual IPiece Take() => throw new NotImplementedException();
+        public virtual IPiece Take() => throw new InvalidOperationException();
 
         /// <inheritdoc />
         public virtual bool IsOccupied() => false;

@@ -10,13 +10,9 @@ namespace MaleficsTests.Models
     [TestFixture]
     public class TileTests
     {
-        //[Test]
-        //public void No_Piece_Can_Be_Added_To_A_Tile_With_Rock_Terrain()
-        //{
-        //    var tile = Tile.Rock();
-        //    Assert.Catch<InvalidOperationException>(
-        //        () => tile.Put(new Barricade()));
-        //}
+        [Test]
+        public void No_Piece_Can_Be_Put_On_A_Tile_With_Rock_Terrain()
+            => Assert.Catch<InvalidOperationException>(() => Tile.Rock().Put(new Barricade()));
 
         [Test]
         public void A_Pawn_Can_Be_Added_To_An_Empty_House()
@@ -31,18 +27,13 @@ namespace MaleficsTests.Models
         public void A_Pawn_Can_Be_Removed_From_A_House()
         {
             var house = Tile.House(Player.Red, 1);
-            //(house as House)!.Remove(new Pawn(Player.Red));
             house.Take();
 
             Assert.That((house as House)!.IsOccupied, Is.False);
         }
 
-        //[Test]
-        //public void Removing_A_Piece_From_An_Empty_Tile_Throws()
-        //{
-        //    var tile = Tile.Rock();
-        //    Assert.Catch<InvalidOperationException>(
-        //        () => tile.Remove(new Barricade()));
-        //}
+        [Test]
+        public void Taking_A_Piece_From_An_Empty_Road_Tile_Throws()
+            => Assert.Catch<InvalidOperationException>(() => Tile.Road().Take());
     }
 }
