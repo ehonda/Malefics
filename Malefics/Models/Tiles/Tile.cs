@@ -7,7 +7,7 @@ using Malefics.Models.Pieces;
 namespace Malefics.Models.Tiles
 {
     // TODO: Convert to subclasses Road, Rock, etc. of ITile - Tests for subclasses!
-    public class Tile : ITile
+    public abstract class Tile : ITile
     {
         public Terrain Terrain { get; init; }
 
