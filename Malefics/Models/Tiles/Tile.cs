@@ -15,7 +15,7 @@ namespace Malefics.Models.Tiles
 
         public bool IsBarricaded() => _occupyingPieces.Contains(new Barricade());
 
-        public bool IsOccupied() => _occupyingPieces.Any();
+        public virtual bool IsOccupied() => _occupyingPieces.Any();
 
         public static ITile Rock() => new Rock();
 
