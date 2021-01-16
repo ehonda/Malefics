@@ -12,7 +12,7 @@ namespace Malefics.Models.Tiles
         public House(Player player, uint pawns)
             => (_player, _pawns) = (player, pawns);
 
-        #region Overrides of Tile
+        #region Implementations of ITile
 
         /// <inheritdoc />
         public void Put(IPiece piece)
@@ -46,6 +46,12 @@ namespace Malefics.Models.Tiles
 
         /// <inheritdoc />
         public bool IsOccupied() => _pawns != 0;
+
+        /// <inheritdoc />
+        public bool IsValidCaptureTargetFor(IPiece piece)
+        {
+            return false;
+        }
 
         #endregion
     }

@@ -12,7 +12,7 @@ namespace Malefics.Models.Tiles
         public Road(IPiece occupyingPiece)
             => _occupyingPiece = occupyingPiece;
 
-        #region Overrides of Tile
+        #region Implementations of ITile
 
         /// <inheritdoc />
         public void Put(IPiece piece)
@@ -37,6 +37,12 @@ namespace Malefics.Models.Tiles
         /// <inheritdoc />
         public bool IsOccupied()
             => _occupyingPiece is not null;
+
+        /// <inheritdoc />
+        public bool IsValidCaptureTargetFor(IPiece piece)
+        {
+            return false;
+        }
 
         #endregion
     }

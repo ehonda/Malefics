@@ -5,7 +5,7 @@ namespace Malefics.Models.Tiles
 {
     public class Rock : ITile
     {
-        #region Overrides of Tile
+        #region Implementations of ITile
 
         /// <inheritdoc />
         public void Put(IPiece piece)
@@ -21,6 +21,12 @@ namespace Malefics.Models.Tiles
 
         /// <inheritdoc />
         public bool IsOccupied() => false;
+
+        /// <inheritdoc />
+        public bool IsValidCaptureTargetFor(IPiece piece)
+        {
+            return false;
+        }
 
         #endregion
     }

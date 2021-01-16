@@ -11,5 +11,7 @@ namespace Malefics.Models.Tiles
         public IPiece Take();
 
         public bool IsOccupied();
+
+        public bool IsValidCaptureTargetFor(IPiece piece);
     }
 }
