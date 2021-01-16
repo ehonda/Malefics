@@ -1,4 +1,5 @@
-﻿using Malefics.Exceptions;
+﻿using Malefics.Enums;
+using Malefics.Exceptions;
 using Malefics.Models.Pieces;
 using Malefics.Models.Tiles;
 using NUnit.Framework;
@@ -21,5 +22,13 @@ namespace MaleficsTests.Models.Tiles
         [Test]
         public void A_Road_With_A_Piece_Is_Occupied()
             => Assert.That(new Road(new Barricade()).IsOccupied, Is.True);
+
+        [Test]
+        public void A_Road_Occupied_By_A_Barricade_Is_Not_Traversable()
+            => Assert.That(new Road(new Barricade()).IsTraversable, Is.False);
+
+        [Test]
+        public void A_Road_Occupied_By_A_Pawn_Is_Traversable()
+            => Assert.That(new Road(new Pawn(Player.Red)).IsTraversable, Is.True);
     }
 }
