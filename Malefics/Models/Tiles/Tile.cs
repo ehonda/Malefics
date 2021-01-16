@@ -9,8 +9,6 @@ namespace Malefics.Models.Tiles
     // TODO: Convert to subclasses Road, Rock, etc. of ITile - Tests for subclasses!
     public abstract class Tile : ITile
     {
-        public Terrain Terrain { get; init; }
-
         protected IList<IPiece> _occupyingPieces = new List<IPiece>();
 
         public void Remove(IPiece piece) => _occupyingPieces.Remove(piece);
@@ -19,25 +17,22 @@ namespace Malefics.Models.Tiles
 
         public bool IsOccupied() => _occupyingPieces.Any();
 
-        public static ITile Rock() => new Rock() { Terrain = Terrain.Rock };
+        public static ITile Rock() => new Rock();
 
-        public static ITile Road() => new Road() { Terrain = Terrain.Road };
+        public static ITile Road() => new Road();
 
         public static ITile Barricade() => new Road()
         {
-            Terrain = Terrain.Road,
             _occupyingPieces = new[] { new Barricade() }
         };
 
         public static ITile Pawn(Player player) => new Road()
         {
-            Terrain = Terrain.Road,
             _occupyingPieces = new[] { new Pawn(player) }
         };
 
         public static Tile House(Player player, int numberOfPawns) => new House()
         {
-            Terrain = Terrain.House,
             _occupyingPieces = Enumerable
                 .Repeat(0, numberOfPawns)
                 .Select(_ => new Pawn(player))
