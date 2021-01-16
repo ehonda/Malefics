@@ -2,6 +2,7 @@
 using Malefics.Exceptions;
 using Malefics.Models.Pieces;
 using Malefics.Models.Tiles;
+using MaleficsTests.Models.Pieces.TestCases;
 using NUnit.Framework;
 
 namespace MaleficsTests.Models.Tiles
@@ -28,7 +29,8 @@ namespace MaleficsTests.Models.Tiles
             => Assert.That(Tile.Rock().IsOccupied, Is.False);
 
         [Test]
-        public void A_Rock_Is_Not_A_Valid_Capture_Target_For_Any_Piece()
-            => Assert.That(Tile.Rock().IsValidCaptureTargetFor(new Pawn(Player.Red)), Is.False);
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.All))]
+        public void A_Rock_Is_Not_A_Valid_Capture_Target_For_Any_Piece(IPiece piece)
+            => Assert.That(Tile.Rock().IsValidCaptureTargetFor(piece), Is.False);
     }
 }
