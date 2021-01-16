@@ -27,23 +27,23 @@ namespace Malefics.Models.Tiles
 
         public bool IsOccupied() => _occupyingPieces.Any();
 
-        public static ITile Rock() => new Tile() { Terrain = Terrain.Rock };
+        public static ITile Rock() => new Rock() { Terrain = Terrain.Rock };
 
-        public static ITile Road() => new Tile() { Terrain = Terrain.Road };
+        public static ITile Road() => new Road() { Terrain = Terrain.Road };
 
-        public static ITile Barricade() => new Tile()
+        public static ITile Barricade() => new Road()
         {
             Terrain = Terrain.Road,
             _occupyingPieces = new[] { new Barricade() }
         };
 
-        public static ITile Pawn(Player player) => new Tile()
+        public static ITile Pawn(Player player) => new Road()
         {
             Terrain = Terrain.Road,
             _occupyingPieces = new[] { new Pawn(player) }
         };
 
-        public static Tile House(Player player, int numberOfPawns) => new()
+        public static Tile House(Player player, int numberOfPawns) => new House()
         {
             Terrain = Terrain.House,
             _occupyingPieces = Enumerable
