@@ -36,5 +36,11 @@ namespace MaleficsTests.Models.Tiles
         [TestCaseSource(typeof(PieceCases), nameof(PieceCases.All))]
         public void An_Empty_Road_Is_Not_A_Valid_Capture_Target_For_Any_Piece(IPiece piece)
             => Assert.That(new Road().IsValidCaptureTargetFor(piece), Is.False);
+
+        [Test]
+        [TestCase(null)]
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.All))]
+        public void A_Road_Is_Never_A_Valid_Capture_Target_For_A_Barricade(IPiece occupyingPiece)
+            => Assert.That(new Road(occupyingPiece).IsValidCaptureTargetFor(new Barricade()), Is.False);
     }
 }
