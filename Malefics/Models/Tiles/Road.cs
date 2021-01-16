@@ -1,4 +1,6 @@
-﻿using Malefics.Models.Pieces;
+﻿using System;
+using System.Linq;
+using Malefics.Models.Pieces;
 
 namespace Malefics.Models.Tiles
 {
@@ -8,7 +10,12 @@ namespace Malefics.Models.Tiles
 
         /// <inheritdoc />
         public override void Add(IPiece piece)
-            => _occupyingPieces.Add(piece);
+        {
+            if (_occupyingPieces.Any())
+                throw new InvalidOperationException(
+                    "Can't add a piece to an occupied road tile.");
+            _occupyingPieces.Add(piece);
+        }
 
         /// <inheritdoc />
         public override bool IsTraversable()
