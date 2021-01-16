@@ -2,6 +2,7 @@
 using Malefics.Exceptions;
 using Malefics.Models.Pieces;
 using Malefics.Models.Tiles;
+using MaleficsTests.Models.Pieces.TestCases;
 using NUnit.Framework;
 
 namespace MaleficsTests.Models.Tiles
@@ -30,5 +31,10 @@ namespace MaleficsTests.Models.Tiles
         [Test]
         public void A_Road_Occupied_By_A_Pawn_Is_Traversable()
             => Assert.That(new Road(new Pawn(Player.Red)).IsTraversable, Is.True);
+
+        [Test]
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.All))]
+        public void An_Empty_Road_Is_Not_A_Valid_Capture_Target_For_Any_Piece(IPiece piece)
+            => Assert.That(new Road().IsValidCaptureTargetFor(piece), Is.False);
     }
 }
