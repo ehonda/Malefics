@@ -3,24 +3,24 @@ using Malefics.Models.Pieces;
 
 namespace Malefics.Models.Tiles
 {
-    public class Rock : Tile, ITile
+    public class Rock : ITile
     {
         #region Overrides of Tile
 
         /// <inheritdoc />
-        public override void Put(IPiece piece)
+        public void Put(IPiece piece)
             => throw new InvalidTileOperationException("Can't add piece to a rock tile.");
 
         /// <inheritdoc />
-        public override IPiece Take()
+        public IPiece Take()
             => throw new InvalidTileOperationException(
                 "Can't take a piece from a rock tile.");
 
         /// <inheritdoc />
-        public override bool IsTraversable() => false;
+        public bool IsTraversable() => false;
 
         /// <inheritdoc />
-        public override bool IsOccupied() => false;
+        public bool IsOccupied() => false;
 
         #endregion
     }
