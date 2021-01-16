@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Malefics.Exceptions;
 using Malefics.Models.Pieces;
 
 namespace Malefics.Models.Tiles
@@ -24,6 +25,12 @@ namespace Malefics.Models.Tiles
             
             _occupyingPiece = piece;
         }
+
+        /// <inheritdoc />
+        public override IPiece Take()
+            => _occupyingPiece
+               ?? throw new InvalidTileOperationException(
+                   "Can't take a piece from an empty road tile");
 
         /// <inheritdoc />
         public override bool IsTraversable()
