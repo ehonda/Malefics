@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Malefics.Enums;
+﻿using Malefics.Enums;
 using Malefics.Models.Pieces;
 
 namespace Malefics.Models.Tiles
@@ -9,13 +6,11 @@ namespace Malefics.Models.Tiles
     // TODO: Convert to subclasses Road, Rock, etc. of ITile - Tests for subclasses!
     public abstract class Tile : ITile
     {
-        protected IList<IPiece> _occupyingPieces = new List<IPiece>();
+        public virtual void Remove(IPiece piece) { }
 
-        public virtual void Remove(IPiece piece) => _occupyingPieces.Remove(piece);
+        public bool IsBarricaded() => false;
 
-        public bool IsBarricaded() => _occupyingPieces.Contains(new Barricade());
-
-        public virtual bool IsOccupied() => _occupyingPieces.Any();
+        public virtual bool IsOccupied() => false;
 
         public static ITile Rock() => new Rock();
 
