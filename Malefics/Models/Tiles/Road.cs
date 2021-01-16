@@ -7,6 +7,10 @@ namespace Malefics.Models.Tiles
         #region Overrides of Tile
 
         /// <inheritdoc />
+        public override void Add(IPiece piece)
+            => _occupyingPieces.Add(piece);
+
+        /// <inheritdoc />
         public override bool IsTraversable()
             => !_occupyingPieces.Contains(new Barricade());
 

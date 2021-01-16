@@ -13,14 +13,6 @@ namespace Malefics.Models.Tiles
 
         protected IList<IPiece> _occupyingPieces = new List<IPiece>();
 
-        public void Add(IPiece piece)
-        {
-            if (Terrain is Terrain.Rock)
-                throw new InvalidOperationException("Can't add piece to a rock tile.");
-
-            _occupyingPieces.Add(piece);
-        }
-
         public void Remove(IPiece piece) => _occupyingPieces.Remove(piece);
 
         public bool IsBarricaded() => _occupyingPieces.Contains(new Barricade());
@@ -56,7 +48,10 @@ namespace Malefics.Models.Tiles
         #region Implementation of ITile
 
         /// <inheritdoc />
-        public virtual bool IsTraversable() => true;
+        public abstract bool IsTraversable();
+
+        /// <inheritdoc />
+        public abstract void Add(IPiece piece);
 
         #endregion
     }
