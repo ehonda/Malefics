@@ -23,10 +23,7 @@ namespace Malefics.Models.Tiles
         public bool IsOccupied() => false;
 
         /// <inheritdoc />
-        public bool IsValidCaptureTargetFor(IPiece piece)
-        {
-            return false;
-        }
+        public bool IsValidCaptureTargetFor(IPiece piece) => false;
 
         #endregion
     }

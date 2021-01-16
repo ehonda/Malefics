@@ -1,4 +1,5 @@
-﻿using Malefics.Exceptions;
+﻿using Malefics.Enums;
+using Malefics.Exceptions;
 using Malefics.Models.Pieces;
 using Malefics.Models.Tiles;
 using NUnit.Framework;
@@ -25,5 +26,9 @@ namespace MaleficsTests.Models.Tiles
         [Test]
         public void A_Rock_Is_Never_Occupied()
             => Assert.That(Tile.Rock().IsOccupied, Is.False);
+
+        [Test]
+        public void A_Rock_Is_Not_A_Valid_Capture_Target_For_Any_Piece()
+            => Assert.That(Tile.Rock().IsValidCaptureTargetFor(new Pawn(Player.Red)), Is.False);
     }
 }
