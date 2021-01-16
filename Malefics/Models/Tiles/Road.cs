@@ -7,6 +7,12 @@ namespace Malefics.Models.Tiles
     public class Road : Tile, ITile
     {
         private IPiece? _occupyingPiece;
+
+        public Road() { }
+
+        public Road(IPiece occupyingPiece)
+            => _occupyingPiece = occupyingPiece;
+
         #region Overrides of Tile
 
         /// <inheritdoc />

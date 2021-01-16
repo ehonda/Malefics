@@ -21,15 +21,9 @@ namespace Malefics.Models.Tiles
 
         public static ITile Road() => new Road();
 
-        public static ITile Barricade() => new Road()
-        {
-            _occupyingPieces = new[] { new Barricade() }
-        };
+        public static ITile Barricade() => new Road(new Barricade());
 
-        public static ITile Pawn(Player player) => new Road()
-        {
-            _occupyingPieces = new[] { new Pawn(player) }
-        };
+        public static ITile Pawn(Player player) => new Road(new Pawn(player));
 
         public static Tile House(Player player, int numberOfPawns) => new House(player)
         {
