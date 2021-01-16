@@ -1,6 +1,7 @@
 ﻿using Malefics.Extensions;
 using System.Collections.Generic;
 using System.Linq;
+using Malefics.Models.Tiles;
 
 namespace Malefics.Models
 {

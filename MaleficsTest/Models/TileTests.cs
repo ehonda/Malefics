@@ -3,6 +3,7 @@ using Malefics.Models;
 using Malefics.Models.Pieces;
 using NUnit.Framework;
 using System;
+using Malefics.Models.Tiles;
 
 namespace MaleficsTests.Models
 {

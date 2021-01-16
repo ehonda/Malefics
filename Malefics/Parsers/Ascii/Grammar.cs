@@ -3,6 +3,7 @@ using Malefics.Models;
 using Sprache;
 using System.Collections.Generic;
 using System.Linq;
+using Malefics.Models.Tiles;
 
 namespace Malefics.Parsers.Ascii
 {
@@ -39,13 +40,13 @@ namespace Malefics.Parsers.Ascii
         // # # # # # # # # # # # # # # # # #
 
         public static readonly Parser<ITile> Rock
-            = Models.Tile.Rock().EncodedAs(ROCK);
+            = Models.Tiles.Tile.Rock().EncodedAs(ROCK);
 
         public static readonly Parser<ITile> Road
-            = Models.Tile.Road().EncodedAs(ROAD);
+            = Models.Tiles.Tile.Road().EncodedAs(ROAD);
 
         public static readonly Parser<ITile> Barricade
-            = Models.Tile.Barricade().EncodedAs(BARRICADE);
+            = Models.Tiles.Tile.Barricade().EncodedAs(BARRICADE);
 
         // Pawns
         // # # # # # # # # # # # # # # # # #
@@ -54,7 +55,7 @@ namespace Malefics.Parsers.Ascii
             = Pawn(Player.Red).Or(Pawn(Player.Blue));
 
         public static Parser<ITile> Pawn(Player player)
-            => Models.Tile.Pawn(player).EncodedAs(PawnEncoding(player));
+            => Models.Tiles.Tile.Pawn(player).EncodedAs(PawnEncoding(player));
 
         // Houses
         // # # # # # # # # # # # # # # # # #
