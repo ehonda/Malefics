@@ -9,6 +9,10 @@ namespace MaleficsTests.Models.Tiles
     public class HouseTests
     {
         [Test]
+        public void An_Empty_House_Is_Not_Occupied()
+            => Assert.That(new House(Player.Red, 0).IsOccupied(), Is.False);
+
+        [Test]
         public void Putting_A_Pawn_In_An_Empty_House_Occupies_It()
         {
             var house = Tile.House(Player.Red, 0);
