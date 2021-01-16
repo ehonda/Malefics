@@ -39,6 +39,11 @@ namespace MaleficsTests.Models.Tiles
                 () => new House(Player.Red, 0).Put(new Pawn(Player.Blue)));
 
         [Test]
+        public void A_Barricade_Can_Not_Be_Put_Into_A_House()
+            => Assert.Catch<InvalidTileOperationException>(
+                () => new House(Player.Red, 0).Put(new Barricade()));
+
+        [Test]
         public void Taking_From_A_Non_Empty_House_Retrieves_A_Pawn_Of_The_Houses_Color()
         {
             var house = Tile.House(Player.Red, 1);
