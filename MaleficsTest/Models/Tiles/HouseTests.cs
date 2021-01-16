@@ -33,7 +33,7 @@ namespace MaleficsTests.Models.Tiles
         }
 
         [Test]
-        public void Taking_From_A_Non_Empty_House_Retrieves_A_Pawn_Of_The_Houses_Player()
+        public void Taking_From_A_Non_Empty_House_Retrieves_A_Pawn_Of_The_Houses_Color()
         {
             var house = Tile.House(Player.Red, 1);
 
