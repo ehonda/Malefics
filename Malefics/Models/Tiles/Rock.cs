@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Malefics.Exceptions;
 using Malefics.Models.Pieces;
 
 namespace Malefics.Models.Tiles
@@ -9,7 +9,7 @@ namespace Malefics.Models.Tiles
 
         /// <inheritdoc />
         public override void Put(IPiece piece)
-            => throw new InvalidOperationException("Can't add piece to a rock tile.");
+            => throw new InvalidTileOperationException("Can't add piece to a rock tile.");
 
         /// <inheritdoc />
         public override bool IsTraversable() => false;
