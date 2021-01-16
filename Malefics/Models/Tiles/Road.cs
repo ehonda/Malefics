@@ -1,11 +1,9 @@
-﻿using System;
-using System.Linq;
-using Malefics.Exceptions;
+﻿using Malefics.Exceptions;
 using Malefics.Models.Pieces;
 
 namespace Malefics.Models.Tiles
 {
-    public class Road : Tile, ITile
+    public class Road : ITile
     {
         private IPiece? _occupyingPiece;
 
@@ -17,7 +15,7 @@ namespace Malefics.Models.Tiles
         #region Overrides of Tile
 
         /// <inheritdoc />
-        public override void Put(IPiece piece)
+        public void Put(IPiece piece)
         {
             if (_occupyingPiece is not null)
                 throw new InvalidTileOperationException(
@@ -27,17 +25,17 @@ namespace Malefics.Models.Tiles
         }
 
         /// <inheritdoc />
-        public override IPiece Take()
+        public IPiece Take()
             => _occupyingPiece
                ?? throw new InvalidTileOperationException(
                    "Can't take a piece from an empty road tile");
 
         /// <inheritdoc />
-        public override bool IsTraversable()
+        public bool IsTraversable()
             => _occupyingPiece is not Pieces.Barricade;
 
         /// <inheritdoc />
-        public override bool IsOccupied()
+        public bool IsOccupied()
             => _occupyingPiece is not null;
 
         #endregion
