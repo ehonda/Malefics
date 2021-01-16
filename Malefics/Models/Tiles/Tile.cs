@@ -3,9 +3,10 @@ using Malefics.Models.Pieces;
 
 namespace Malefics.Models.Tiles
 {
-    // TODO: Convert to subclasses Road, Rock, etc. of ITile - Tests for subclasses!
     public static class Tile
     {
+        // TODO: Do we really need these static constructor functions
+        //       or should we replace them by direct constructor calls?
         public static ITile Rock() => new Rock();
 
         public static ITile Road() => new Road();
