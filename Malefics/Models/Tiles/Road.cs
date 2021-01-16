@@ -20,7 +20,7 @@ namespace Malefics.Models.Tiles
             if (_occupyingPiece is not null)
                 throw new InvalidTileOperationException(
                     "Can't add a piece to an occupied road tile.");
-            
+
             _occupyingPiece = piece;
         }
 
@@ -39,7 +39,10 @@ namespace Malefics.Models.Tiles
             => _occupyingPiece is not null;
 
         /// <inheritdoc />
-        public bool IsValidCaptureTargetFor(IPiece piece) => false;
+        public bool IsValidCaptureTargetFor(IPiece piece)
+            => piece is Pawn
+               && _occupyingPiece is not null
+               && _occupyingPiece != piece;
 
         #endregion
     }

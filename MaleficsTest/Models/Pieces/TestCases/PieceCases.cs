@@ -1,6 +1,7 @@
 ﻿using Malefics.Enums;
 using Malefics.Models.Pieces;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MaleficsTests.Models.Pieces.TestCases
 {
@@ -28,5 +29,11 @@ namespace MaleficsTests.Models.Pieces.TestCases
                 yield return new Pawn(Player.Blue);
             }
         }
+
+        public static IEnumerable<(Pawn, Pawn)> PawnsOfDifferentColors =>
+            Pawns
+                .SelectMany(p => Pawns
+                    .Select(q => (p, q))
+                    .Where(pawns => pawns.p != pawns.q));
     }
 }
