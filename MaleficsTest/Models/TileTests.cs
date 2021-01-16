@@ -11,10 +11,6 @@ namespace MaleficsTests.Models
     public class TileTests
     {
         [Test]
-        public void No_Piece_Can_Be_Put_On_A_Tile_With_Rock_Terrain()
-            => Assert.Catch<InvalidOperationException>(() => Tile.Rock().Put(new Barricade()));
-
-        [Test]
         public void A_Pawn_Can_Be_Added_To_An_Empty_House()
         {
             var house = Tile.House(Player.Red, 0);
