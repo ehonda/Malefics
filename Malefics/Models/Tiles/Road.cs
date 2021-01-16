@@ -20,7 +20,7 @@ namespace Malefics.Models.Tiles
         public override void Put(IPiece piece)
         {
             if (_occupyingPiece is not null)
-                throw new InvalidOperationException(
+                throw new InvalidTileOperationException(
                     "Can't add a piece to an occupied road tile.");
             
             _occupyingPiece = piece;
