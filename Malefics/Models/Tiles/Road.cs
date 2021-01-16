@@ -6,20 +6,22 @@ namespace Malefics.Models.Tiles
 {
     public class Road : Tile, ITile
     {
+        private IPiece? _occupyingPiece;
         #region Overrides of Tile
 
         /// <inheritdoc />
         public override void Add(IPiece piece)
         {
-            if (_occupyingPieces.Any())
+            if (_occupyingPiece is not null)
                 throw new InvalidOperationException(
                     "Can't add a piece to an occupied road tile.");
-            _occupyingPieces.Add(piece);
+            
+            _occupyingPiece = piece;
         }
 
         /// <inheritdoc />
         public override bool IsTraversable()
-            => !_occupyingPieces.Contains(new Barricade());
+            => _occupyingPiece is not Pieces.Barricade;
 
         #endregion
     }
