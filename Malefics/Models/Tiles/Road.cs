@@ -16,7 +16,7 @@ namespace Malefics.Models.Tiles
         #region Overrides of Tile
 
         /// <inheritdoc />
-        public override void Add(IPiece piece)
+        public override void Put(IPiece piece)
         {
             if (_occupyingPiece is not null)
                 throw new InvalidOperationException(

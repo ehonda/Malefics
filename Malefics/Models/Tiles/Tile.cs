@@ -24,7 +24,7 @@ namespace Malefics.Models.Tiles
         public abstract bool IsTraversable();
 
         /// <inheritdoc />
-        public abstract void Add(IPiece piece);
+        public abstract void Put(IPiece piece);
 
         /// <inheritdoc />
         public virtual IPiece Take() => throw new NotImplementedException();

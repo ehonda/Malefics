@@ -8,7 +8,7 @@ namespace Malefics.Models.Tiles
         #region Overrides of Tile
 
         /// <inheritdoc />
-        public override void Add(IPiece piece)
+        public override void Put(IPiece piece)
             => throw new InvalidOperationException("Can't add piece to a rock tile.");
 
         /// <inheritdoc />

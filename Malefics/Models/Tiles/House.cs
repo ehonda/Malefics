@@ -15,7 +15,7 @@ namespace Malefics.Models.Tiles
         #region Overrides of Tile
 
         /// <inheritdoc />
-        public override void Add(IPiece piece) => ++_pawns;
+        public override void Put(IPiece piece) => ++_pawns;
 
         /// <inheritdoc />
         public override IPiece Take()

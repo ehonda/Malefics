@@ -15,14 +15,14 @@ namespace MaleficsTests.Models
         //{
         //    var tile = Tile.Rock();
         //    Assert.Catch<InvalidOperationException>(
-        //        () => tile.Add(new Barricade()));
+        //        () => tile.Put(new Barricade()));
         //}
 
         [Test]
         public void A_Pawn_Can_Be_Added_To_An_Empty_House()
         {
             var house = Tile.House(Player.Red, 0);
-            house.Add(new Pawn(Player.Red));
+            house.Put(new Pawn(Player.Red));
 
             Assert.That((house as House)!.IsOccupied(), Is.True);
         }
