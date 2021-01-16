@@ -50,5 +50,10 @@ namespace MaleficsTests.Models.Tiles
 
             Assert.That(house.Take(), Is.EqualTo(new Pawn(Player.Red)));
         }
+
+        [Test]
+        public void Taking_From_An_Empty_House_Throws()
+            => Assert.Catch<InvalidTileOperationException>(
+                () => new House(Player.Red, 0).Take());
     }
 }

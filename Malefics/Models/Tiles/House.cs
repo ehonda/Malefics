@@ -1,5 +1,4 @@
-﻿using System;
-using Malefics.Enums;
+﻿using Malefics.Enums;
 using Malefics.Exceptions;
 using Malefics.Models.Pieces;
 
@@ -35,7 +34,7 @@ namespace Malefics.Models.Tiles
         public override IPiece Take()
         {
             if (_pawns == 0)
-                throw new InvalidOperationException(
+                throw new InvalidTileOperationException(
                     "Can't remove a piece from an empty house.");
 
             --_pawns;
