@@ -1,4 +1,6 @@
-﻿using Malefics.Enums;
+﻿using System;
+using System.Linq;
+using Malefics.Enums;
 using Malefics.Exceptions;
 using Malefics.Models.Pieces;
 using Malefics.Models.Tiles;
@@ -42,5 +44,19 @@ namespace MaleficsTests.Models.Tiles
         [TestCaseSource(typeof(PieceCases), nameof(PieceCases.All))]
         public void A_Road_Is_Never_A_Valid_Capture_Target_For_A_Barricade(IPiece occupyingPiece)
             => Assert.That(new Road(occupyingPiece).IsValidCaptureTargetFor(new Barricade()), Is.False);
+
+        [Test]
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.Pawns))]
+        public void A_Road_Occupied_By_A_Pawn_Is_A_Valid_Capture_Target_For_A_Pawn_Of_Another_Color(
+            Pawn occupyingPiece)
+        {
+            var road = new Road(occupyingPiece);
+            var pawnsOfDifferentColorsCanCapture = Enum
+                .GetValues<Player>()
+                .Where(player => player != occupyingPiece.Player)
+                .Select(player => road.IsValidCaptureTargetFor(new Pawn(player)));
+
+            Assert.That(pawnsOfDifferentColorsCanCapture, Is.All.False);
+        }
     }
 }

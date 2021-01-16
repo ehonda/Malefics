@@ -17,5 +17,16 @@ namespace MaleficsTests.Models.Pieces.TestCases
                 yield return new Pawn(Player.Blue);
             }
         }
+
+        public static IEnumerable<Pawn> Pawns
+        {
+            get
+            {
+                yield return new Pawn(Player.Red);
+                yield return new Pawn(Player.Green);
+                yield return new Pawn(Player.Yellow);
+                yield return new Pawn(Player.Blue);
+            }
+        }
     }
 }
