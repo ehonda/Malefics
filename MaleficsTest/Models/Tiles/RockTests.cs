@@ -9,8 +9,12 @@ namespace MaleficsTests.Models.Tiles
     public class RockTests
     {
         [Test]
-        public void No_Piece_Can_Be_Put_On_A_Tile_With_Rock_Terrain()
+        public void No_Piece_Can_Be_Put_On_A_Rock_Tile()
             => Assert.Catch<InvalidTileOperationException>(
                 () => Tile.Rock().Put(new Barricade()));
+
+        [Test]
+        public void A_Rock_Tile_Is_Not_Traversable()
+            => Assert.That(Tile.Rock().IsTraversable, Is.False);
     }
 }
