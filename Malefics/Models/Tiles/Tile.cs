@@ -52,5 +52,17 @@ namespace Malefics.Models.Tiles
                 .AsEnumerable<IPiece>()
                 .ToList()
         };
+
+        #region Implementation of ITile
+
+        /// <inheritdoc />
+        public bool IsTraversable()
+            => Terrain switch
+            {
+                Terrain.Road => !IsBarricaded(),
+                _ => false
+            };
+
+        #endregion
     }
 }
