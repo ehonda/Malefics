@@ -1,4 +1,5 @@
 ﻿using Malefics.Enums;
+using Malefics.Exceptions;
 using Malefics.Models.Pieces;
 using Malefics.Models.Tiles;
 using NUnit.Framework;
@@ -31,6 +32,11 @@ namespace MaleficsTests.Models.Tiles
 
             Assert.That(house.IsOccupied(), Is.True);
         }
+
+        [Test]
+        public void A_Pawn_Can_Not_Be_Put_Into_A_House_Of_Another_Color()
+            => Assert.Catch<InvalidTileOperationException>(
+                () => new House(Player.Red, 0).Put(new Pawn(Player.Blue)));
 
         [Test]
         public void Taking_From_A_Non_Empty_House_Retrieves_A_Pawn_Of_The_Houses_Color()

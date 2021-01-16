@@ -1,5 +1,6 @@
 ﻿using System;
 using Malefics.Enums;
+using Malefics.Exceptions;
 using Malefics.Models.Pieces;
 
 namespace Malefics.Models.Tiles
@@ -15,7 +16,20 @@ namespace Malefics.Models.Tiles
         #region Overrides of Tile
 
         /// <inheritdoc />
-        public override void Put(IPiece piece) => ++_pawns;
+        public override void Put(IPiece piece)
+        {
+            if (piece is Pawn pawn)
+            {
+                if (pawn == new Pawn(_player))
+                {
+                    ++_pawns;
+                    return;
+                }
+            }
+
+            throw new InvalidTileOperationException(
+                $"Can't put {piece} on a house of player {_player}");
+        }
 
         /// <inheritdoc />
         public override IPiece Take()
