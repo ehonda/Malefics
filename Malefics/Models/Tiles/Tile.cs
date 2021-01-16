@@ -18,7 +18,7 @@ namespace Malefics.Models.Tiles
 
         public static ITile Pawn(Player player) => new Road(new Pawn(player));
 
-        public static Tile House(Player player, uint pawns)
+        public static ITile House(Player player, uint pawns)
             => new House(player, pawns);
 
         #region Implementation of ITile
