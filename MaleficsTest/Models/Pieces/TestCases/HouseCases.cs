@@ -9,6 +9,12 @@ namespace MaleficsTests.Models.Pieces.TestCases
     public static class HouseCases
     {
         public static IEnumerable<House> AllEmptyHouses
-            => Enum.GetValues<Player>().Select(player => new House(player, 0));
+            => AllHousesWithPopulation(0);
+
+        public static IEnumerable<House> AllHousesWithSinglePawn
+            => AllHousesWithPopulation(1);
+
+        private static IEnumerable<House> AllHousesWithPopulation(uint pawns)
+            => Enum.GetValues<Player>().Select(player => new House(player, pawns));
     }
 }

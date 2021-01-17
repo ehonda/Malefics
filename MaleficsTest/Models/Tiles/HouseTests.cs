@@ -45,22 +45,19 @@ namespace MaleficsTests.Models.Tiles
         }
 
         [Test]
-        public void A_Barricade_Can_Not_Be_Put_Into_A_House()
-            => Assert.Catch<InvalidTileOperationException>(
-                () => new House(Player.Red, 0).Put(new Barricade()));
+        [TestCaseSource(typeof(HouseCases), nameof(HouseCases.AllEmptyHouses))]
+        public void A_Barricade_Can_Not_Be_Put_Into_A_House(House house)
+            => Assert.Catch<InvalidTileOperationException>(() => house.Put(new Barricade()));
 
         [Test]
-        public void Taking_From_A_Non_Empty_House_Retrieves_A_Pawn_Of_The_Houses_Color()
-        {
-            var house = Tile.House(Player.Red, 1);
-
-            Assert.That(house.Take(), Is.EqualTo(new Pawn(Player.Red)));
-        }
+        [TestCaseSource(typeof(HouseCases), nameof(HouseCases.AllHousesWithSinglePawn))]
+        public void Taking_From_A_Non_Empty_House_Retrieves_A_Pawn_Of_The_Houses_Color(House house)
+            => Assert.That(house.Take(), Is.EqualTo(new Pawn(house.Player)));
 
         [Test]
-        public void Taking_From_An_Empty_House_Throws()
-            => Assert.Catch<InvalidTileOperationException>(
-                () => new House(Player.Red, 0).Take());
+        [TestCaseSource(typeof(HouseCases), nameof(HouseCases.AllEmptyHouses))]
+        public void Taking_From_An_Empty_House_Throws(House house)
+            => Assert.Catch<InvalidTileOperationException>(() => house.Take());
 
         [Test]
         [TestCaseSource(typeof(MixedCases), nameof(MixedCases.AllEmptyHouses_AllPieces))]
