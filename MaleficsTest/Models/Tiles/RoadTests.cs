@@ -22,7 +22,7 @@ namespace MaleficsTests.Models.Tiles
                 () => new Road(pieces.First()).Put(pieces.Second()));
 
         [Test]
-        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.All))]
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
         public void A_Road_With_A_Piece_Is_Occupied(IPiece piece)
             => Assert.That(new Road(piece).IsOccupied, Is.True);
 
@@ -36,13 +36,13 @@ namespace MaleficsTests.Models.Tiles
             => Assert.That(new Road(pawn).IsTraversable, Is.True);
 
         [Test]
-        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.All))]
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
         public void An_Empty_Road_Is_Not_A_Valid_Capture_Target_For_Any_Piece(IPiece piece)
             => Assert.That(new Road().IsValidCaptureTargetFor(piece), Is.False);
 
         [Test]
         [TestCase(null)]
-        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.All))]
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
         public void A_Road_Is_Never_A_Valid_Capture_Target_For_A_Barricade(IPiece occupyingPiece)
             => Assert.That(new Road(occupyingPiece).IsValidCaptureTargetFor(new Barricade()), Is.False);
 

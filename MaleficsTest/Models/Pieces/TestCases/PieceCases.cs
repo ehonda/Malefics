@@ -9,11 +9,11 @@ namespace MaleficsTests.Models.Pieces.TestCases
 {
     public static class PieceCases
     {
-        public static IEnumerable<IPiece> All
+        public static IEnumerable<IPiece> AllPieces
             => Barricade.Concat<IPiece>(Pawns);
 
         public static IEnumerable<(IPiece, IPiece)> AllPairs
-            => All.SelectMany(p => All.Select(q => (p, q)));
+            => AllPieces.SelectMany(p => AllPieces.Select(q => (p, q)));
 
         public static IEnumerable<Barricade> Barricade
             => Enumerable.Repeat(new Barricade(), 1);

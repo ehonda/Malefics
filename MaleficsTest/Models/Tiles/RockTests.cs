@@ -28,7 +28,7 @@ namespace MaleficsTests.Models.Tiles
             => Assert.That(Tile.Rock().IsOccupied, Is.False);
 
         [Test]
-        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.All))]
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
         public void A_Rock_Is_Not_A_Valid_Capture_Target_For_Any_Piece(IPiece piece)
             => Assert.That(Tile.Rock().IsValidCaptureTargetFor(piece), Is.False);
     }

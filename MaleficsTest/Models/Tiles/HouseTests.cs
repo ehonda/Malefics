@@ -1,7 +1,9 @@
 ﻿using Malefics.Enums;
 using Malefics.Exceptions;
+using Malefics.Extensions;
 using Malefics.Models.Pieces;
 using Malefics.Models.Tiles;
+using MaleficsTests.Models.Pieces.TestCases;
 using NUnit.Framework;
 
 namespace MaleficsTests.Models.Tiles
@@ -55,5 +57,12 @@ namespace MaleficsTests.Models.Tiles
         public void Taking_From_An_Empty_House_Throws()
             => Assert.Catch<InvalidTileOperationException>(
                 () => new House(Player.Red, 0).Take());
+
+        [Test]
+        [TestCaseSource(typeof(MixedCases), nameof(MixedCases.AllEmptyHouses_AllPieces))]
+        public void A_House_Is_Not_A_Valid_Capture_Target_For_Any_Piece(
+            (House, IPiece) houseAndPiece)
+            => Assert.That(houseAndPiece.First()
+                .IsValidCaptureTargetFor(houseAndPiece.Second()), Is.False);
     }
 }
