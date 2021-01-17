@@ -16,22 +16,24 @@ namespace MaleficsTests.Models.Tiles
             => Assert.That(new House(Player.Red, 0).IsOccupied(), Is.False);
 
         [Test]
-        [TestCase(0u)]
-        [TestCase(1u)]
-        [TestCase(2u)]
-        public void A_House_Is_Not_Traversable(uint pawns)
-            => Assert.That(new House(Player.Red, pawns).IsTraversable(), Is.False);
+        [TestCaseSource(typeof(HouseCases), nameof(HouseCases.AllHousesWithPopulation),
+            new object[] { 0u })]
+        [TestCaseSource(typeof(HouseCases), nameof(HouseCases.AllHousesWithPopulation),
+            new object[] { 1u })]
+        public void A_House_Is_Not_Traversable(House house)
+            => Assert.That(house.IsTraversable(), Is.False);
 
         [Test]
-        [TestCase(0u)]
-        [TestCase(1u)]
-        [TestCase(2u)]
+        [TestCaseSource(typeof(HouseCases), nameof(HouseCases.AllHousesWithPopulation), 
+            new object[] { 0u })]
+        [TestCaseSource(typeof(HouseCases), nameof(HouseCases.AllHousesWithPopulation),
+            new object[] { 1u })]
+        [TestCaseSource(typeof(HouseCases), nameof(HouseCases.AllHousesWithPopulation),
+            new object[] { 2u })]
         public void A_Pawn_Can_Be_Put_In_A_House_Of_The_Right_Color_And_It_Is_Then_Occupied(
-            uint pawnsInHouse)
+            House house)
         {
-            var house = Tile.House(Player.Red, pawnsInHouse);
-            house.Put(new Pawn(Player.Red));
-
+            house.Put(new Pawn(house.Player));
             Assert.That(house.IsOccupied(), Is.True);
         }
 
