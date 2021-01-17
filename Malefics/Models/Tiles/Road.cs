@@ -15,6 +15,12 @@ namespace Malefics.Models.Tiles
         #region Implementations of ITile
 
         /// <inheritdoc />
+        public bool Contains(IPiece piece)
+        {
+            return false;
+        }
+
+        /// <inheritdoc />
         public void Put(IPiece piece)
         {
             if (_occupyingPiece is not null)

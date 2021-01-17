@@ -1,3 +1,4 @@
+using Malefics.Enums;
 using Malefics.Extensions;
 using Malefics.Models;
 using Malefics.Parsers.Ascii;
@@ -63,5 +64,13 @@ namespace MaleficsTests.Models
             Assert.False(_board.IsLegalPath(
                 Path.AxisParallelSegments(new(0, 0), new(2, 0), new(1, 0))));
         }
+
+        //[Test]
+        //public void A_Player_Has_A_Pawn_And_Can_Move_It_Over_A_Valid_Path()
+        //{
+        //    _board = FromRows("r...");
+
+        //    Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.True);
+        //}
     }
 }

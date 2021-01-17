@@ -8,6 +8,12 @@ namespace Malefics.Models.Tiles
         #region Implementations of ITile
 
         /// <inheritdoc />
+        public bool Contains(IPiece piece)
+        {
+            return false;
+        }
+
+        /// <inheritdoc />
         public void Put(IPiece piece)
             => throw new InvalidTileOperationException("Can't add piece to a rock tile.");
 

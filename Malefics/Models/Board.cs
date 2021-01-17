@@ -1,6 +1,7 @@
 ﻿using Malefics.Extensions;
 using System.Collections.Generic;
 using System.Linq;
+using Malefics.Enums;
 using Malefics.Models.Tiles;
 
 namespace Malefics.Models
@@ -35,6 +36,9 @@ namespace Malefics.Models
                    && pathAsArray.All(IsTraversable)
                    && pathAsArray.AllDistinct();
         }
+
+        //public bool PlayerCanMoveAPawn(Player player, uint distance)
+        //    => _nodes.Values.Where(tile => tile is Road);
 
         public static Board FromReversedTileRows(IEnumerable<IEnumerable<ITile>> rows)
             => new(rows);

@@ -6,6 +6,8 @@ namespace Malefics.Models.Tiles
     {
         public bool IsTraversable();
 
+        public bool Contains(IPiece piece);
+
         public void Put(IPiece piece);
 
         public IPiece Take();
