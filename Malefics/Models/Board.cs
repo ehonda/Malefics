@@ -16,13 +16,7 @@ namespace Malefics.Models
         {
         }
 
-        public Board(IDictionary<Position, ITile> nodes)
-            => _nodes = nodes;
-
-        public Board(IEnumerable<(Position, ITile)> nodePositions)
-            => _nodes = nodePositions.ToDictionary(Pair.First, Pair.Second);
-
-        public Board(IEnumerable<IEnumerable<ITile>> rows)
+        private Board(IEnumerable<IEnumerable<ITile>> rows)
             => _nodes = rows
                 .Reverse()
                 .SelectMany((row, y) => row
