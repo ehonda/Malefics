@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Malefics.Enums;
+﻿using Malefics.Enums;
 using Malefics.Exceptions;
 using Malefics.Models.Pieces;
 using Malefics.Models.Tiles;
@@ -55,6 +53,9 @@ namespace MaleficsTests.Models.Tiles
             Assert.That(road.IsValidCaptureTargetFor(capturer), Is.True);
         }
 
-        // TODO: Test that Barricade can be captured by all pawns
+        [Test]
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.Pawns))]
+        public void A_Road_Occupied_By_A_Barricade_Is_A_Valid_Capture_Target_For_Any_Pawn(Pawn pawn)
+            => Assert.That(new Road(new Barricade()).IsValidCaptureTargetFor(pawn), Is.True);
     }
 }
