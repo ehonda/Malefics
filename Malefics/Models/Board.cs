@@ -35,9 +35,12 @@ namespace Malefics.Models
                && _nodes[position].IsTraversable();
 
         public bool IsLegalPath(Path path)
-            => path.IsPath()
-            && path.All(IsTraversable)
-            && path.AllDistinct();
+        {
+            var pathAsArray = path.ToArray();
+            return pathAsArray.IsPath()
+                   && pathAsArray.All(IsTraversable)
+                   && pathAsArray.AllDistinct();
+        }
 
         public static Board FromReversedTileRows(IEnumerable<IEnumerable<ITile>> rows)
             => new(rows);
