@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Malefics.Enums;
+using Malefics.Models.Pieces;
 using Malefics.Models.Tiles;
 
 namespace Malefics.Models
 {
-    using Path = IEnumerable<Position>;
-
     public class Board
     {
         private readonly IDictionary<Position, ITile> _nodes
@@ -26,10 +25,10 @@ namespace Malefics.Models
 
 
         public bool IsTraversable(Position position)
-            => _nodes.ContainsKey(position) 
+            => _nodes.ContainsKey(position)
                && _nodes[position].IsTraversable();
 
-        public bool IsLegalPath(Path path)
+        public bool IsLegalPath(IEnumerable<Position> path)
         {
             var pathAsArray = path.ToArray();
             return pathAsArray.IsPath()
@@ -37,8 +36,22 @@ namespace Malefics.Models
                    && pathAsArray.AllDistinct();
         }
 
-        //public bool PlayerCanMoveAPawn(Player player, uint distance)
-        //    => _nodes.Values.Where(tile => tile is Road);
+        public bool PlayerCanMoveAPawn(Player player, uint distance)
+            => _nodes
+                .Where(positionAndTile => positionAndTile.Value.Contains(new Pawn(player)))
+                .SelectMany(positionAndTile => GetPathsOfDistanceFrom(positionAndTile.Key, distance))
+                .Any(IsLegalPath);
+
+        private IEnumerable<IEnumerable<Position>> GetPathsOfDistanceFrom(
+            Position position, uint distance)
+            => distance switch
+            {
+                0u => new[] {Path.AxisParallel(position, position)},
+                _ => position
+                    .Neighbors()
+                    .SelectMany(p => GetPathsOfDistanceFrom(p, distance - 1))
+                    .Select(path => path.Prepend(position))
+            };
 
         public static Board FromReversedTileRows(IEnumerable<IEnumerable<ITile>> rows)
             => new(rows);
