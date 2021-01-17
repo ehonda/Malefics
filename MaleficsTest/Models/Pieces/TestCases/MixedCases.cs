@@ -12,5 +12,13 @@ namespace MaleficsTests.Models.Pieces.TestCases
             => HouseCases.AllEmptyHouses
                 .SelectMany(house => 
                     PieceCases.AllPieces.Select(piece => (house, piece)));
+
+        public static IEnumerable<(House, Pawn)> AllEmptyHouses_PawnsOfDifferentColor
+            => HouseCases.AllEmptyHouses
+                .SelectMany(house =>
+                    PieceCases.Pawns
+                        .Select(pawn => (house, pawn))
+                        .Where(houseAndPawn => 
+                            houseAndPawn.house.Player != houseAndPawn.pawn.Player));
     }
 }

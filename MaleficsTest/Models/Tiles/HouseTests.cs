@@ -36,9 +36,13 @@ namespace MaleficsTests.Models.Tiles
         }
 
         [Test]
-        public void A_Pawn_Can_Not_Be_Put_Into_A_House_Of_Another_Color()
-            => Assert.Catch<InvalidTileOperationException>(
-                () => new House(Player.Red, 0).Put(new Pawn(Player.Blue)));
+        [TestCaseSource(typeof(MixedCases), nameof(MixedCases.AllEmptyHouses_PawnsOfDifferentColor))]
+        public void A_Pawn_Can_Not_Be_Put_Into_A_House_Of_Another_Color(
+            (House, Pawn) houseAndPawn)
+        {
+            var (house, pawn) = houseAndPawn;
+            Assert.Catch<InvalidTileOperationException>(() => house.Put(pawn));
+        }
 
         [Test]
         public void A_Barricade_Can_Not_Be_Put_Into_A_House()

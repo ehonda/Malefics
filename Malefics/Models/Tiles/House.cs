@@ -6,11 +6,11 @@ namespace Malefics.Models.Tiles
 {
     public class House : ITile
     {
-        private readonly Player _player;
+        public Player Player { get; }
         private uint _pawns;
 
         public House(Player player, uint pawns)
-            => (_player, _pawns) = (player, pawns);
+            => (Player, _pawns) = (player, pawns);
 
         #region Implementations of ITile
 
@@ -19,7 +19,7 @@ namespace Malefics.Models.Tiles
         {
             if (piece is Pawn pawn)
             {
-                if (pawn == new Pawn(_player))
+                if (pawn == new Pawn(Player))
                 {
                     ++_pawns;
                     return;
@@ -27,7 +27,7 @@ namespace Malefics.Models.Tiles
             }
 
             throw new InvalidTileOperationException(
-                $"Can't put {piece} on a house of player {_player}");
+                $"Can't put {piece} on a house of player {Player}");
         }
 
         /// <inheritdoc />
@@ -38,7 +38,7 @@ namespace Malefics.Models.Tiles
                     "Can't remove a piece from an empty house.");
 
             --_pawns;
-            return new Pawn(_player);
+            return new Pawn(Player);
         }
 
         /// <inheritdoc />
