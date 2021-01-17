@@ -1,5 +1,5 @@
-﻿using Malefics.Enums;
-using Malefics.Exceptions;
+﻿using Malefics.Exceptions;
+using Malefics.Extensions;
 using Malefics.Models.Pieces;
 using Malefics.Models.Tiles;
 using MaleficsTests.Models.Pieces.TestCases;
@@ -16,21 +16,24 @@ namespace MaleficsTests.Models.Tiles
                 () => Tile.Road().Take());
 
         [Test]
-        public void Putting_A_Piece_On_An_Occupied_Road_Tile_Throws()
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPairs))]
+        public void Putting_A_Piece_On_An_Occupied_Road_Tile_Throws((IPiece, IPiece) pieces)
             => Assert.Catch<InvalidTileOperationException>(
-                () => new Road(new Barricade()).Put(new Barricade()));
+                () => new Road(pieces.First()).Put(pieces.Second()));
 
         [Test]
-        public void A_Road_With_A_Piece_Is_Occupied()
-            => Assert.That(new Road(new Barricade()).IsOccupied, Is.True);
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.All))]
+        public void A_Road_With_A_Piece_Is_Occupied(IPiece piece)
+            => Assert.That(new Road(piece).IsOccupied, Is.True);
 
         [Test]
         public void A_Road_Occupied_By_A_Barricade_Is_Not_Traversable()
             => Assert.That(new Road(new Barricade()).IsTraversable, Is.False);
 
         [Test]
-        public void A_Road_Occupied_By_A_Pawn_Is_Traversable()
-            => Assert.That(new Road(new Pawn(Player.Red)).IsTraversable, Is.True);
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.Pawns))]
+        public void A_Road_Occupied_By_A_Pawn_Is_Traversable(Pawn pawn)
+            => Assert.That(new Road(pawn).IsTraversable, Is.True);
 
         [Test]
         [TestCaseSource(typeof(PieceCases), nameof(PieceCases.All))]
