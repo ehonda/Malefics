@@ -8,10 +8,7 @@ namespace Malefics.Models.Tiles
         #region Implementations of ITile
 
         /// <inheritdoc />
-        public bool Contains(IPiece piece)
-        {
-            return false;
-        }
+        public bool Contains(IPiece piece) => false;
 
         /// <inheritdoc />
         public void Put(IPiece piece)

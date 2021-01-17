@@ -16,9 +16,9 @@ namespace Malefics.Models.Tiles
 
         /// <inheritdoc />
         public bool Contains(IPiece piece)
-        {
-            return false;
-        }
+            => _pawns > 0
+               && piece is Pawn pawn
+               && pawn == new Pawn(Player);
 
         /// <inheritdoc />
         public void Put(IPiece piece)
@@ -54,10 +54,7 @@ namespace Malefics.Models.Tiles
         public bool IsOccupied() => _pawns != 0;
 
         /// <inheritdoc />
-        public bool IsValidCaptureTargetFor(IPiece piece)
-        {
-            return false;
-        }
+        public bool IsValidCaptureTargetFor(IPiece piece) => false;
 
         #endregion
     }

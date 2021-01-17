@@ -60,5 +60,16 @@ namespace MaleficsTests.Models.Tiles
         [TestCaseSource(typeof(PieceCases), nameof(PieceCases.Pawns))]
         public void A_Road_Occupied_By_A_Barricade_Is_A_Valid_Capture_Target_For_Any_Pawn(Pawn pawn)
             => Assert.That(new Road(new Barricade()).IsValidCaptureTargetFor(pawn), Is.True);
+
+        [Test]
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
+        public void A_Road_Occupied_By_A_Piece_Contains_That_Piece(IPiece piece)
+            => Assert.That(new Road(piece).Contains(piece), Is.True);
+
+        [Test]
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.UnequalPairs))]
+        public void A_Road_Occupied_By_A_Piece_Does_Not_Contain_An_Unequal_Piece(
+            (IPiece, IPiece) pieces)
+            => Assert.That(new Road(pieces.First()).Contains(pieces.Second()), Is.False);
     }
 }

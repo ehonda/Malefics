@@ -31,5 +31,10 @@ namespace MaleficsTests.Models.Tiles
         [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
         public void A_Rock_Is_Not_A_Valid_Capture_Target_For_Any_Piece(IPiece piece)
             => Assert.That(Tile.Rock().IsValidCaptureTargetFor(piece), Is.False);
+
+        [Test]
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
+        public void A_Rock_Contains_No_Piece(IPiece piece)
+            => Assert.That(Tile.Rock().Contains(piece), Is.False);
     }
 }

@@ -67,5 +67,24 @@ namespace MaleficsTests.Models.Tiles
             (House, IPiece) houseAndPiece)
             => Assert.That(houseAndPiece.First()
                 .IsValidCaptureTargetFor(houseAndPiece.Second()), Is.False);
+
+        // TODO: Find a nicer way to handle mixed cases, parameterize these tests
+        //       to test all possible combinations
+        [Test]
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
+        public void An_Empty_House_Does_Not_Contain_Any_Piece(IPiece piece)
+            => Assert.That(new House(Player.Red, 0).Contains(piece), Is.False);
+
+        [Test]
+        public void A_Non_Empty_House_Contains_A_Pawn_Of_That_Color()
+            => Assert.That(new House(Player.Red, 1).Contains(new Pawn(Player.Red)), Is.True);
+
+        [Test]
+        public void A_Non_Empty_House_Does_Not_Contain_A_Pawn_Of_Another_Color()
+            => Assert.That(new House(Player.Red, 1).Contains(new Pawn(Player.Blue)), Is.False);
+
+        [Test]
+        public void A_Non_Empty_House_Does_Not_Contain_A_Barricade()
+            => Assert.That(new House(Player.Red, 1).Contains(new Barricade()), Is.False);
     }
 }

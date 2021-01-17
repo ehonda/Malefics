@@ -15,6 +15,9 @@ namespace MaleficsTests.Models.Pieces.TestCases
         public static IEnumerable<(IPiece, IPiece)> AllPairs
             => AllPieces.SelectMany(p => AllPieces.Select(q => (p, q)));
 
+        public static IEnumerable<(IPiece, IPiece)> UnequalPairs
+            => AllPairs.Where(p => p.First() != p.Second());
+
         public static IEnumerable<Barricade> Barricade
             => Enumerable.Repeat(new Barricade(), 1);
 
@@ -28,5 +31,6 @@ namespace MaleficsTests.Models.Pieces.TestCases
 
         public static IEnumerable<(Pawn, Pawn)> PawnPairsOfDifferentColors
             => PawnPairs.Where(pawns => pawns.First() != pawns.Second());
+
     }
 }
