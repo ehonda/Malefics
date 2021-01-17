@@ -46,7 +46,7 @@ namespace MaleficsTests.Models.Tiles
             => Assert.That(new Road(occupyingPiece).IsValidCaptureTargetFor(new Barricade()), Is.False);
 
         [Test]
-        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.PawnsOfDifferentColors))]
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.PawnPairsOfDifferentColors))]
         public void A_Road_Occupied_By_A_Pawn_Is_A_Valid_Capture_Target_For_A_Pawn_Of_Another_Color(
             (Pawn, Pawn) occupierAndCapturer)
         {

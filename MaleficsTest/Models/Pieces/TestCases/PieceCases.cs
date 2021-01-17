@@ -1,39 +1,29 @@
-﻿using Malefics.Enums;
-using Malefics.Models.Pieces;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Malefics.Enums;
+using Malefics.Extensions;
+using Malefics.Models.Pieces;
 
 namespace MaleficsTests.Models.Pieces.TestCases
 {
     public static class PieceCases
     {
         public static IEnumerable<IPiece> All
-        {
-            get
-            {
-                yield return new Barricade();
-                yield return new Pawn(Player.Red);
-                yield return new Pawn(Player.Green);
-                yield return new Pawn(Player.Yellow);
-                yield return new Pawn(Player.Blue);
-            }
-        }
+            => Barricade.Concat<IPiece>(Pawns);
+
+        public static IEnumerable<Barricade> Barricade
+            => Enumerable.Repeat(new Barricade(), 1);
 
         public static IEnumerable<Pawn> Pawns
-        {
-            get
-            {
-                yield return new Pawn(Player.Red);
-                yield return new Pawn(Player.Green);
-                yield return new Pawn(Player.Yellow);
-                yield return new Pawn(Player.Blue);
-            }
-        }
+            => Enum
+                .GetValues<Player>()
+                .Select(player => new Pawn(player));
 
-        public static IEnumerable<(Pawn, Pawn)> PawnsOfDifferentColors =>
-            Pawns
-                .SelectMany(p => Pawns
-                    .Select(q => (p, q))
-                    .Where(pawns => pawns.p != pawns.q));
+        public static IEnumerable<(Pawn, Pawn)> PawnPairs
+            => Pawns.SelectMany(p => Pawns.Select(q => (p, q)));
+
+        public static IEnumerable<(Pawn, Pawn)> PawnPairsOfDifferentColors
+            => PawnPairs.Where(pawns => pawns.First() != pawns.Second());
     }
 }
