@@ -1,9 +1,12 @@
+using System.Collections.Generic;
+using System.Linq;
 using Malefics.Enums;
 using Malefics.Extensions;
 using Malefics.Models;
 using Malefics.Parsers.Ascii;
 using NUnit.Framework;
 using Sprache;
+using Position = Malefics.Models.Position;
 
 namespace MaleficsTests.Models
 {
@@ -66,11 +69,37 @@ namespace MaleficsTests.Models
         }
 
         [Test]
-        public void A_Player_Has_A_Pawn_And_Can_Move_It_Over_A_Valid_Path()
+        public void Non_Backtracking_Paths_Of_Distance_2_On_A_Square()
         {
-            _board = FromRows("r...");
+            _board = FromRows(
+                "..",
+                "..");
 
-            Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.True);
+            var paths = _board
+                .GetNonBacktrackingRoadPathsOfDistanceFrom(new(0, 0), 2)
+                .ToArray();
+
+            Assert.That(paths, Has.Length.EqualTo(2));
+            Assert.That(paths, Has.Exactly(1).Items.EquivalentTo(
+                new[] { new Position(0, 0), new(1, 0), new(1, 1)}));
+            Assert.That(paths, Has.Exactly(1).Items.EquivalentTo(
+                new[] { new Position(0, 0), new(0, 1), new(1, 1) }));
         }
+
+        //[Test]
+        //public void A_Player_Has_A_Pawn_And_Can_Move_It_Over_A_Valid_Path()
+        //{
+        //    _board = FromRows("r...");
+
+        //    //var p0 = _board.GetPathsOfDistanceFrom(new(0, 0), 0).ToArray();
+        //    //var p1 = _board.GetPathsOfDistanceFrom(new(0, 0), 1).ToArray();
+        //    //var p2 = _board.GetPathsOfDistanceFrom(new(0, 0), 2).ToArray();
+
+        //    var paths = _board.GetPathsOfDistanceFrom(new(0, 0), 3);
+        //    Assert.That(paths, Has.Exactly(1).Items.EquivalentTo(
+        //        new[] { new Position(0, 0), new(1, 0), new(2, 0), new(3, 0)}));
+
+        //    //Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.True);
+        //}
     }
 }

@@ -1,9 +1,9 @@
-﻿using Malefics.Extensions;
-using System.Collections.Generic;
-using System.Linq;
-using Malefics.Enums;
+﻿using Malefics.Enums;
+using Malefics.Extensions;
 using Malefics.Models.Pieces;
 using Malefics.Models.Tiles;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Malefics.Models
 {
@@ -42,16 +42,45 @@ namespace Malefics.Models
                 .SelectMany(positionAndTile => GetPathsOfDistanceFrom(positionAndTile.Key, distance))
                 .Any(IsLegalPath);
 
-        private IEnumerable<IEnumerable<Position>> GetPathsOfDistanceFrom(
+        public IEnumerable<IEnumerable<Position>> GetPathsOfDistanceFrom(
             Position position, uint distance)
             => distance switch
             {
-                0u => new[] {Path.AxisParallel(position, position)},
+                0u => new[] { new[] { position } },
                 _ => position
                     .Neighbors()
                     .SelectMany(p => GetPathsOfDistanceFrom(p, distance - 1))
                     .Select(path => path.Prepend(position))
             };
+
+        private ITile TileAt(Position position)
+            => _nodes.TryGetValue(position, out var tile)
+                ? tile
+                : Tile.Rock();
+
+        public IEnumerable<IEnumerable<Position>> GetNonBacktrackingRoadPathsOfDistanceFrom(
+            Position position, uint distance)
+            => GetNonBacktrackingRoadPathsOfDistanceFrom(position, distance,
+                    Enumerable.Empty<Position>());
+
+        private IEnumerable<IEnumerable<Position>> GetNonBacktrackingRoadPathsOfDistanceFrom(
+            Position position, uint distance, IEnumerable<Position> visited)
+        {
+            if (distance == 0u && TileAt(position) is Road)
+                return new[] { new[] { position } };
+
+            var roadNeighbors = position
+                .Neighbors()
+                .Where(neighbor
+                    => TileAt(neighbor) is Road
+                    && !visited.Contains(neighbor));
+
+            return roadNeighbors
+                .SelectMany(neighbor =>
+                    GetNonBacktrackingRoadPathsOfDistanceFrom(
+                            neighbor, distance - 1, visited.Append(position))
+                        .Select(path => path.Prepend(position)));
+        }
 
         public static Board FromReversedTileRows(IEnumerable<IEnumerable<ITile>> rows)
             => new(rows);
