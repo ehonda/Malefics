@@ -82,6 +82,18 @@ namespace Malefics.Models
                         .Select(path => path.Prepend(position)));
         }
 
+        public IEnumerable<IEnumerable<Position>> GetLegalMovePathsOfDistanceFrom(
+            Position position, uint distance)
+        {
+            // TODO: As extension method maybe?
+            var tile = TileAt(position);
+            if (!tile.IsOccupied() || tile.Contains(new Barricade()))
+                return Enumerable.Empty<IEnumerable<Position>>();
+
+            return GetNonBacktrackingRoadPathsOfDistanceFrom(position, distance)
+                .Where(path => path.All(IsTraversable));
+        }
+
         public static Board FromReversedTileRows(IEnumerable<IEnumerable<ITile>> rows)
             => new(rows);
     }
