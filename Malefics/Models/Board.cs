@@ -39,8 +39,8 @@ namespace Malefics.Models
         public bool PlayerCanMoveAPawn(Player player, uint distance)
             => _nodes
                 .Where(positionAndTile => positionAndTile.Value.Contains(new Pawn(player)))
-                .SelectMany(positionAndTile => GetPathsOfDistanceFrom(positionAndTile.Key, distance))
-                .Any(IsLegalPath);
+                .SelectMany(positionAndTile => GetLegalMovePathsOfDistanceFrom(positionAndTile.Key, distance))
+                .Any();
 
         public IEnumerable<IEnumerable<Position>> GetPathsOfDistanceFrom(
             Position position, uint distance)

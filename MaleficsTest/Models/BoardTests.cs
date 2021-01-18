@@ -131,20 +131,18 @@ namespace MaleficsTests.Models
                 new[] { new Position(0, 0), new(1, 0), new(2, 0) }));
         }
 
-        //[Test]
-        //public void A_Player_Has_A_Pawn_And_Can_Move_It_Over_A_Valid_Path()
-        //{
-        //    _board = FromRows("r...");
+        // TODO: Test cases
+        //      - r...r (4)
+        //      - r...o (4)
+        //      - r...b (4)
+        //      - start from house
 
-        //    //var p0 = _board.GetPathsOfDistanceFrom(new(0, 0), 0).ToArray();
-        //    //var p1 = _board.GetPathsOfDistanceFrom(new(0, 0), 1).ToArray();
-        //    //var p2 = _board.GetPathsOfDistanceFrom(new(0, 0), 2).ToArray();
+        [Test]
+        public void A_Player_Has_A_Pawn_And_Can_Move_It_Over_A_Valid_Path()
+        {
+            _board = FromRows("r...");
 
-        //    var paths = _board.GetPathsOfDistanceFrom(new(0, 0), 3);
-        //    Assert.That(paths, Has.Exactly(1).Items.EquivalentTo(
-        //        new[] { new Position(0, 0), new(1, 0), new(2, 0), new(3, 0)}));
-
-        //    //Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.True);
-        //}
+            Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.True);
+        }
     }
 }
