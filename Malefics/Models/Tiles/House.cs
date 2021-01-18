@@ -48,6 +48,9 @@ namespace Malefics.Models.Tiles
         }
 
         /// <inheritdoc />
+        public IPiece? Peek() => _pawns > 0 ? new Pawn(Player) : null;
+
+        /// <inheritdoc />
         public bool IsTraversable() => false;
 
         /// <inheritdoc />

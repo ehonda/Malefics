@@ -20,6 +20,9 @@ namespace Malefics.Models.Tiles
                 "Can't take a piece from a rock tile.");
 
         /// <inheritdoc />
+        public IPiece? Peek() => null;
+
+        /// <inheritdoc />
         public bool IsTraversable() => false;
 
         /// <inheritdoc />

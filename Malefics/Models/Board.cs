@@ -91,7 +91,13 @@ namespace Malefics.Models
                 return Enumerable.Empty<IEnumerable<Position>>();
 
             return GetNonBacktrackingRoadPathsOfDistanceFrom(position, distance)
-                .Where(path => path.All(IsTraversable));
+                .Where(path =>
+                {
+                    var pathAsArray = path.ToArray();
+
+                    // Need Tile.Peek()
+                    //if (!TileAt(pathAsArray.Last()).IsValidCaptureTargetFor(tile.))
+                });
         }
 
         public static Board FromReversedTileRows(IEnumerable<IEnumerable<ITile>> rows)

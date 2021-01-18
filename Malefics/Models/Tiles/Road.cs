@@ -34,6 +34,9 @@ namespace Malefics.Models.Tiles
                    "Can't take a piece from an empty road tile");
 
         /// <inheritdoc />
+        public IPiece? Peek() => _occupyingPiece;
+
+        /// <inheritdoc />
         public bool IsTraversable()
             => _occupyingPiece is not Pieces.Barricade;
 
