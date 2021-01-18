@@ -109,6 +109,20 @@ namespace MaleficsTests.Models
                 "r...");
 
             var paths = _board
+                .GetLegalMovePathsOfDistanceFrom(new(0, 0), 3)
+                .ToArray();
+
+            Assert.That(paths, Has.Length.EqualTo(1));
+            Assert.That(paths, Has.Exactly(1).Items.EquivalentTo(
+                new[] { new Position(0, 0), new(1, 0), new(2, 0), new(3, 0) }));
+        }
+
+        [Test]
+        public void Legal_Move_Path_With_Barricade_Capture()
+        {
+            _board = FromRows("r.o");
+
+            var paths = _board
                 .GetLegalMovePathsOfDistanceFrom(new(0, 0), 2)
                 .ToArray();
 
