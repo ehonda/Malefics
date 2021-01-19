@@ -63,7 +63,7 @@ namespace Malefics.Parsers.Ascii
         public static readonly Parser<ITile> RedHouse =
             from player in Parse.Char(HOUSE_RED)
             from pawns in Parse.Numeric
-            select Models.Tiles.Tile.House(Player.Red, 0);
+            select Models.Tiles.Tile.House(Player.Red, uint.Parse(pawns.ToString()));
 
         // Main parser
         // # # # # # # # # # # # # # # # # #

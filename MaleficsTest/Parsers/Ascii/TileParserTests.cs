@@ -1,6 +1,7 @@
 ﻿using Malefics.Enums;
 using Malefics.Models;
 using Malefics.Models.Pieces;
+using Malefics.Models.Tiles;
 using Malefics.Parsers.Ascii;
 using NUnit.Framework;
 using Sprache;
@@ -13,11 +14,26 @@ namespace MaleficsTests.Parsers.Ascii
         // TODO: We want a better way to test for expected tiles
         //       now that we made occupying pieces private
 
+        // TODO: Reactivate the commented out tests
+
+        // TODO: Parameterize these tests
+
+        [Test]
+        public void Parse_Red_House_With_A_Pawn()
+        {
+            var tile = Grammar.Tile.Parse("R1");
+
+            Assert.That(tile, Is.TypeOf<House>());
+            Assert.That(tile.Contains(new Pawn(Player.Red)), Is.True);
+        }
+
+
+
         //[Test]
         //public void A_Barricade_Is_Parsed_With_A_Road_Tile()
         //{
         //    var tile = Grammar.Tile.Parse("o");
-            
+
         //    Assert.That(tile.Terrain, Is.EqualTo(Terrain.Road));
         //    Assert.That(tile.OccupyingPieces, Has.Exactly(1).Items
         //        .And.Exactly(1).Items.TypeOf<Barricade>());
