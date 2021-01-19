@@ -14,8 +14,25 @@ namespace Malefics.Models.Tiles
 
         #region Implementations of ITile
 
+        // TODO: Is there a less awkward way to get the value comparison semantics we want?
         /// <inheritdoc />
-        public bool Contains(IPiece piece) => _occupyingPiece == piece;
+        public bool Contains(IPiece piece)
+            => _occupyingPiece switch
+            {
+                Barricade => piece switch
+                {
+                    Barricade => true,
+                    _ => false
+                },
+
+                Pawn p => piece switch
+                {
+                    Pawn q => p == q,
+                    _ => false
+                },
+
+                _ => false
+            };
 
         /// <inheritdoc />
         public void Put(IPiece piece)
