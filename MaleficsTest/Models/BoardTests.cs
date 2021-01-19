@@ -1,11 +1,10 @@
-using System.Collections.Generic;
-using System.Linq;
 using Malefics.Enums;
 using Malefics.Extensions;
 using Malefics.Models;
 using Malefics.Parsers.Ascii;
 using NUnit.Framework;
 using Sprache;
+using System.Linq;
 using Position = Malefics.Models.Position;
 
 namespace MaleficsTests.Models
@@ -141,6 +140,22 @@ namespace MaleficsTests.Models
         public void A_Player_Has_A_Pawn_And_Can_Move_It_Over_A_Valid_Path()
         {
             _board = FromRows("r...");
+
+            Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.True);
+        }
+
+        [Test]
+        public void Capturing_A_Barricade_Is_A_Legal_Move_Path()
+        {
+            _board = FromRows("r..o");
+
+            Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.True);
+        }
+
+        [Test]
+        public void Capturing_Another_Pawn_Is_A_Legal_Move_Path()
+        {
+            _board = FromRows("r..b");
 
             Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.True);
         }
