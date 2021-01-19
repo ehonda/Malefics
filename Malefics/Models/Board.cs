@@ -42,17 +42,6 @@ namespace Malefics.Models
                 .SelectMany(positionAndTile => GetLegalMovePathsOfDistanceFrom(positionAndTile.Key, distance))
                 .Any();
 
-        public IEnumerable<IEnumerable<Position>> GetPathsOfDistanceFrom(
-            Position position, uint distance)
-            => distance switch
-            {
-                0u => new[] { new[] { position } },
-                _ => position
-                    .Neighbors()
-                    .SelectMany(p => GetPathsOfDistanceFrom(p, distance - 1))
-                    .Select(path => path.Prepend(position))
-            };
-
         private ITile TileAt(Position position)
             => _nodes.TryGetValue(position, out var tile)
                 ? tile
