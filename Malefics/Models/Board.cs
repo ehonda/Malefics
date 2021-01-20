@@ -89,7 +89,7 @@ namespace Malefics.Models
                     //      b - Traverse all previous tiles
                     return (lastTile.IsValidCaptureTargetFor(pawnToMove)
                            || (lastTile is Road && !lastTile.IsOccupied()))
-                           && pathAsArray.Reverse().Skip(1).All(IsTraversable);
+                           && pathAsArray.Skip(1).Reverse().Skip(1).All(IsTraversable);
                 });
         }
 
