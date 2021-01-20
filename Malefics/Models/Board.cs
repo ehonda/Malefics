@@ -55,14 +55,15 @@ namespace Malefics.Models
         private IEnumerable<IEnumerable<Position>> GetNonBacktrackingRoadPathsOfDistanceFrom(
             Position position, uint distance, IEnumerable<Position> visited)
         {
-            if (distance == 0u && TileAt(position) is Road)
+            // TODO: Refactor to get rid of all the "tile is Road || tile is Goal"
+            if (distance == 0u && TileAt(position) is Road || TileAt(position) is Goal)
                 return new[] { new[] { position } };
 
             var roadNeighbors = position
                 .Neighbors()
                 .Where(neighbor
-                    => TileAt(neighbor) is Road
-                    && !visited.Contains(neighbor));
+                    => (TileAt(neighbor) is Road || TileAt(neighbor) is Goal)
+                       && !visited.Contains(neighbor));
 
             return roadNeighbors
                 .SelectMany(neighbor =>
