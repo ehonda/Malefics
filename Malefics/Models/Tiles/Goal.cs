@@ -4,13 +4,15 @@ namespace Malefics.Models.Tiles
 {
     public class Goal : ITile
     {
+        // TODO: What to do about the other functions we need to implement?
+        //       They aren't really meaningful since if a Pawn is placed on
+        //       a Goal, the game ends, should we try and realize "natural"
+        //       semantics for them anyway?
+
         #region Implementation of ITile
 
         /// <inheritdoc />
-        public bool IsTraversable()
-        {
-            return false;
-        }
+        public bool IsTraversable() => true;
 
         /// <inheritdoc />
         public bool Contains(Piece piece)
