@@ -88,7 +88,8 @@ namespace Malefics.Models
                     //      a - Capture at the last tile (or have it be unoccupied Road)
                     //      b - Traverse all previous tiles
                     return (lastTile.IsValidCaptureTargetFor(pawnToMove)
-                           || (lastTile is Road && !lastTile.IsOccupied()))
+                           || (lastTile is Road && !lastTile.IsOccupied())
+                           || lastTile is Goal)
                            && pathAsArray.Skip(1).Reverse().Skip(1).All(IsTraversable);
                 });
         }

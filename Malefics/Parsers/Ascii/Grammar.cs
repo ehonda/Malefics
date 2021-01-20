@@ -74,10 +74,11 @@ namespace Malefics.Parsers.Ascii
 
         public static readonly Parser<ITile> Tile
             = Rock
-            .Or(Road)
-            .Or(Barricade)
-            .Or(AnyPawn)
-            .Or(RedHouse);
+                .Or(Road)
+                .Or(Barricade)
+                .Or(AnyPawn)
+                .Or(RedHouse)
+                .Or(Goal);
 
         // Board Parser
         // ------------------------------------------------------------------
