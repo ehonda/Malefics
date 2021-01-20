@@ -24,6 +24,7 @@ namespace Malefics.Parsers.Ascii
         private const char PAWN_RED = 'r';
         private const char PAWN_BLUE = 'b';
         private const char HOUSE_RED = 'R';
+        private const char GOAL = 'x';
 
         private static char PawnEncoding(Player player)
             => player switch
@@ -47,6 +48,9 @@ namespace Malefics.Parsers.Ascii
 
         public static readonly Parser<ITile> Barricade
             = Models.Tiles.Tile.Barricade().EncodedAs(BARRICADE);
+
+        public static readonly Parser<ITile> Goal
+            = new Goal().EncodedAs(GOAL);
 
         // Pawns
         // # # # # # # # # # # # # # # # # #
