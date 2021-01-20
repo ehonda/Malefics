@@ -16,23 +16,7 @@ namespace Malefics.Models.Tiles
 
         // TODO: Is there a less awkward way to get the value comparison semantics we want?
         /// <inheritdoc />
-        public bool Contains(Piece piece)
-            => _occupyingPiece switch
-            {
-                Barricade => piece switch
-                {
-                    Barricade => true,
-                    _ => false
-                },
-
-                Pawn p => piece switch
-                {
-                    Pawn q => p == q,
-                    _ => false
-                },
-
-                _ => false
-            };
+        public bool Contains(Piece piece) => _occupyingPiece == piece;
 
         /// <inheritdoc />
         public void Put(Piece piece)
