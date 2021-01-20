@@ -6,18 +6,18 @@ namespace Malefics.Models.Tiles
     {
         public bool IsTraversable();
 
-        public bool Contains(IPiece piece);
+        public bool Contains(Piece piece);
 
-        public void Put(IPiece piece);
+        public void Put(Piece piece);
 
-        public IPiece Take();
+        public Piece Take();
 
         // TODO: - Unit Tests for all subclasses
         //       - Should it return nullable?
-        public IPiece? Peek();
+        public Piece? Peek();
 
         public bool IsOccupied();
 
-        public bool IsValidCaptureTargetFor(IPiece piece);
+        public bool IsValidCaptureTargetFor(Piece piece);
     }
 }

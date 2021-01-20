@@ -64,7 +64,7 @@ namespace MaleficsTests.Models.Tiles
         [Test]
         [TestCaseSource(typeof(MixedCases), nameof(MixedCases.AllEmptyHouses_AllPieces))]
         public void A_House_Is_Not_A_Valid_Capture_Target_For_Any_Piece(
-            (House, IPiece) houseAndPiece)
+            (House, Piece) houseAndPiece)
             => Assert.That(houseAndPiece.First()
                 .IsValidCaptureTargetFor(houseAndPiece.Second()), Is.False);
 
@@ -72,7 +72,7 @@ namespace MaleficsTests.Models.Tiles
         //       to test all possible combinations
         [Test]
         [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
-        public void An_Empty_House_Does_Not_Contain_Any_Piece(IPiece piece)
+        public void An_Empty_House_Does_Not_Contain_Any_Piece(Piece piece)
             => Assert.That(new House(Player.Red, 0).Contains(piece), Is.False);
 
         [Test]

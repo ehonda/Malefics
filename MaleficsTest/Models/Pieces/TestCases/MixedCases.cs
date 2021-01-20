@@ -8,7 +8,7 @@ namespace MaleficsTests.Models.Pieces.TestCases
 {
     public static class MixedCases
     {
-        public static IEnumerable<(House, IPiece)> AllEmptyHouses_AllPieces
+        public static IEnumerable<(House, Piece)> AllEmptyHouses_AllPieces
             => HouseCases.AllEmptyHouses
                 .SelectMany(house => 
                     PieceCases.AllPieces.Select(piece => (house, piece)));

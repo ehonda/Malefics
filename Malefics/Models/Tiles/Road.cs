@@ -5,18 +5,18 @@ namespace Malefics.Models.Tiles
 {
     public class Road : ITile
     {
-        private IPiece? _occupyingPiece;
+        private Piece? _occupyingPiece;
 
         public Road() { }
 
-        public Road(IPiece occupyingPiece)
+        public Road(Piece occupyingPiece)
             => _occupyingPiece = occupyingPiece;
 
         #region Implementations of ITile
 
         // TODO: Is there a less awkward way to get the value comparison semantics we want?
         /// <inheritdoc />
-        public bool Contains(IPiece piece)
+        public bool Contains(Piece piece)
             => _occupyingPiece switch
             {
                 Barricade => piece switch
@@ -35,7 +35,7 @@ namespace Malefics.Models.Tiles
             };
 
         /// <inheritdoc />
-        public void Put(IPiece piece)
+        public void Put(Piece piece)
         {
             if (_occupyingPiece is not null)
                 throw new InvalidTileOperationException(
@@ -45,13 +45,13 @@ namespace Malefics.Models.Tiles
         }
 
         /// <inheritdoc />
-        public IPiece Take()
+        public Piece Take()
             => _occupyingPiece
                ?? throw new InvalidTileOperationException(
                    "Can't take a piece from an empty road tile");
 
         /// <inheritdoc />
-        public IPiece? Peek() => _occupyingPiece;
+        public Piece? Peek() => _occupyingPiece;
 
         /// <inheritdoc />
         public bool IsTraversable()
@@ -62,7 +62,7 @@ namespace Malefics.Models.Tiles
             => _occupyingPiece is not null;
 
         /// <inheritdoc />
-        public bool IsValidCaptureTargetFor(IPiece piece)
+        public bool IsValidCaptureTargetFor(Piece piece)
             => piece is Pawn
                && _occupyingPiece is not null
                && _occupyingPiece != piece;

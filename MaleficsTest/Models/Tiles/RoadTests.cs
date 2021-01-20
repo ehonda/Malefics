@@ -17,13 +17,13 @@ namespace MaleficsTests.Models.Tiles
 
         [Test]
         [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPairs))]
-        public void Putting_A_Piece_On_An_Occupied_Road_Tile_Throws((IPiece, IPiece) pieces)
+        public void Putting_A_Piece_On_An_Occupied_Road_Tile_Throws((Piece, Piece) pieces)
             => Assert.Catch<InvalidTileOperationException>(
                 () => new Road(pieces.First()).Put(pieces.Second()));
 
         [Test]
         [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
-        public void A_Road_With_A_Piece_Is_Occupied(IPiece piece)
+        public void A_Road_With_A_Piece_Is_Occupied(Piece piece)
             => Assert.That(new Road(piece).IsOccupied, Is.True);
 
         [Test]
@@ -37,13 +37,13 @@ namespace MaleficsTests.Models.Tiles
 
         [Test]
         [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
-        public void An_Empty_Road_Is_Not_A_Valid_Capture_Target_For_Any_Piece(IPiece piece)
+        public void An_Empty_Road_Is_Not_A_Valid_Capture_Target_For_Any_Piece(Piece piece)
             => Assert.That(new Road().IsValidCaptureTargetFor(piece), Is.False);
 
         [Test]
         [TestCase(null)]
         [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
-        public void A_Road_Is_Never_A_Valid_Capture_Target_For_A_Barricade(IPiece occupyingPiece)
+        public void A_Road_Is_Never_A_Valid_Capture_Target_For_A_Barricade(Piece occupyingPiece)
             => Assert.That(new Road(occupyingPiece).IsValidCaptureTargetFor(new Barricade()), Is.False);
 
         [Test]
@@ -63,7 +63,7 @@ namespace MaleficsTests.Models.Tiles
 
         [Test]
         [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
-        public void A_Road_Occupied_By_A_Piece_Contains_That_Piece(IPiece piece)
+        public void A_Road_Occupied_By_A_Piece_Contains_That_Piece(Piece piece)
             => Assert.That(new Road(piece).Contains(piece), Is.True);
 
         [Test]
@@ -75,7 +75,7 @@ namespace MaleficsTests.Models.Tiles
         [Test]
         [TestCaseSource(typeof(PieceCases), nameof(PieceCases.UnequalPairs))]
         public void A_Road_Occupied_By_A_Piece_Does_Not_Contain_An_Unequal_Piece(
-            (IPiece, IPiece) pieces)
+            (Piece, Piece) pieces)
             => Assert.That(new Road(pieces.First()).Contains(pieces.Second()), Is.False);
     }
 }

@@ -9,13 +9,13 @@ namespace MaleficsTests.Models.Pieces.TestCases
 {
     public static class PieceCases
     {
-        public static IEnumerable<IPiece> AllPieces
-            => Barricade.Concat<IPiece>(Pawns);
+        public static IEnumerable<Piece> AllPieces
+            => Barricade.Concat<Piece>(Pawns);
 
-        public static IEnumerable<(IPiece, IPiece)> AllPairs
+        public static IEnumerable<(Piece, Piece)> AllPairs
             => AllPieces.SelectMany(p => AllPieces.Select(q => (p, q)));
 
-        public static IEnumerable<(IPiece, IPiece)> UnequalPairs
+        public static IEnumerable<(Piece, Piece)> UnequalPairs
             => AllPairs.Where(p => p.First() != p.Second());
 
         public static IEnumerable<Barricade> Barricade

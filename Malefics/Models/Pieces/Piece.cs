@@ -1,6 +1,4 @@
 ﻿namespace Malefics.Models.Pieces
 {
-    public interface IPiece
-    {
-    }
+    public abstract record Piece;
 }

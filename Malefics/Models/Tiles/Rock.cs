@@ -8,19 +8,19 @@ namespace Malefics.Models.Tiles
         #region Implementations of ITile
 
         /// <inheritdoc />
-        public bool Contains(IPiece piece) => false;
+        public bool Contains(Piece piece) => false;
 
         /// <inheritdoc />
-        public void Put(IPiece piece)
+        public void Put(Piece piece)
             => throw new InvalidTileOperationException("Can't add piece to a rock tile.");
 
         /// <inheritdoc />
-        public IPiece Take()
+        public Piece Take()
             => throw new InvalidTileOperationException(
                 "Can't take a piece from a rock tile.");
 
         /// <inheritdoc />
-        public IPiece? Peek() => null;
+        public Piece? Peek() => null;
 
         /// <inheritdoc />
         public bool IsTraversable() => false;
@@ -29,7 +29,7 @@ namespace Malefics.Models.Tiles
         public bool IsOccupied() => false;
 
         /// <inheritdoc />
-        public bool IsValidCaptureTargetFor(IPiece piece) => false;
+        public bool IsValidCaptureTargetFor(Piece piece) => false;
 
         #endregion
     }

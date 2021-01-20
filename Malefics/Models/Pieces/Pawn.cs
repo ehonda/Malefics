@@ -2,7 +2,7 @@
 
 namespace Malefics.Models.Pieces
 {
-    public record Pawn(Player Player) : IPiece
+    public record Pawn(Player Player) : Piece
     {
     }
 }

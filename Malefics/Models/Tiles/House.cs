@@ -15,13 +15,13 @@ namespace Malefics.Models.Tiles
         #region Implementations of ITile
 
         /// <inheritdoc />
-        public bool Contains(IPiece piece)
+        public bool Contains(Piece piece)
             => _pawns > 0
                && piece is Pawn pawn
                && pawn == new Pawn(Player);
 
         /// <inheritdoc />
-        public void Put(IPiece piece)
+        public void Put(Piece piece)
         {
             if (piece is Pawn pawn)
             {
@@ -37,7 +37,7 @@ namespace Malefics.Models.Tiles
         }
 
         /// <inheritdoc />
-        public IPiece Take()
+        public Piece Take()
         {
             if (_pawns == 0)
                 throw new InvalidTileOperationException(
@@ -48,7 +48,7 @@ namespace Malefics.Models.Tiles
         }
 
         /// <inheritdoc />
-        public IPiece? Peek() => _pawns > 0 ? new Pawn(Player) : null;
+        public Piece? Peek() => _pawns > 0 ? new Pawn(Player) : null;
 
         /// <inheritdoc />
         public bool IsTraversable() => false;
@@ -57,7 +57,7 @@ namespace Malefics.Models.Tiles
         public bool IsOccupied() => _pawns != 0;
 
         /// <inheritdoc />
-        public bool IsValidCaptureTargetFor(IPiece piece) => false;
+        public bool IsValidCaptureTargetFor(Piece piece) => false;
 
         #endregion
     }
