@@ -179,5 +179,13 @@ namespace MaleficsTests.Models
 
             Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.False);
         }
+
+        [Test]
+        public void Landing_On_A_Goal_Tile_Is_A_Legal_Move_Path()
+        {
+            _board = FromRows("r..x");
+
+            Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.True);
+        }
     }
 }
