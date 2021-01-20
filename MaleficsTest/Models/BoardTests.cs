@@ -169,5 +169,15 @@ namespace MaleficsTests.Models
 
             Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.True);
         }
+
+        [Test]
+        public void Landing_On_A_House_Is_Not_A_Legal_Move_Path()
+        {
+            _board = FromRows(
+                "..r",
+                "R0");
+
+            Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.False);
+        }
     }
 }
