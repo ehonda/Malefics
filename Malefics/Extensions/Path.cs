@@ -7,6 +7,7 @@ using Malefics.Models.Tiles;
 
 namespace Malefics.Extensions
 {
+    [SuppressMessage("ReSharper", "VariableHidesOuterVariable")]
     public static class Path
     {
         public static bool AllDistinct(this IEnumerable<Position> p)
@@ -47,7 +48,6 @@ namespace Malefics.Extensions
             };
 
         // TODO: Re-implement board pawn legal move checking with this
-        [SuppressMessage("ReSharper", "VariableHidesOuterVariable")]
         public static bool IsGeometricallyTraversablePath(
             this IEnumerable<(Position, ITile)> tilePath)
             => With.Array(
@@ -61,14 +61,16 @@ namespace Malefics.Extensions
                         .All(tile => tile.IsGeometricallyTraversable()));
 
         public static bool IsPath(this IEnumerable<Position> positions)
-        {
-            var positionsEnumerated = positions.ToArray();
-            return positionsEnumerated
-                .Zip(positionsEnumerated.Skip(1))
-                .Aggregate(
-                    true,
-                    (isPathUntilPq, pq) => isPathUntilPq && pq.First.IsNeighborOf(pq.Second));
-        }
+            => With.Array(
+                positions,
+                positions =>
+                    positions
+                        .Zip(positions.Skip(1))
+                        .Aggregate(
+                            true,
+                            (isPathUntilPq, pq) => 
+                                isPathUntilPq 
+                                && pq.First.IsNeighborOf(pq.Second)));
 
         [SuppressMessage("ReSharper", "InconsistentNaming")]
         [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
