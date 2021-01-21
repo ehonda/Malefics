@@ -37,7 +37,7 @@ namespace Malefics.Extensions
         public static IEnumerable<Position> AxisParallelSegments(params Position[] endpoints)
             => endpoints switch
             {
-                {Length: < 2} => throw new ArgumentException(
+                { Length: < 2 } => throw new ArgumentException(
                     "Can't construct segments path from less than 2 endpoints."),
 
                 _ => endpoints
@@ -47,17 +47,18 @@ namespace Malefics.Extensions
             };
 
         // TODO: Re-implement board pawn legal move checking with this
+        [SuppressMessage("ReSharper", "VariableHidesOuterVariable")]
         public static bool IsGeometricallyTraversablePath(
             this IEnumerable<(Position, ITile)> tilePath)
-        {
-            var tilePathAsArray = tilePath.ToArray();
-            return tilePathAsArray
-                       .Select(Pair.First)
-                       .IsPath()
-                   && tilePathAsArray
-                       .Select(Pair.Second)
-                       .All(tile => tile.IsGeometricallyTraversable());
-        }
+            => With.Array(
+                tilePath,
+                tilePath =>
+                    tilePath
+                        .Select(Pair.First)
+                        .IsPath()
+                    && tilePath
+                        .Select(Pair.Second)
+                        .All(tile => tile.IsGeometricallyTraversable()));
 
         public static bool IsPath(this IEnumerable<Position> positions)
         {
@@ -70,6 +71,7 @@ namespace Malefics.Extensions
         }
 
         [SuppressMessage("ReSharper", "InconsistentNaming")]
+        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         public static IEnumerable<Position> JoinPathTo(
             this IEnumerable<Position> p, IEnumerable<Position> q)
         {
