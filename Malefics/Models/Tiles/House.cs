@@ -21,6 +21,9 @@ namespace Malefics.Models.Tiles
                && pawn == new Pawn(Player);
 
         /// <inheritdoc />
+        public bool IsGeometricallyTraversable() => true;
+
+        /// <inheritdoc />
         public void Put(Piece piece)
         {
             if (piece is Pawn pawn)

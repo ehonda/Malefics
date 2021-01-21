@@ -21,6 +21,9 @@ namespace Malefics.Models.Tiles
         }
 
         /// <inheritdoc />
+        public bool IsGeometricallyTraversable() => true;
+
+        /// <inheritdoc />
         public void Put(Piece piece)
         {
         }

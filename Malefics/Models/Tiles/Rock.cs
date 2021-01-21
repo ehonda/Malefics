@@ -11,6 +11,9 @@ namespace Malefics.Models.Tiles
         public bool Contains(Piece piece) => false;
 
         /// <inheritdoc />
+        public bool IsGeometricallyTraversable() => false;
+
+        /// <inheritdoc />
         public void Put(Piece piece)
             => throw new InvalidTileOperationException("Can't add piece to a rock tile.");
 

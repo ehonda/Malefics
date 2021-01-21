@@ -6,7 +6,10 @@ namespace Malefics.Models.Tiles
     {
         public bool Contains(Piece piece);
 
+        public bool IsGeometricallyTraversable();
+
         public bool IsOccupied();
+
         public bool IsTraversable();
 
         public bool IsValidCaptureTargetFor(Piece piece);

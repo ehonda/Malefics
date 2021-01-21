@@ -19,6 +19,9 @@ namespace Malefics.Models.Tiles
         public bool Contains(Piece piece) => _occupyingPiece == piece;
 
         /// <inheritdoc />
+        public bool IsGeometricallyTraversable() => true;
+
+        /// <inheritdoc />
         public void Put(Piece piece)
         {
             if (_occupyingPiece is not null)
