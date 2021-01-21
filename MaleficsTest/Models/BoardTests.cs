@@ -67,6 +67,8 @@ namespace MaleficsTests.Models
                 Path.AxisParallelSegments(new(0, 0), new(2, 0), new(1, 0))));
         }
 
+        // TODO: Tests that beginning and end of IsLegalMovePath match computed legal move paths!
+
         [Test]
         public void Non_Backtracking_Paths_Of_Distance_2_On_A_Square()
         {
