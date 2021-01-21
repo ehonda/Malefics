@@ -1,6 +1,7 @@
 ﻿using Malefics.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Malefics.Extensions
@@ -14,7 +15,7 @@ namespace Malefics.Extensions
                 .Zip(positionsEnumerated.Skip(1))
                 .Aggregate(
                     true,
-                    (IsPathUntilPq, pq) => IsPathUntilPq && (pq.First.IsNeighborOf(pq.Second)));
+                    (isPathUntilPq, pq) => isPathUntilPq && (pq.First.IsNeighborOf(pq.Second)));
         }
 
         public static IEnumerable<Position> AxisParallel(Position start, Position end)
@@ -36,6 +37,7 @@ namespace Malefics.Extensions
             throw new ArgumentException($"{start} and {end} have no equal coordinate");
         }
 
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
         public static IEnumerable<Position> JoinPathTo(
             this IEnumerable<Position> p, IEnumerable<Position> q)
         {
@@ -57,7 +59,7 @@ namespace Malefics.Extensions
         public static IEnumerable<Position> AxisParallelSegments(params Position[] endpoints)
             => endpoints switch
             {
-                Position[] { Length: < 2 } => throw new ArgumentException(
+                { Length: < 2 } => throw new ArgumentException(
                     "Can't construct segments path from less than 2 endpoints."),
 
                 _ => endpoints
