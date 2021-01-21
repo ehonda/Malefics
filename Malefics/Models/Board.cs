@@ -9,7 +9,7 @@ namespace Malefics.Models
 {
     public class Board
     {
-        private readonly IDictionary<Position, ITile> _nodes
+        private readonly IDictionary<Position, ITile> _tiles
             = new Dictionary<Position, ITile>();
 
         public Board()
@@ -17,16 +17,19 @@ namespace Malefics.Models
         }
 
         private Board(IEnumerable<IEnumerable<ITile>> rows)
-            => _nodes = rows
+        {
+            _tiles = rows
                 .Reverse()
                 .SelectMany((row, y) => row
                     .Select((tile, x) => (new Position(x, y), tile)))
                 .ToDictionary(Pair.First, Pair.Second);
-
+        }
 
         public bool IsTraversable(Position position)
-            => _nodes.ContainsKey(position)
-               && _nodes[position].IsTraversable();
+        {
+            return _tiles.ContainsKey(position)
+                   && _tiles[position].IsTraversable();
+        }
 
         public bool IsLegalPath(IEnumerable<Position> path)
         {
@@ -37,27 +40,33 @@ namespace Malefics.Models
         }
 
         public bool PlayerCanMoveAPawn(Player player, uint distance)
-            => _nodes
+        {
+            return _tiles
                 .Where(positionAndTile => positionAndTile.Value.Contains(new Pawn(player)))
                 .SelectMany(positionAndTile => GetLegalMovePathsOfDistanceFrom(positionAndTile.Key, distance))
                 .Any();
+        }
 
         private ITile TileAt(Position position)
-            => _nodes.TryGetValue(position, out var tile)
+        {
+            return _tiles.TryGetValue(position, out var tile)
                 ? tile
                 : Tile.Rock();
+        }
 
         public IEnumerable<IEnumerable<Position>> GetNonBacktrackingRoadPathsOfDistanceFrom(
             Position position, uint distance)
-            => GetNonBacktrackingRoadPathsOfDistanceFrom(position, distance,
-                    Enumerable.Empty<Position>());
+        {
+            return GetNonBacktrackingRoadPathsOfDistanceFrom(position, distance,
+                Enumerable.Empty<Position>());
+        }
 
         private IEnumerable<IEnumerable<Position>> GetNonBacktrackingRoadPathsOfDistanceFrom(
             Position position, uint distance, IEnumerable<Position> visited)
         {
             // TODO: Refactor to get rid of all the "tile is Road || tile is Goal"
             if (distance == 0u && TileAt(position) is Road || TileAt(position) is Goal)
-                return new[] { new[] { position } };
+                return new[] {new[] {position}};
 
             var roadNeighbors = position
                 .Neighbors()
@@ -89,13 +98,15 @@ namespace Malefics.Models
                     //      a - Capture at the last tile (or have it be unoccupied Road)
                     //      b - Traverse all previous tiles
                     return (lastTile.IsValidCaptureTargetFor(pawnToMove)
-                           || (lastTile is Road && !lastTile.IsOccupied())
-                           || lastTile is Goal)
+                            || lastTile is Road && !lastTile.IsOccupied()
+                            || lastTile is Goal)
                            && pathAsArray.Skip(1).Reverse().Skip(1).All(IsTraversable);
                 });
         }
 
         public static Board FromReversedTileRows(IEnumerable<IEnumerable<ITile>> rows)
-            => new(rows);
+        {
+            return new(rows);
+        }
     }
 }
