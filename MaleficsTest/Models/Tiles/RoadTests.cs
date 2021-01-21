@@ -77,5 +77,14 @@ namespace MaleficsTests.Models.Tiles
         public void A_Road_Occupied_By_A_Piece_Does_Not_Contain_An_Unequal_Piece(
             (Piece, Piece) pieces)
             => Assert.That(new Road(pieces.First()).Contains(pieces.Second()), Is.False);
+
+        [Test]
+        public void Peeking_At_An_Unoccupied_Road_Returns_Null()
+            => Assert.That(new Road().Peek(), Is.Null);
+
+        [Test]
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
+        public void Peeking_At_An_Occupied_Road_Returns_The_Occupying_Piece(Piece piece)
+            => Assert.That(new Road(piece).Peek(), Is.EqualTo(piece));
     }
 }
