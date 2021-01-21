@@ -38,7 +38,7 @@ namespace Malefics.Extensions
         public static IEnumerable<Position> AxisParallelSegments(params Position[] endpoints)
             => endpoints switch
             {
-                { Length: < 2 } => throw new ArgumentException(
+                {Length: < 2} => throw new ArgumentException(
                     "Can't construct segments path from less than 2 endpoints."),
 
                 _ => endpoints
@@ -46,6 +46,15 @@ namespace Malefics.Extensions
                     .Select(points => AxisParallel(points.First, points.Second))
                     .Aggregate(JoinPathTo)
             };
+
+        // TODO: Re-implement board pawn legal move checking with this
+        // TODO: Move to IEnumerableExtensions?
+        public static IEnumerable<T> Inner<T>(this IEnumerable<T> path)
+            => path
+                .Skip(1)
+                .Reverse()
+                .Skip(1)
+                .Reverse();
 
         // TODO: Re-implement board pawn legal move checking with this
         public static bool IsGeometricallyTraversablePath(
