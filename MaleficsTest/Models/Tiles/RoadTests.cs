@@ -86,5 +86,14 @@ namespace MaleficsTests.Models.Tiles
         [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
         public void Peeking_At_An_Occupied_Road_Returns_The_Occupying_Piece(Piece piece)
             => Assert.That(new Road(piece).Peek(), Is.EqualTo(piece));
+
+        [Test]
+        public void An_Unoccupied_Road_Is_Geometrically_Traversable()
+            => Assert.That(new Road().IsGeometricallyTraversable(), Is.True);
+
+        [Test]
+        [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
+        public void An_Occupied_Road_Is_Geometrically_Traversable(Piece piece)
+            => Assert.That(new Road(piece).IsGeometricallyTraversable(), Is.True);
     }
 }

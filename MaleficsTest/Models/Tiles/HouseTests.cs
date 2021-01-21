@@ -94,5 +94,12 @@ namespace MaleficsTests.Models.Tiles
         [Test]
         public void Peeking_At_A_Non_Empty_House_Returns_A_Pawn_Of_That_Color()
             => Assert.That(new House(Player.Red, 1).Peek(), Is.EqualTo(new Pawn(Player.Red)));
+
+        [Test]
+        [TestCase(0u)]
+        [TestCase(1u)]
+        [TestCase(2u)]
+        public void A_House_Is_Geometrically_Traversable(uint pawns)
+            => Assert.That(new House(Player.Red, pawns).IsGeometricallyTraversable(), Is.True);
     }
 }

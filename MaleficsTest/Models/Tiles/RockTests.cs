@@ -45,5 +45,9 @@ namespace MaleficsTests.Models.Tiles
         [Test]
         public void Peeking_At_A_Rock_Returns_Null()
             => Assert.That(_rock.Peek(), Is.Null);
+
+        [Test]
+        public void A_Rock_Is_Not_Geometrically_Traversable()
+            => Assert.That(_rock.IsGeometricallyTraversable(), Is.False);
     }
 }
