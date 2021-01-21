@@ -36,5 +36,9 @@ namespace MaleficsTests.Models.Tiles
         [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
         public void A_Rock_Contains_No_Piece(Piece piece)
             => Assert.That(Tile.Rock().Contains(piece), Is.False);
+
+        [Test]
+        public void Peeking_At_A_Rock_Returns_Null()
+            => Assert.That(Tile.Rock().Peek(), Is.Null);
     }
 }
