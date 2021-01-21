@@ -86,5 +86,13 @@ namespace MaleficsTests.Models.Tiles
         [Test]
         public void A_Non_Empty_House_Does_Not_Contain_A_Barricade()
             => Assert.That(new House(Player.Red, 1).Contains(new Barricade()), Is.False);
+
+        [Test]
+        public void Peeking_At_An_Empty_House_Returns_Null()
+            => Assert.That(new House(Player.Red, 0).Peek(), Is.Null);
+
+        [Test]
+        public void Peeking_At_A_Non_Empty_House_Returns_A_Pawn_Of_That_Color()
+            => Assert.That(new House(Player.Red, 1).Peek(), Is.EqualTo(new Pawn(Player.Red)));
     }
 }
