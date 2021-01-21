@@ -68,8 +68,8 @@ namespace Malefics.Extensions
                         .Zip(positions.Skip(1))
                         .Aggregate(
                             true,
-                            (isPathUntilPq, pq) => 
-                                isPathUntilPq 
+                            (isPathUntilPq, pq) =>
+                                isPathUntilPq
                                 && pq.First.IsNeighborOf(pq.Second)));
 
         [SuppressMessage("ReSharper", "InconsistentNaming")]
