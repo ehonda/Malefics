@@ -74,7 +74,7 @@ namespace Malefics.Models
                         .Select(path => path.Prepend(position)));
         }
 
-        public bool IsLegalPath(IEnumerable<Position> path)
+        public bool IsLegalMovePath(IEnumerable<Position> path)
         {
             var pathAsArray = path.ToArray();
             return pathAsArray.IsPath()

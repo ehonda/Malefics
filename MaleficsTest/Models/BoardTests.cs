@@ -27,14 +27,14 @@ namespace MaleficsTests.Models
         public void A_Straight_Path_Over_Unoccupied_Road_Tiles_Is_Legal()
         {
             _board = FromRows("..");
-            Assert.True(_board.IsLegalPath(Path.AxisParallel(new(0, 0), new(1, 0))));
+            Assert.True(_board.IsLegalMovePath(Path.AxisParallel(new(0, 0), new(1, 0))));
         }
 
         [Test]
         public void A_Straight_Path_Over_A_Rock_Tile_Is_Not_Legal()
         {
             _board = FromRows(". .");
-            Assert.False(_board.IsLegalPath(Path.AxisParallel(new(0, 0), new(2, 0))));
+            Assert.False(_board.IsLegalMovePath(Path.AxisParallel(new(0, 0), new(2, 0))));
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace MaleficsTests.Models
                 "  .",
                 "...");
 
-            Assert.True(_board.IsLegalPath(
+            Assert.True(_board.IsLegalMovePath(
                 Path.AxisParallelSegments(new(0, 0), new(2, 0), new(2, 2))));
         }
 
@@ -54,7 +54,7 @@ namespace MaleficsTests.Models
         {
             _board = FromRows("..o.");
 
-            Assert.False(_board.IsLegalPath(
+            Assert.False(_board.IsLegalMovePath(
                 Path.AxisParallel(new(0, 0), new(0, 3))));
         }
 
@@ -63,7 +63,7 @@ namespace MaleficsTests.Models
         {
             _board = FromRows("...");
 
-            Assert.False(_board.IsLegalPath(
+            Assert.False(_board.IsLegalMovePath(
                 Path.AxisParallelSegments(new(0, 0), new(2, 0), new(1, 0))));
         }
 
