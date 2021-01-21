@@ -52,10 +52,10 @@ namespace Malefics.Extensions
         {
             var tilePathAsArray = tilePath.ToArray();
             return tilePathAsArray
-                       .Select(p => p.First())
+                       .Select(Pair.First)
                        .IsPath()
                    && tilePathAsArray
-                       .Select(p => p.Second())
+                       .Select(Pair.Second)
                        .All(tile => tile.IsGeometricallyTraversable());
         }
 
