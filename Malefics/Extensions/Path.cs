@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Malefics.Models;
+using Malefics.Models.Tiles;
 
 namespace Malefics.Extensions
 {
@@ -44,6 +45,19 @@ namespace Malefics.Extensions
                     .Select(points => AxisParallel(points.First, points.Second))
                     .Aggregate(JoinPathTo)
             };
+
+        // TODO: Re-implement board pawn legal move checking with this
+        public static bool IsGeometricallyTraversablePath(
+            this IEnumerable<(Position, ITile)> tilePath)
+        {
+            var tilePathAsArray = tilePath.ToArray();
+            return tilePathAsArray
+                       .Select(p => p.First())
+                       .IsPath()
+                   && tilePathAsArray
+                       .Select(p => p.Second())
+                       .All(tile => tile.IsGeometricallyTraversable());
+        }
 
         public static bool IsPath(this IEnumerable<Position> positions)
         {
