@@ -24,6 +24,7 @@ namespace Malefics.Models.Tiles
             => tile switch
             {
                 Tiles.Road => !tile.Contains(new Barricade()),
+                Goal => true,
                 _ => false
             };
 
