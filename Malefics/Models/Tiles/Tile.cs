@@ -26,5 +26,12 @@ namespace Malefics.Models.Tiles
                 Tiles.Road => !tile.Contains(new Barricade()),
                 _ => false
             };
+
+        public static bool AllowsBeingLandedOnBy(this ITile tile, Pawn pawn)
+            => tile switch
+            {
+                Tiles.Road => !tile.Contains(pawn),
+                _ => false
+            };
     }
 }
