@@ -5,7 +5,6 @@ using Malefics.Parsers.Ascii;
 using NUnit.Framework;
 using Sprache;
 using System.Linq;
-using Malefics.Models.Pieces;
 using Position = Malefics.Models.Position;
 
 namespace MaleficsTests.Models
@@ -24,51 +23,7 @@ namespace MaleficsTests.Models
             _board = new();
         }
 
-        [Test]
-        public void A_Straight_Path_Over_Unoccupied_Road_Tiles_Is_Legal()
-        {
-            _board = FromRows("..");
-            Assert.True(_board.IsLegalMovePath(Path.AxisParallel(new(0, 0), new(1, 0))));
-        }
-
-        [Test]
-        public void A_Straight_Path_Over_A_Rock_Tile_Is_Not_Legal()
-        {
-            _board = FromRows(". .");
-            Assert.False(_board.IsLegalMovePath(Path.AxisParallel(new(0, 0), new(2, 0))));
-        }
-
-        [Test]
-        public void A_Path_Over_Road_Tiles_Around_A_Corner_Is_Legal()
-        {
-            _board = FromRows(
-                "  .",
-                "  .",
-                "...");
-
-            Assert.True(_board.IsLegalMovePath(
-                Path.AxisParallelSegments(new(0, 0), new(2, 0), new(2, 2))));
-        }
-
-        [Test]
-        public void A_Path_Passing_Over_A_Barricade_Is_Not_Legal()
-        {
-            _board = FromRows("..o.");
-
-            Assert.False(_board.IsLegalMovePath(
-                Path.AxisParallel(new(0, 0), new(0, 3))));
-        }
-
-        [Test]
-        public void A_Path_Over_Road_Tiles_That_Backtracks_Is_Not_Legal()
-        {
-            _board = FromRows("...");
-
-            Assert.False(_board.IsLegalMovePath(
-                Path.AxisParallelSegments(new(0, 0), new(2, 0), new(1, 0))));
-        }
-
-        // TODO: Tests that beginning and end of IsLegalMovePath match computed legal move paths!
+        // TODO: Tests that IsLegalPawnMovePath holds for all computed paths!
 
         [Test]
         public void Non_Backtracking_Paths_Of_Distance_2_On_A_Square()

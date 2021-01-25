@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using Malefics.Enums;
+﻿using Malefics.Enums;
 using Malefics.Extensions;
 using Malefics.Models.Pieces;
 using Malefics.Models.Tiles;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace Malefics.Models
 {
@@ -86,15 +85,6 @@ namespace Malefics.Models
                     && tilePath.Last().Second.AllowsBeingLandedOnBy(pawn)
                     && tilePath.IsGeometricallyTraversablePath()
                     && tilePath.Inner().All(tilePosition => tilePosition.Second.AllowsMovingOver()));
-
-        [Obsolete("Will be replaced by IsLegalPawnMovePath")]
-        public bool IsLegalMovePath(IEnumerable<Position> path)
-        {
-            var pathAsArray = path.ToArray();
-            return pathAsArray.IsPath()
-                   && pathAsArray.All(IsTraversable)
-                   && pathAsArray.AllDistinct();
-        }
 
         public bool IsTraversable(Position position)
             => _tiles.ContainsKey(position)
