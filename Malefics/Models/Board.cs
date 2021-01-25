@@ -46,7 +46,7 @@ namespace Malefics.Models
             Position position, uint distance, IEnumerable<Position> visited)
         {
             // TODO: Refactor to get rid of all the "tile is Road || tile is Goal"
-            if (distance == 0u && TileAt(position) is Road || TileAt(position) is Goal)
+            if (distance == 0u && TileAt(position).IsGeometricallyTraversable())
                 return new[] {new[] {position}};
 
             var roadNeighbors = position
@@ -72,6 +72,7 @@ namespace Malefics.Models
                     tilePath.First().Second.Contains(pawn)
                     && tilePath.Last().Second.AllowsBeingLandedOnBy(pawn)
                     && tilePath.IsGeometricallyTraversablePath()
+                    && tilePath.Select(Pair.First).IsNonBacktracking()
                     && tilePath.Inner().All(tilePosition => tilePosition.Second.AllowsMovingOver()));
 
         public bool IsTraversable(Position position)

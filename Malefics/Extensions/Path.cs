@@ -47,7 +47,6 @@ namespace Malefics.Extensions
                     .Aggregate(JoinPathTo)
             };
 
-        // TODO: Re-implement board pawn legal move checking with this
         // TODO: Move to IEnumerableExtensions?
         public static IEnumerable<T> Inner<T>(this IEnumerable<T> path)
             => path
@@ -56,7 +55,6 @@ namespace Malefics.Extensions
                 .Skip(1)
                 .Reverse();
 
-        // TODO: Re-implement board pawn legal move checking with this
         public static bool IsGeometricallyTraversablePath(
             this IEnumerable<(Position, ITile)> tilePath)
             => With.Array(
@@ -68,6 +66,12 @@ namespace Malefics.Extensions
                     && tilePath
                         .Select(Pair.Second)
                         .All(tile => tile.IsGeometricallyTraversable()));
+
+        public static bool IsNonBacktracking(this IEnumerable<Position> positions)
+            => With.Array(
+                positions,
+                positions =>
+                    positions.Distinct().Count() == positions.Length);
 
         public static bool IsPath(this IEnumerable<Position> positions)
             => With.Array(

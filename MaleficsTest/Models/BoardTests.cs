@@ -294,5 +294,18 @@ namespace MaleficsTests.Models
                         Path.AxisParallel(new(0, 0), new(3, 0)),
                         new(Player.Red)),
                 Is.False);
+
+        // Backtracking
+        // ----------------------------------------------------------------
+
+        [Test]
+        public void Moving_A_Red_Pawn_Along_A_Backtracking_Path_Is_Not_Legal()
+            => Assert.That(
+                FromRows("r..")
+                    .IsLegalPawnMovePath(
+                        Path.AxisParallelSegments(new(0, 0), new(2, 0), new(1, 0)),
+                        new(Player.Red)),
+                Is.False);
+
     }
 }
