@@ -239,5 +239,14 @@ namespace MaleficsTests.Models
                         Path.AxisParallel(new(0, 0), new(3, 0)),
                         new(Player.Red)),
                 Is.True);
+
+        [Test]
+        public void Moving_A_Red_Pawn_To_Land_On_A_Goal_Is_Legal()
+            => Assert.That(
+                FromRows("r..x")
+                    .IsLegalPawnMovePath(
+                        Path.AxisParallel(new(0, 0), new(3, 0)),
+                        new(Player.Red)),
+                Is.True);
     }
 }

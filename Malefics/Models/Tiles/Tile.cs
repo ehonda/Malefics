@@ -31,6 +31,7 @@ namespace Malefics.Models.Tiles
             => tile switch
             {
                 Tiles.Road => !tile.Contains(pawn),
+                Goal => true,
                 _ => false
             };
     }
