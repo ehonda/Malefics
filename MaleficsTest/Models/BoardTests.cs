@@ -202,9 +202,10 @@ namespace MaleficsTests.Models
         // r..b
         // r..x
         // r.R.
+        // r.o.
 
         [Test]
-        public void Test_Description()
+        public void Moving_A_Red_Pawn_To_Land_On_An_Empty_Road_Is_Legal()
             => Assert.That(
                 FromRows("r...")
                     .IsLegalPawnMovePath(
