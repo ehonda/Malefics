@@ -196,13 +196,21 @@ namespace MaleficsTests.Models
         // -----------------------------------------------------------------------
 
         // Unit tests
+        // Landing tile cases
         // r...
         // r..r
         // r..o
         // r..b
         // r..x
-        // r.R.
+        // r..R
+        //
+        // Moving over tile cases
+        // r. .
+        // r.r.
         // r.o.
+        // r.b.
+        // r.x.
+        // r.R.
 
         [Test]
         public void Moving_A_Red_Pawn_To_Land_On_An_Empty_Road_Is_Legal()
