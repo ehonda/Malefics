@@ -24,6 +24,7 @@ namespace Malefics.Parsers.Ascii
         private const char PAWN_RED = 'r';
         private const char PAWN_BLUE = 'b';
         private const char HOUSE_RED = 'R';
+        private const char HOUSE_BLUE = 'B';
         private const char GOAL = 'x';
 
         private static char PawnEncoding(Player player)
@@ -31,6 +32,14 @@ namespace Malefics.Parsers.Ascii
             {
                 Player.Red => PAWN_RED,
                 Player.Blue => PAWN_BLUE,
+                _ => ' '
+            };
+
+        private static char HouseEncoding(Player player)
+            => player switch
+            {
+                Player.Red => HOUSE_RED,
+                Player.Blue => HOUSE_BLUE,
                 _ => ' '
             };
 
@@ -64,10 +73,13 @@ namespace Malefics.Parsers.Ascii
         // Houses
         // # # # # # # # # # # # # # # # # #
 
-        public static readonly Parser<ITile> RedHouse =
-            from player in Parse.Char(HOUSE_RED)
+        public static readonly Parser<ITile> AnyHouse
+            = House(Player.Red).Or(House(Player.Blue));
+
+        private static Parser<ITile> House(Player player) =>
+            from _ in Parse.Char(HouseEncoding(player))
             from pawns in Parse.Numeric
-            select Models.Tiles.Tile.House(Player.Red, uint.Parse(pawns.ToString()));
+            select Models.Tiles.Tile.House(player, uint.Parse(pawns.ToString()));
 
         // Main parser
         // # # # # # # # # # # # # # # # # #
@@ -77,7 +89,7 @@ namespace Malefics.Parsers.Ascii
                 .Or(Road)
                 .Or(Barricade)
                 .Or(AnyPawn)
-                .Or(RedHouse)
+                .Or(AnyHouse)
                 .Or(Goal);
 
         // Board Parser

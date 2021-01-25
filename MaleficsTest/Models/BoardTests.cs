@@ -211,6 +211,7 @@ namespace MaleficsTests.Models
         // r.b.
         // r.x.
         // r.R.
+        // r.B.
 
         // Landing tile cases
         // ----------------------------------------------------------------
@@ -316,5 +317,27 @@ namespace MaleficsTests.Models
                         Path.AxisParallel(new(0, 0), new(3, 0)),
                         new(Player.Red)),
                 Is.True);
+
+        [Test]
+        public void Moving_A_Red_Pawn_Over_A_Red_House_Is_Not_Legal()
+            => Assert.That(
+                FromRows(
+                        "  .",
+                        "r.R0")
+                    .IsLegalPawnMovePath(
+                        Path.AxisParallelSegments(new(0, 0), new(2, 0), new(2, 1)),
+                        new(Player.Red)),
+                Is.False);
+
+        [Test]
+        public void Moving_A_Red_Pawn_Over_A_Blue_House_Is_Not_Legal()
+            => Assert.That(
+                FromRows(
+                        "  .",
+                        "r.B0")
+                    .IsLegalPawnMovePath(
+                        Path.AxisParallel(new(0, 0), new(3, 0)),
+                        new(Player.Red)),
+                Is.False);
     }
 }
