@@ -29,26 +29,13 @@ namespace Malefics.Models
 
         public IEnumerable<IEnumerable<Position>> GetLegalPawnMovePathsOfDistanceFrom(
             Position position, uint distance)
-        {
-            var tile = TileAt(position);
-            var pawnToMove = tile.Peek();
-            if (pawnToMove is not Pawn)
-                return Enumerable.Empty<IEnumerable<Position>>();
+            => TileAt(position).Peek() switch
+            {
+                Pawn pawn => GetNonBacktrackingRoadPathsOfDistanceFrom(position, distance)
+                    .Where(path => IsLegalPawnMovePath(path, pawn)),
 
-            return GetNonBacktrackingRoadPathsOfDistanceFrom(position, distance)
-                .Where(path =>
-                {
-                    var pathAsArray = path.ToArray();
-                    var lastTile = TileAt(pathAsArray.Last());
-                    // We have to be able to
-                    //      a - Capture at the last tile (or have it be unoccupied Road)
-                    //      b - Traverse all previous tiles
-                    return (lastTile.IsValidCaptureTargetFor(pawnToMove)
-                            || lastTile is Road && !lastTile.IsOccupied()
-                            || lastTile is Goal)
-                           && pathAsArray.Skip(1).Reverse().Skip(1).All(IsTraversable);
-                });
-        }
+                _ => Enumerable.Empty<IEnumerable<Position>>()
+            };
 
         public IEnumerable<IEnumerable<Position>> GetNonBacktrackingRoadPathsOfDistanceFrom(
             Position position, uint distance)
