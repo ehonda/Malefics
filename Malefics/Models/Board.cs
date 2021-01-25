@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Malefics.Enums;
@@ -86,6 +87,7 @@ namespace Malefics.Models
                     && tilePath.IsGeometricallyTraversablePath()
                     && tilePath.Inner().All(tilePosition => tilePosition.Second.AllowsMovingOver()));
 
+        [Obsolete("Will be replaced by IsLegalPawnMovePath")]
         public bool IsLegalMovePath(IEnumerable<Position> path)
         {
             var pathAsArray = path.ToArray();
