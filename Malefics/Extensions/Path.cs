@@ -18,14 +18,14 @@ namespace Malefics.Extensions
 
         public static IEnumerable<Position> AxisParallel(Position start, Position end)
         {
-            if (start.X != end.X)
+            if (start.X != end.X && start.Y == end.Y)
                 return Enumerable
                     .Range(0, Math.Abs(start.X - end.X))
                     .Select(x => start.X < end.X ? x : -x)
                     .Select(x => new Position(start.X + x, start.Y))
                     .Append(end);
 
-            if (start.Y != end.Y)
+            if (start.Y != end.Y && start.X == end.X)
                 return Enumerable
                     .Range(0, Math.Abs(start.Y - end.Y))
                     .Select(y => start.Y < end.Y ? y : -y)

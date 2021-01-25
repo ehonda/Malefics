@@ -45,6 +45,10 @@ namespace MaleficsTests.Extensions
         }
 
         [Test]
+        public void Axis_Parallel_Throws_If_Positions_Have_No_Equal_Coordinate()
+            => Assert.Catch<ArgumentException>(() => Path.AxisParallel(new(0, 0), new(1, 1)));
+
+        [Test]
         public void Paths_That_Connect_Can_Be_Joined()
         {
             var p = Path.AxisParallel(new(0, 0), new(2, 0));
