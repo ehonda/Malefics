@@ -17,5 +17,14 @@ namespace Malefics.Models.Tiles
 
         public static ITile House(Player player, uint pawns)
             => new House(player, pawns);
+
+        // TODO: Should we expose these "higher order predicates" via interface or extension?
+        // TODO: Dedicated unit tests
+        public static bool AllowsMovingOver(this ITile tile)
+            => tile switch
+            {
+                Tiles.Road => !tile.Contains(new Barricade()),
+                _ => false
+            };
     }
 }
