@@ -50,7 +50,7 @@ namespace MaleficsTests.Models
             _board = FromRows("...");
 
             var paths = _board
-                .GetLegalMovePathsOfDistanceFrom(new(0, 0), 2)
+                .GetLegalPawnMovePathsOfDistanceFrom(new(0, 0), 2)
                 .ToArray();
 
             Assert.That(paths, Is.Empty);
@@ -66,7 +66,7 @@ namespace MaleficsTests.Models
                 "r...");
 
             var paths = _board
-                .GetLegalMovePathsOfDistanceFrom(new(0, 0), 3)
+                .GetLegalPawnMovePathsOfDistanceFrom(new(0, 0), 3)
                 .ToArray();
 
             Assert.That(paths, Has.Length.EqualTo(1));
@@ -80,7 +80,7 @@ namespace MaleficsTests.Models
             _board = FromRows("r.o");
 
             var paths = _board
-                .GetLegalMovePathsOfDistanceFrom(new(0, 0), 2)
+                .GetLegalPawnMovePathsOfDistanceFrom(new(0, 0), 2)
                 .ToArray();
 
             Assert.That(paths, Has.Length.EqualTo(1));

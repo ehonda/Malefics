@@ -27,7 +27,7 @@ namespace Malefics.Models
         public static Board FromReversedTileRows(IEnumerable<IEnumerable<ITile>> rows)
             => new(rows);
 
-        public IEnumerable<IEnumerable<Position>> GetLegalMovePathsOfDistanceFrom(
+        public IEnumerable<IEnumerable<Position>> GetLegalPawnMovePathsOfDistanceFrom(
             Position position, uint distance)
         {
             var tile = TileAt(position);
@@ -93,7 +93,7 @@ namespace Malefics.Models
         public bool PlayerCanMoveAPawn(Player player, uint distance)
             => _tiles
                 .Where(positionAndTile => positionAndTile.Value.Contains(new Pawn(player)))
-                .SelectMany(positionAndTile => GetLegalMovePathsOfDistanceFrom(positionAndTile.Key, distance))
+                .SelectMany(positionAndTile => GetLegalPawnMovePathsOfDistanceFrom(positionAndTile.Key, distance))
                 .Any();
 
         private ITile TileAt(Position position)
