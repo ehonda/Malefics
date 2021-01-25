@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Malefics.Enums;
 using Malefics.Extensions;
@@ -73,6 +74,16 @@ namespace Malefics.Models
                             neighbor, distance - 1, visited.Append(position))
                         .Select(path => path.Prepend(position)));
         }
+
+        [SuppressMessage("ReSharper", "VariableHidesOuterVariable")]
+        public bool IsLegalPawnMovePath(IEnumerable<Position> path, Pawn pawn)
+            => With.Array(
+                With.Array(path, path => path.Zip(path.Select(TileAt))),
+                tilePath =>
+                    tilePath.First().Second.Contains(pawn)
+                    && tilePath.Last().Second.AllowsBeingLandedOnBy(pawn)
+                    && tilePath.IsGeometricallyTraversablePath()
+                    && tilePath.Inner().All(tilePosition => tilePosition.Second.AllowsMovingOver()));
 
         public bool IsLegalMovePath(IEnumerable<Position> path)
         {
