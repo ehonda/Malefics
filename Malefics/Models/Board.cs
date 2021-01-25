@@ -44,23 +44,22 @@ namespace Malefics.Models
 
         private IEnumerable<IEnumerable<Position>> GetNonBacktrackingGeometricallyTraversablePathsOfDistanceFrom(
             Position position, uint distance, IEnumerable<Position> visited)
-        {
-            // TODO: Refactor to get rid of all the "tile is Road || tile is Goal"
-            if (distance == 0u && TileAt(position).IsGeometricallyTraversable())
-                return new[] {new[] {position}};
+            => distance switch
+            {
+                0u => TileAt(position).IsGeometricallyTraversable()
+                    ? new[] {new[] {position}}
+                    : Enumerable.Empty<IEnumerable<Position>>(),
 
-            var roadNeighbors = position
-                .Neighbors()
-                .Where(neighbor
-                    => (TileAt(neighbor) is Road || TileAt(neighbor) is Goal)
-                       && !visited.Contains(neighbor));
-
-            return roadNeighbors
-                .SelectMany(neighbor =>
-                    GetNonBacktrackingGeometricallyTraversablePathsOfDistanceFrom(
-                            neighbor, distance - 1, visited.Append(position))
-                        .Select(path => path.Prepend(position)));
-        }
+                _ => position
+                    .Neighbors()
+                    .Where(neighbor
+                        => TileAt(neighbor).IsGeometricallyTraversable()
+                           && !visited.Contains(neighbor))
+                    .SelectMany(neighbor =>
+                        GetNonBacktrackingGeometricallyTraversablePathsOfDistanceFrom(
+                                neighbor, distance - 1, visited.Append(position))
+                            .Select(path => path.Prepend(position)))
+            };
 
         // TODO: There's a bug here, we don't require the path to be non-backtracking!
         //       - Fix it and write a test
