@@ -75,6 +75,7 @@ namespace Malefics.Models
                         .Select(path => path.Prepend(position)));
         }
 
+
         [SuppressMessage("ReSharper", "VariableHidesOuterVariable")]
         public bool IsLegalPawnMovePath(IEnumerable<Position> path, Pawn pawn)
             => With.Array(

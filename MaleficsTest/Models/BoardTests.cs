@@ -5,6 +5,7 @@ using Malefics.Parsers.Ascii;
 using NUnit.Framework;
 using Sprache;
 using System.Linq;
+using Malefics.Models.Pieces;
 using Position = Malefics.Models.Position;
 
 namespace MaleficsTests.Models
@@ -189,5 +190,26 @@ namespace MaleficsTests.Models
 
             Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.True);
         }
+
+        // TODO: Extract to separate class
+        // IsLegalPawnMovePath tests
+        // -----------------------------------------------------------------------
+
+        // Unit tests
+        // r...
+        // r..r
+        // r..o
+        // r..b
+        // r..x
+        // r.R.
+
+        [Test]
+        public void Test_Description()
+            => Assert.That(
+                FromRows("r...")
+                    .IsLegalPawnMovePath(
+                        Path.AxisParallel(new(0, 0), new(3, 0)),
+                        new(Player.Red)), 
+                Is.True);
     }
 }
