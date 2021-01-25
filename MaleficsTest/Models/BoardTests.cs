@@ -212,6 +212,9 @@ namespace MaleficsTests.Models
         // r.x.
         // r.R.
 
+        // Landing tile cases
+        // ----------------------------------------------------------------
+
         [Test]
         public void Moving_A_Red_Pawn_To_Land_On_An_Empty_Road_Is_Legal()
             => Assert.That(
@@ -256,5 +259,28 @@ namespace MaleficsTests.Models
                         Path.AxisParallel(new(0, 0), new(3, 0)),
                         new(Player.Red)),
                 Is.True);
+
+        [Test]
+        public void Moving_A_Red_Pawn_To_Land_On_A_House_Is_Not_Legal()
+            => Assert.That(
+                FromRows("r..R")
+                    .IsLegalPawnMovePath(
+                        Path.AxisParallel(new(0, 0), new(3, 0)),
+                        new(Player.Red)),
+                Is.False);
+
+        // Moving over tile cases
+        // ----------------------------------------------------------------
+
+        [Test]
+        public void Moving_A_Red_Pawn_Over_A_Rock_Is_Not_Legal()
+            => Assert.That(
+                FromRows("r. .")
+                    .IsLegalPawnMovePath(
+                        Path.AxisParallel(new(0, 0), new(3, 0)),
+                        new(Player.Red)),
+                Is.False);
+
+
     }
 }
