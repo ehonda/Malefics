@@ -31,18 +31,18 @@ namespace Malefics.Models
             Position position, uint distance)
             => TileAt(position).Peek() switch
             {
-                Pawn pawn => GetNonBacktrackingRoadPathsOfDistanceFrom(position, distance)
+                Pawn pawn => GetNonBacktrackingGeometricallyTraversablePathsOfDistanceFrom(position, distance)
                     .Where(path => IsLegalPawnMovePath(path, pawn)),
 
                 _ => Enumerable.Empty<IEnumerable<Position>>()
             };
 
-        public IEnumerable<IEnumerable<Position>> GetNonBacktrackingRoadPathsOfDistanceFrom(
+        public IEnumerable<IEnumerable<Position>> GetNonBacktrackingGeometricallyTraversablePathsOfDistanceFrom(
             Position position, uint distance)
-            => GetNonBacktrackingRoadPathsOfDistanceFrom(position, distance,
+            => GetNonBacktrackingGeometricallyTraversablePathsOfDistanceFrom(position, distance,
                 Enumerable.Empty<Position>());
 
-        private IEnumerable<IEnumerable<Position>> GetNonBacktrackingRoadPathsOfDistanceFrom(
+        private IEnumerable<IEnumerable<Position>> GetNonBacktrackingGeometricallyTraversablePathsOfDistanceFrom(
             Position position, uint distance, IEnumerable<Position> visited)
         {
             // TODO: Refactor to get rid of all the "tile is Road || tile is Goal"
@@ -57,12 +57,13 @@ namespace Malefics.Models
 
             return roadNeighbors
                 .SelectMany(neighbor =>
-                    GetNonBacktrackingRoadPathsOfDistanceFrom(
+                    GetNonBacktrackingGeometricallyTraversablePathsOfDistanceFrom(
                             neighbor, distance - 1, visited.Append(position))
                         .Select(path => path.Prepend(position)));
         }
 
-
+        // TODO: There's a bug here, we don't require the path to be non-backtracking!
+        //       - Fix it and write a test
         [SuppressMessage("ReSharper", "VariableHidesOuterVariable")]
         public bool IsLegalPawnMovePath(IEnumerable<Position> path, Pawn pawn)
             => With.Array(

@@ -33,7 +33,7 @@ namespace MaleficsTests.Models
                 "..");
 
             var paths = _board
-                .GetNonBacktrackingRoadPathsOfDistanceFrom(new(0, 0), 2)
+                .GetNonBacktrackingGeometricallyTraversablePathsOfDistanceFrom(new(0, 0), 2)
                 .ToArray();
 
             Assert.That(paths, Has.Length.EqualTo(2));
