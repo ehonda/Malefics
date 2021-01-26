@@ -61,8 +61,6 @@ namespace Malefics.Models
                             .Select(path => path.Prepend(position)))
             };
 
-        // TODO: There's a bug here, we don't require the path to be non-backtracking!
-        //       - Fix it and write a test
         [SuppressMessage("ReSharper", "VariableHidesOuterVariable")]
         public bool IsLegalPawnMovePath(IEnumerable<Position> path, Pawn pawn)
             => With.Array(
