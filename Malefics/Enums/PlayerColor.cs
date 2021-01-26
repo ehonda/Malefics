@@ -1,6 +1,6 @@
 ﻿namespace Malefics.Enums
 {
-    public enum Player
+    public enum PlayerColor
     {
         Red,
         Green,

@@ -19,6 +19,6 @@ namespace MaleficsTests.Models.Pieces.TestCases
                     PieceCases.Pawns
                         .Select(pawn => (house, pawn))
                         .Where(houseAndPawn => 
-                            houseAndPawn.house.Player != houseAndPawn.pawn.Player));
+                            houseAndPawn.house.PlayerColor != houseAndPawn.pawn.PlayerColor));
     }
 }

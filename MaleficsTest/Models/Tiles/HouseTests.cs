@@ -13,7 +13,7 @@ namespace MaleficsTests.Models.Tiles
     {
         [Test]
         public void An_Empty_House_Is_Not_Occupied()
-            => Assert.That(new House(Player.Red, 0).IsOccupied(), Is.False);
+            => Assert.That(new House(PlayerColor.Red, 0).IsOccupied(), Is.False);
 
         [Test]
         [TestCaseSource(typeof(HouseCases), nameof(HouseCases.AllHousesWithPopulation),
@@ -33,7 +33,7 @@ namespace MaleficsTests.Models.Tiles
         public void A_Pawn_Can_Be_Put_In_A_House_Of_The_Right_Color_And_It_Is_Then_Occupied(
             House house)
         {
-            house.Put(new Pawn(house.Player));
+            house.Put(new Pawn(house.PlayerColor));
             Assert.That(house.IsOccupied(), Is.True);
         }
 
@@ -54,7 +54,7 @@ namespace MaleficsTests.Models.Tiles
         [Test]
         [TestCaseSource(typeof(HouseCases), nameof(HouseCases.AllHousesWithSinglePawn))]
         public void Taking_From_A_Non_Empty_House_Retrieves_A_Pawn_Of_The_Houses_Color(House house)
-            => Assert.That(house.Take(), Is.EqualTo(new Pawn(house.Player)));
+            => Assert.That(house.Take(), Is.EqualTo(new Pawn(house.PlayerColor)));
 
         [Test]
         [TestCaseSource(typeof(HouseCases), nameof(HouseCases.AllEmptyHouses))]
@@ -73,33 +73,33 @@ namespace MaleficsTests.Models.Tiles
         [Test]
         [TestCaseSource(typeof(PieceCases), nameof(PieceCases.AllPieces))]
         public void An_Empty_House_Does_Not_Contain_Any_Piece(Piece piece)
-            => Assert.That(new House(Player.Red, 0).Contains(piece), Is.False);
+            => Assert.That(new House(PlayerColor.Red, 0).Contains(piece), Is.False);
 
         [Test]
         public void A_Non_Empty_House_Contains_A_Pawn_Of_That_Color()
-            => Assert.That(new House(Player.Red, 1).Contains(new Pawn(Player.Red)), Is.True);
+            => Assert.That(new House(PlayerColor.Red, 1).Contains(new Pawn(PlayerColor.Red)), Is.True);
 
         [Test]
         public void A_Non_Empty_House_Does_Not_Contain_A_Pawn_Of_Another_Color()
-            => Assert.That(new House(Player.Red, 1).Contains(new Pawn(Player.Blue)), Is.False);
+            => Assert.That(new House(PlayerColor.Red, 1).Contains(new Pawn(PlayerColor.Blue)), Is.False);
 
         [Test]
         public void A_Non_Empty_House_Does_Not_Contain_A_Barricade()
-            => Assert.That(new House(Player.Red, 1).Contains(new Barricade()), Is.False);
+            => Assert.That(new House(PlayerColor.Red, 1).Contains(new Barricade()), Is.False);
 
         [Test]
         public void Peeking_At_An_Empty_House_Returns_Null()
-            => Assert.That(new House(Player.Red, 0).Peek(), Is.Null);
+            => Assert.That(new House(PlayerColor.Red, 0).Peek(), Is.Null);
 
         [Test]
         public void Peeking_At_A_Non_Empty_House_Returns_A_Pawn_Of_That_Color()
-            => Assert.That(new House(Player.Red, 1).Peek(), Is.EqualTo(new Pawn(Player.Red)));
+            => Assert.That(new House(PlayerColor.Red, 1).Peek(), Is.EqualTo(new Pawn(PlayerColor.Red)));
 
         [Test]
         [TestCase(0u)]
         [TestCase(1u)]
         [TestCase(2u)]
         public void A_House_Is_Geometrically_Traversable(uint pawns)
-            => Assert.That(new House(Player.Red, pawns).IsGeometricallyTraversable(), Is.True);
+            => Assert.That(new House(PlayerColor.Red, pawns).IsGeometricallyTraversable(), Is.True);
     }
 }

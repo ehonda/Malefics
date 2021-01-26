@@ -24,7 +24,7 @@ namespace MaleficsTests.Parsers.Ascii
             var tile = Grammar.Tile.Parse("R1");
 
             Assert.That(tile, Is.TypeOf<House>());
-            Assert.That(tile.Contains(new Pawn(Player.Red)), Is.True);
+            Assert.That(tile.Contains(new Pawn(PlayerColor.Red)), Is.True);
         }
 
 
@@ -47,7 +47,7 @@ namespace MaleficsTests.Parsers.Ascii
         //    Assert.That(tile.Terrain, Is.EqualTo(Terrain.Road));
         //    Assert.That(tile.OccupyingPieces, Has.Exactly(1).Items
         //        .And.Exactly(1).Items.TypeOf<Pawn>()
-        //        .And.Matches<Pawn>(p => p.Player == Player.Red));
+        //        .And.Matches<Pawn>(p => p.PlayerColor == PlayerColor.Red));
         //}
 
         //[Test]
@@ -58,7 +58,7 @@ namespace MaleficsTests.Parsers.Ascii
         //    Assert.That(tile.Terrain, Is.EqualTo(Terrain.Road));
         //    Assert.That(tile.OccupyingPieces, Has.Exactly(1).Items
         //        .And.Exactly(1).Items.TypeOf<Pawn>()
-        //        .And.Matches<Pawn>(p => p.Player == Player.Blue));
+        //        .And.Matches<Pawn>(p => p.PlayerColor == PlayerColor.Blue));
         //}
 
         //[Test]

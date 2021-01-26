@@ -23,7 +23,7 @@ namespace MaleficsTests.Models.Pieces.TestCases
 
         public static IEnumerable<Pawn> Pawns
             => Enum
-                .GetValues<Player>()
+                .GetValues<PlayerColor>()
                 .Select(player => new Pawn(player));
 
         public static IEnumerable<(Pawn, Pawn)> PawnPairs

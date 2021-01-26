@@ -6,11 +6,11 @@ namespace Malefics.Models.Tiles
 {
     public class House : ITile
     {
-        public Player Player { get; }
+        public PlayerColor PlayerColor { get; }
         private uint _pawns;
 
-        public House(Player player, uint pawns)
-            => (Player, _pawns) = (player, pawns);
+        public House(PlayerColor playerColor, uint pawns)
+            => (PlayerColor, _pawns) = (playerColor, pawns);
 
         #region Implementations of ITile
 
@@ -18,7 +18,7 @@ namespace Malefics.Models.Tiles
         public bool Contains(Piece piece)
             => _pawns > 0
                && piece is Pawn pawn
-               && pawn == new Pawn(Player);
+               && pawn == new Pawn(PlayerColor);
 
         /// <inheritdoc />
         public bool IsGeometricallyTraversable() => true;
@@ -28,7 +28,7 @@ namespace Malefics.Models.Tiles
         {
             if (piece is Pawn pawn)
             {
-                if (pawn == new Pawn(Player))
+                if (pawn == new Pawn(PlayerColor))
                 {
                     ++_pawns;
                     return;
@@ -36,7 +36,7 @@ namespace Malefics.Models.Tiles
             }
 
             throw new InvalidTileOperationException(
-                $"Can't put {piece} on a house of player {Player}");
+                $"Can't put {piece} on a house of playerColor {PlayerColor}");
         }
 
         /// <inheritdoc />
@@ -47,11 +47,11 @@ namespace Malefics.Models.Tiles
                     "Can't remove a piece from an empty house.");
 
             --_pawns;
-            return new Pawn(Player);
+            return new Pawn(PlayerColor);
         }
 
         /// <inheritdoc />
-        public Piece? Peek() => _pawns > 0 ? new Pawn(Player) : null;
+        public Piece? Peek() => _pawns > 0 ? new Pawn(PlayerColor) : null;
 
         /// <inheritdoc />
         public bool IsTraversable() => false;

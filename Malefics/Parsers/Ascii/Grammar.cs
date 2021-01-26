@@ -27,19 +27,19 @@ namespace Malefics.Parsers.Ascii
         private const char HOUSE_BLUE = 'B';
         private const char GOAL = 'x';
 
-        private static char PawnEncoding(Player player)
-            => player switch
+        private static char PawnEncoding(PlayerColor playerColor)
+            => playerColor switch
             {
-                Player.Red => PAWN_RED,
-                Player.Blue => PAWN_BLUE,
+                PlayerColor.Red => PAWN_RED,
+                PlayerColor.Blue => PAWN_BLUE,
                 _ => ' '
             };
 
-        private static char HouseEncoding(Player player)
-            => player switch
+        private static char HouseEncoding(PlayerColor playerColor)
+            => playerColor switch
             {
-                Player.Red => HOUSE_RED,
-                Player.Blue => HOUSE_BLUE,
+                PlayerColor.Red => HOUSE_RED,
+                PlayerColor.Blue => HOUSE_BLUE,
                 _ => ' '
             };
 
@@ -65,21 +65,21 @@ namespace Malefics.Parsers.Ascii
         // # # # # # # # # # # # # # # # # #
 
         public static readonly Parser<ITile> AnyPawn
-            = Pawn(Player.Red).Or(Pawn(Player.Blue));
+            = Pawn(PlayerColor.Red).Or(Pawn(PlayerColor.Blue));
 
-        public static Parser<ITile> Pawn(Player player)
-            => Models.Tiles.Tile.Pawn(player).EncodedAs(PawnEncoding(player));
+        public static Parser<ITile> Pawn(PlayerColor playerColor)
+            => Models.Tiles.Tile.Pawn(playerColor).EncodedAs(PawnEncoding(playerColor));
 
         // Houses
         // # # # # # # # # # # # # # # # # #
 
         public static readonly Parser<ITile> AnyHouse
-            = House(Player.Red).Or(House(Player.Blue));
+            = House(PlayerColor.Red).Or(House(PlayerColor.Blue));
 
-        private static Parser<ITile> House(Player player) =>
-            from _ in Parse.Char(HouseEncoding(player))
+        private static Parser<ITile> House(PlayerColor playerColor) =>
+            from _ in Parse.Char(HouseEncoding(playerColor))
             from pawns in Parse.Numeric
-            select Models.Tiles.Tile.House(player, uint.Parse(pawns.ToString()));
+            select Models.Tiles.Tile.House(playerColor, uint.Parse(pawns.ToString()));
 
         // Main parser
         // # # # # # # # # # # # # # # # # #

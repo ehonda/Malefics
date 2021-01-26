@@ -99,7 +99,7 @@ namespace MaleficsTests.Models
         {
             _board = FromRows("r...");
 
-            Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.True);
+            Assert.That(_board.PlayerCanMoveAPawn(PlayerColor.Red, 3), Is.True);
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace MaleficsTests.Models
         {
             _board = FromRows("r..o");
 
-            Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.True);
+            Assert.That(_board.PlayerCanMoveAPawn(PlayerColor.Red, 3), Is.True);
         }
 
         [Test]
@@ -115,7 +115,7 @@ namespace MaleficsTests.Models
         {
             _board = FromRows("r..b");
 
-            Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.True);
+            Assert.That(_board.PlayerCanMoveAPawn(PlayerColor.Red, 3), Is.True);
         }
 
         [Test]
@@ -125,7 +125,7 @@ namespace MaleficsTests.Models
                 "...",
                 "R1");
 
-            Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.True);
+            Assert.That(_board.PlayerCanMoveAPawn(PlayerColor.Red, 3), Is.True);
         }
 
         [Test]
@@ -135,7 +135,7 @@ namespace MaleficsTests.Models
                 "..r",
                 "R0");
 
-            Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.False);
+            Assert.That(_board.PlayerCanMoveAPawn(PlayerColor.Red, 3), Is.False);
         }
 
         [Test]
@@ -143,7 +143,7 @@ namespace MaleficsTests.Models
         {
             _board = FromRows("r..x");
 
-            Assert.That(_board.PlayerCanMoveAPawn(Player.Red, 3), Is.True);
+            Assert.That(_board.PlayerCanMoveAPawn(PlayerColor.Red, 3), Is.True);
         }
 
         // TODO: Extract to separate class
@@ -177,7 +177,7 @@ namespace MaleficsTests.Models
                 FromRows("r...")
                     .IsLegalPawnMovePath(
                         Path.AxisParallel(new(0, 0), new(3, 0)),
-                        new(Player.Red)), 
+                        new(PlayerColor.Red)), 
                 Is.True);
 
         [Test]
@@ -186,7 +186,7 @@ namespace MaleficsTests.Models
                 FromRows("r..r")
                     .IsLegalPawnMovePath(
                         Path.AxisParallel(new(0, 0), new(3, 0)),
-                        new(Player.Red)),
+                        new(PlayerColor.Red)),
                 Is.False);
 
         [Test]
@@ -195,7 +195,7 @@ namespace MaleficsTests.Models
                 FromRows("r..o")
                     .IsLegalPawnMovePath(
                         Path.AxisParallel(new(0, 0), new(3, 0)),
-                        new(Player.Red)),
+                        new(PlayerColor.Red)),
                 Is.True);
 
         [Test]
@@ -204,7 +204,7 @@ namespace MaleficsTests.Models
                 FromRows("r..b")
                     .IsLegalPawnMovePath(
                         Path.AxisParallel(new(0, 0), new(3, 0)),
-                        new(Player.Red)),
+                        new(PlayerColor.Red)),
                 Is.True);
 
         [Test]
@@ -213,7 +213,7 @@ namespace MaleficsTests.Models
                 FromRows("r..x")
                     .IsLegalPawnMovePath(
                         Path.AxisParallel(new(0, 0), new(3, 0)),
-                        new(Player.Red)),
+                        new(PlayerColor.Red)),
                 Is.True);
 
         [Test]
@@ -222,7 +222,7 @@ namespace MaleficsTests.Models
                 FromRows("r..R")
                     .IsLegalPawnMovePath(
                         Path.AxisParallel(new(0, 0), new(3, 0)),
-                        new(Player.Red)),
+                        new(PlayerColor.Red)),
                 Is.False);
 
         // Moving over tile cases
@@ -234,7 +234,7 @@ namespace MaleficsTests.Models
                 FromRows("r. .")
                     .IsLegalPawnMovePath(
                         Path.AxisParallel(new(0, 0), new(3, 0)),
-                        new(Player.Red)),
+                        new(PlayerColor.Red)),
                 Is.False);
 
         [Test]
@@ -243,7 +243,7 @@ namespace MaleficsTests.Models
                 FromRows("r.r.")
                     .IsLegalPawnMovePath(
                         Path.AxisParallel(new(0, 0), new(3, 0)),
-                        new(Player.Red)),
+                        new(PlayerColor.Red)),
                 Is.True);
 
         [Test]
@@ -252,7 +252,7 @@ namespace MaleficsTests.Models
                 FromRows("r.o.")
                     .IsLegalPawnMovePath(
                         Path.AxisParallel(new(0, 0), new(3, 0)),
-                        new(Player.Red)),
+                        new(PlayerColor.Red)),
                 Is.False);
 
         [Test]
@@ -261,7 +261,7 @@ namespace MaleficsTests.Models
                 FromRows("r.b.")
                     .IsLegalPawnMovePath(
                         Path.AxisParallel(new(0, 0), new(3, 0)),
-                        new(Player.Red)),
+                        new(PlayerColor.Red)),
                 Is.True);
 
         [Test]
@@ -270,7 +270,7 @@ namespace MaleficsTests.Models
                 FromRows("r.x.")
                     .IsLegalPawnMovePath(
                         Path.AxisParallel(new(0, 0), new(3, 0)),
-                        new(Player.Red)),
+                        new(PlayerColor.Red)),
                 Is.True);
 
         [Test]
@@ -281,7 +281,7 @@ namespace MaleficsTests.Models
                         "r.R0")
                     .IsLegalPawnMovePath(
                         Path.AxisParallelSegments(new(0, 0), new(2, 0), new(2, 1)),
-                        new(Player.Red)),
+                        new(PlayerColor.Red)),
                 Is.False);
 
         [Test]
@@ -292,7 +292,7 @@ namespace MaleficsTests.Models
                         "r.B0")
                     .IsLegalPawnMovePath(
                         Path.AxisParallel(new(0, 0), new(3, 0)),
-                        new(Player.Red)),
+                        new(PlayerColor.Red)),
                 Is.False);
 
         // Backtracking
@@ -304,7 +304,7 @@ namespace MaleficsTests.Models
                 FromRows("r..")
                     .IsLegalPawnMovePath(
                         Path.AxisParallelSegments(new(0, 0), new(2, 0), new(1, 0)),
-                        new(Player.Red)),
+                        new(PlayerColor.Red)),
                 Is.False);
 
     }

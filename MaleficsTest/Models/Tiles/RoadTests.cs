@@ -70,7 +70,7 @@ namespace MaleficsTests.Models.Tiles
         [TestCaseSource(typeof(PieceCases), nameof(PieceCases.Pawns))]
         public void A_Road_Occupied_By_A_Pawn_Returns_True_On_Contains_New_Pawn_Of_That_Color(
             Pawn pawn)
-            => Assert.That(new Road(pawn).Contains(new Pawn(pawn.Player)), Is.True);
+            => Assert.That(new Road(pawn).Contains(new Pawn(pawn.PlayerColor)), Is.True);
 
         [Test]
         [TestCaseSource(typeof(PieceCases), nameof(PieceCases.UnequalPairs))]

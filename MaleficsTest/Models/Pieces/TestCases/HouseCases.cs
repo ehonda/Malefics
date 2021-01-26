@@ -15,6 +15,6 @@ namespace MaleficsTests.Models.Pieces.TestCases
             => AllHousesWithPopulation(1);
 
         public static IEnumerable<House> AllHousesWithPopulation(uint pawns)
-            => Enum.GetValues<Player>().Select(player => new House(player, pawns));
+            => Enum.GetValues<PlayerColor>().Select(player => new House(player, pawns));
     }
 }

@@ -13,10 +13,10 @@ namespace Malefics.Models.Tiles
 
         public static ITile Barricade() => new Road(new Barricade());
 
-        public static ITile Pawn(Player player) => new Road(new Pawn(player));
+        public static ITile Pawn(PlayerColor playerColor) => new Road(new Pawn(playerColor));
 
-        public static ITile House(Player player, uint pawns)
-            => new House(player, pawns);
+        public static ITile House(PlayerColor playerColor, uint pawns)
+            => new House(playerColor, pawns);
 
         // TODO: Should we expose these "higher order predicates" via interface or extension?
         // TODO: Dedicated unit tests

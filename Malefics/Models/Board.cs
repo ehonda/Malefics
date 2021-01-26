@@ -77,9 +77,9 @@ namespace Malefics.Models
             => _tiles.ContainsKey(position)
                && _tiles[position].IsTraversable();
 
-        public bool PlayerCanMoveAPawn(Player player, uint distance)
+        public bool PlayerCanMoveAPawn(PlayerColor playerColor, uint distance)
             => _tiles
-                .Where(positionAndTile => positionAndTile.Value.Contains(new Pawn(player)))
+                .Where(positionAndTile => positionAndTile.Value.Contains(new Pawn(playerColor)))
                 .SelectMany(positionAndTile => GetLegalPawnMovePathsOfDistanceFrom(positionAndTile.Key, distance))
                 .Any();
 
