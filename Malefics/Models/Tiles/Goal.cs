@@ -1,4 +1,5 @@
-﻿using Malefics.Models.Pieces;
+﻿using Malefics.Exceptions;
+using Malefics.Models.Pieces;
 
 namespace Malefics.Models.Tiles
 {
@@ -28,11 +29,10 @@ namespace Malefics.Models.Tiles
         {
         }
 
+        // TODO: Test that this throws
         /// <inheritdoc />
         public Piece Take()
-        {
-            return null;
-        }
+            => throw new InvalidTileOperationException("Can't take from a Goal tile.");
 
         /// <inheritdoc />
         public Piece? Peek()
