@@ -25,8 +25,10 @@ namespace Malefics.Game
             foreach (var player in _players)
             {
                 var roll = _die.Roll();
-                if(_board.PlayerCanMoveAPawn(player.PlayerColor, roll))
-                    player.RequestPawnMove(_board, roll);
+                if (_board.PlayerCanMoveAPawn(player.PlayerColor, roll))
+                {
+                    var move = player.RequestPawnMove(_board, roll);
+                }
             }
 
             return _players.First();
