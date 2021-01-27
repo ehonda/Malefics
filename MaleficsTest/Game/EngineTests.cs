@@ -7,6 +7,7 @@ using Moq;
 using NUnit.Framework;
 using Sprache;
 using System.Linq;
+using Malefics.Extensions;
 using Position = Malefics.Models.Position;
 
 namespace MaleficsTests.Game
@@ -36,6 +37,22 @@ namespace MaleficsTests.Game
             blue.Verify(p => p.RequestPawnMove(
                 It.IsAny<Board>(),
                 It.IsAny<uint>()), Times.AtLeastOnce);
+        }
+
+        [Test]
+        public void Moving_Onto_A_Goal_Tile_Ends_The_Game()
+        {
+            var red = PlayerMocks.StaticPawnMoveExecutor(
+                PlayerColor.Red,
+                Path.AxisParallel(new(0, 0), new(3, 0)));
+
+            var engine = new Engine(
+                FromRows("r..x"),
+                new[] {red.Object});
+
+            var winner = engine.Run();
+
+            Assert.That(winner.PlayerColor, Is.EqualTo(PlayerColor.Red));
         }
     }
 }
