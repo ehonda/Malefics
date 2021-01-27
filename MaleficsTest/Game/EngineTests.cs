@@ -74,7 +74,7 @@ namespace MaleficsTests.Game
 
             var engine = new Engine(
                 FromRows("r..x..b"),
-                new[] { red.Object },
+                new[] { red.Object, blue.Object },
                 DieMocks.Cyclic(new[] { 2u, 3u }).Object);
 
             var winner = engine.Run();
