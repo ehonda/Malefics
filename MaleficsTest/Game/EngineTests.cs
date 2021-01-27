@@ -8,6 +8,7 @@ using NUnit.Framework;
 using Sprache;
 using System.Linq;
 using Malefics.Extensions;
+using MaleficsTests.Game.Dice.Mocks;
 using Position = Malefics.Models.Position;
 
 namespace MaleficsTests.Game
@@ -27,7 +28,11 @@ namespace MaleficsTests.Game
             var blue = PlayerMocks.StaticPawnMoveExecutor(
                 PlayerColor.Blue, Enumerable.Empty<Position>());
 
-            var engine = new Engine(new(), new[] {red.Object, blue.Object});
+            var engine = new Engine(
+                new(), 
+                new[] {red.Object, blue.Object},
+                DieMocks.Cyclic(new[] { 1u, 3u }).Object);
+            
             engine.Run();
 
             red.Verify(p => p.RequestPawnMove(
@@ -48,7 +53,8 @@ namespace MaleficsTests.Game
 
             var engine = new Engine(
                 FromRows("r..x"),
-                new[] {red.Object});
+                new[] {red.Object},
+                DieMocks.Cyclic(new[] { 3u }).Object);
 
             var winner = engine.Run();
 
