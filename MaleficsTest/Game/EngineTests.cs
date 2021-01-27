@@ -60,5 +60,28 @@ namespace MaleficsTests.Game
 
             Assert.That(winner.PlayerColor, Is.EqualTo(PlayerColor.Red));
         }
+
+        [Test]
+        public void The_Engine_Does_Not_Request_A_Move_From_A_Player_That_Has_No_Moves()
+        {
+            var red = PlayerMocks.StaticPawnMoveExecutor(
+                PlayerColor.Red,
+                Enumerable.Empty<Position>());
+
+            var blue = PlayerMocks.StaticPawnMoveExecutor(
+                PlayerColor.Red,
+                Path.AxisParallel(new(6, 0), new(3, 0)));
+
+            var engine = new Engine(
+                FromRows("ro.x..b"),
+                new[] { red.Object, blue.Object },
+                DieMocks.Cyclic(new[] { 3u }).Object);
+
+            engine.Run();
+
+            red.Verify(p => p.RequestPawnMove(
+                It.IsAny<Board>(),
+                It.IsAny<uint>()), Times.Never);
+        }
     }
 }
