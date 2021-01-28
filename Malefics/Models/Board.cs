@@ -32,15 +32,45 @@ namespace Malefics.Models
         // TODO: Custom exception type, better error message (print path)
         [SuppressMessage("ReSharper", "VariableHidesOuterVariable")]
         public MoveResult MovePawn(Pawn pawn, IEnumerable<Position> path)
-            => With.Array(
+            => With.Array<Position, MoveResult>(
                 path,
-                path => IsLegalPawnMovePath(path, pawn) switch
+                path =>
                 {
-                    false => throw new InvalidOperationException($"Can't move {pawn} along illegal path"),
-                    true => TileAt(path.Last()) switch
+                    // TODO: Implement more cleanly - These ifs and throwing at the end are awkward!
+                    if (!IsLegalPawnMovePath(path, pawn))
+                        throw new InvalidOperationException($"Can't move {pawn} along illegal path");
+
+                    var destination = TileAt(path.Last());
+
+                    if (destination is Goal)
+                        return new Victory(pawn.PlayerColor);
+
+                    // Must be Road otherwise
+                    var pieceToCapture = destination.Peek();
+
+                    if (pieceToCapture is null)
                     {
-                        _ => new TurnFinished()
+                        destination.Put(pawn);
+                        return new TurnFinished();
                     }
+
+                    if (pieceToCapture is Pawn)
+                    {
+                        // TODO: Put pawn back in its house
+                        var capturedPawn = destination.Take();
+                        destination.Put(pawn);
+                        return new TurnFinished();
+                    }
+
+                    if (pieceToCapture is Barricade)
+                    {
+                        destination.Take();
+                        destination.Put(pawn);
+                        return new BarricadeCaptured();
+                    }
+
+                    // Unreachable
+                    throw new InvalidOperationException("Unreachable path in MovePawn");
                 });
 
         public IEnumerable<IEnumerable<Position>> GetLegalPawnMovePathsOfDistanceFrom(
