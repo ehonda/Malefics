@@ -61,26 +61,26 @@ namespace MaleficsTests.Game
             Assert.That(winner.PlayerColor, Is.EqualTo(PlayerColor.Red));
         }
 
-        [Test]
-        public void Whoever_Moves_Onto_A_Goal_Tile_First_Wins()
-        {
-            var red = PlayerMocks.StaticPawnMoveExecutor(
-                PlayerColor.Red,
-                Path.AxisParallel(new(0, 0), new(3, 0)));
+        //[Test]
+        //public void Whoever_Moves_Onto_A_Goal_Tile_First_Wins()
+        //{
+        //    var red = PlayerMocks.StaticPawnMoveExecutor(
+        //        PlayerColor.Red,
+        //        Path.AxisParallel(new(0, 0), new(3, 0)));
 
-            var blue = PlayerMocks.StaticPawnMoveExecutor(
-                PlayerColor.Blue,
-                Path.AxisParallel(new(6, 0), new(3, 0)));
+        //    var blue = PlayerMocks.StaticPawnMoveExecutor(
+        //        PlayerColor.Blue,
+        //        Path.AxisParallel(new(6, 0), new(3, 0)));
 
-            var engine = new Engine(
-                FromRows("r..x..b"),
-                new[] { red.Object, blue.Object },
-                DieMocks.Cyclic(new[] { 2u, 3u }).Object);
+        //    var engine = new Engine(
+        //        FromRows("r..x..b"),
+        //        new[] { red.Object, blue.Object },
+        //        DieMocks.Cyclic(new[] { 2u, 3u }).Object);
 
-            var winner = engine.Run();
+        //    var winner = engine.Run();
 
-            Assert.That(winner.PlayerColor, Is.EqualTo(PlayerColor.Blue));
-        }
+        //    Assert.That(winner.PlayerColor, Is.EqualTo(PlayerColor.Blue));
+        //}
 
         [Test]
         public void The_Engine_Does_Not_Request_A_Move_From_A_Player_That_Has_No_Moves()
