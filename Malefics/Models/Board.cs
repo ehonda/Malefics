@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace Malefics.Models
 {
-    // TODO: Make some of the methods that are only called in tests and used by other methods private
     public class Board
     {
         private readonly IDictionary<Position, ITile> _tiles
