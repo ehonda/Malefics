@@ -30,8 +30,18 @@ namespace Malefics.Models
             => new(rows);
 
         // TODO: Custom exception type, better error message (print path)
+        [SuppressMessage("ReSharper", "VariableHidesOuterVariable")]
         public MoveResult MovePawn(Pawn pawn, IEnumerable<Position> path)
-            => throw new InvalidOperationException($"Can't move {pawn} along illegal path");
+            => With.Array(
+                path,
+                path => IsLegalPawnMovePath(path, pawn) switch
+                {
+                    false => throw new InvalidOperationException($"Can't move {pawn} along illegal path"),
+                    true => TileAt(path.Last()) switch
+                    {
+                        _ => new TurnFinished()
+                    }
+                });
 
         public IEnumerable<IEnumerable<Position>> GetLegalPawnMovePathsOfDistanceFrom(
             Position position, uint distance)

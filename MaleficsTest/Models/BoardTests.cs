@@ -6,6 +6,7 @@ using Malefics.Parsers.Ascii;
 using NUnit.Framework;
 using Sprache;
 using System.Linq;
+using Malefics.Game.MoveResults;
 using Malefics.Models.Pieces;
 using Position = Malefics.Models.Position;
 
@@ -298,7 +299,16 @@ namespace MaleficsTests.Models
             => Assert.Catch<InvalidOperationException>(
                 () => FromRows("r..")
                     .MovePawn(
-                        new Pawn(PlayerColor.Red),
+                        new(PlayerColor.Red),
                         Path.AxisParallel(new(0, 0), new(2, 0))));
+
+        [Test]
+        public void Moving_A_Pawn_Onto_An_Empty_Road_Tile_Returns_TurnFinished()
+            => Assert.That(
+                FromRows("r..")
+                    .MovePawn(
+                        new(PlayerColor.Red),
+                        Path.AxisParallel(new(0, 0), new(2, 0))),
+                Is.EqualTo(new TurnFinished()));
     }
 }
