@@ -38,7 +38,7 @@ namespace Malefics.Models
                 _ => Enumerable.Empty<IEnumerable<Position>>()
             };
 
-        public IEnumerable<IEnumerable<Position>> GetNonBacktrackingGeometricallyTraversablePathsOfDistanceFrom(
+        private IEnumerable<IEnumerable<Position>> GetNonBacktrackingGeometricallyTraversablePathsOfDistanceFrom(
             Position position, uint distance)
             => GetNonBacktrackingGeometricallyTraversablePathsOfDistanceFrom(position, distance,
                 Enumerable.Empty<Position>());

@@ -23,26 +23,6 @@ namespace MaleficsTests.Models
             _board = new();
         }
 
-        // TODO: Tests that IsLegalPawnMovePath holds for all computed paths!
-
-        [Test]
-        public void Non_Backtracking_Paths_Of_Distance_2_On_A_Square()
-        {
-            _board = FromRows(
-                "..",
-                "..");
-
-            var paths = _board
-                .GetNonBacktrackingGeometricallyTraversablePathsOfDistanceFrom(new(0, 0), 2)
-                .ToArray();
-
-            Assert.That(paths, Has.Length.EqualTo(2));
-            Assert.That(paths, Has.Exactly(1).Items.EquivalentTo(
-                new[] { new Position(0, 0), new(1, 0), new(1, 1)}));
-            Assert.That(paths, Has.Exactly(1).Items.EquivalentTo(
-                new[] { new Position(0, 0), new(0, 1), new(1, 1) }));
-        }
-
         // TODO: Test for barricade
         [Test]
         public void There_Are_No_Legal_Move_Paths_From_A_Tile_Without_A_Pawn()
