@@ -1,3 +1,4 @@
+using System;
 using Malefics.Enums;
 using Malefics.Extensions;
 using Malefics.Models;
@@ -5,6 +6,7 @@ using Malefics.Parsers.Ascii;
 using NUnit.Framework;
 using Sprache;
 using System.Linq;
+using Malefics.Models.Pieces;
 using Position = Malefics.Models.Position;
 
 namespace MaleficsTests.Models
@@ -287,5 +289,16 @@ namespace MaleficsTests.Models
                         new(PlayerColor.Red)),
                 Is.False);
 
+        // TODO: Extract to separate class
+        // MovePawn tests
+        // -----------------------------------------------------------------------
+
+        [Test]
+        public void Moving_A_Pawn_Along_An_Illegal_Path_Throws()
+            => Assert.Catch<InvalidOperationException>(
+                () => FromRows("r..")
+                    .MovePawn(
+                        new Pawn(PlayerColor.Red),
+                        Path.AxisParallel(new(0, 0), new(2, 0))));
     }
 }

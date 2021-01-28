@@ -1,10 +1,12 @@
-﻿using Malefics.Enums;
+﻿using System;
+using Malefics.Enums;
 using Malefics.Extensions;
 using Malefics.Models.Pieces;
 using Malefics.Models.Tiles;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Malefics.Game.MoveResults;
 
 namespace Malefics.Models
 {
@@ -26,6 +28,10 @@ namespace Malefics.Models
 
         public static Board FromReversedTileRows(IEnumerable<IEnumerable<ITile>> rows)
             => new(rows);
+
+        // TODO: Custom exception type, better error message (print path)
+        public MoveResult MovePawn(Pawn pawn, IEnumerable<Position> path)
+            => throw new InvalidOperationException($"Can't move {pawn} along illegal path");
 
         public IEnumerable<IEnumerable<Position>> GetLegalPawnMovePathsOfDistanceFrom(
             Position position, uint distance)
