@@ -73,10 +73,6 @@ namespace Malefics.Models
                     && tilePath.Select(Pair.First).IsNonBacktracking()
                     && tilePath.Inner().All(tilePosition => tilePosition.Second.AllowsMovingOver()));
 
-        public bool IsTraversable(Position position)
-            => _tiles.ContainsKey(position)
-               && _tiles[position].IsTraversable();
-
         public bool PlayerCanMoveAPawn(PlayerColor playerColor, uint distance)
             => _tiles
                 .Where(positionAndTile => positionAndTile.Value.Contains(new Pawn(playerColor)))
