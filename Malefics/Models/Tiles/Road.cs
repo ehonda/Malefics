@@ -33,9 +33,15 @@ namespace Malefics.Models.Tiles
 
         /// <inheritdoc />
         public Piece Take()
-            => _occupyingPiece
-               ?? throw new InvalidTileOperationException(
-                   "Can't take a piece from an empty road tile");
+        {
+            if(_occupyingPiece is null)
+                throw new InvalidTileOperationException(
+                    "Can't take a piece from an empty road tile");
+
+            var piece = _occupyingPiece;
+            _occupyingPiece = null;
+            return piece;
+        }
 
         /// <inheritdoc />
         public Piece? Peek() => _occupyingPiece;

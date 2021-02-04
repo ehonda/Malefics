@@ -101,5 +101,18 @@ namespace MaleficsTests.Models.Tiles
         [TestCase(2u)]
         public void A_House_Is_Geometrically_Traversable(uint pawns)
             => Assert.That(new House(PlayerColor.Red, pawns).IsGeometricallyTraversable(), Is.True);
+
+        [TestCase(0u)]
+        [TestCase(1u)]
+        [TestCase(2u)]
+        public void Taking_From_A_House_With_N_Pawns_N_Times_Empties_It(uint pawns)
+        {
+            var house = new House(PlayerColor.Red, pawns);
+            
+            for (int i = 0; i < pawns; i++)
+                house.Take();
+
+            Assert.That(house.IsOccupied(), Is.False);
+        }
     }
 }
