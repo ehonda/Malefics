@@ -27,7 +27,22 @@ namespace MaleficsTests.Parsers.Ascii
             Assert.That(tile.Contains(new Pawn(PlayerColor.Red)), Is.True);
         }
 
+        // This is a regression test: Before we returned generator functions
+        // from our parsers, we returned tiles directly from a static context,
+        // which meant we always returned a reference to the same tile. Thus,
+        // modifying a tile returned on the first parse then yielded that modified
+        // tile being returned on the second pass.
+        [Test]
+        public void Parsing_A_Tile_And_Modifying_It_Does_Not_Affect_Subsequent_Parses()
+        {
+            var roadA = Grammar.Road.Parse(".");
+            Assert.That(roadA.IsOccupied, Is.False);
 
+            roadA.Put(new Barricade());
+
+            var roadB = Grammar.Road.Parse(".");
+            Assert.That(roadB.IsOccupied, Is.False);
+        }
 
         //[Test]
         //public void A_Barricade_Is_Parsed_With_A_Road_Tile()
