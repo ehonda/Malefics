@@ -48,31 +48,31 @@ namespace Malefics.Parsers.Ascii
         // Simple terrain and pieces
         // # # # # # # # # # # # # # # # # #
 
-        public static Parser<ITile> Rock()
+        private static Parser<ITile> Rock()
             => Models.Tiles.Tile.Rock().EncodedAs(ROCK);
 
-        public static Parser<ITile> Road()
+        private static Parser<ITile> Road()
             => Models.Tiles.Tile.Road().EncodedAs(ROAD);
 
-        public static Parser<ITile> Barricade()
+        private static Parser<ITile> Barricade()
             => Models.Tiles.Tile.Barricade().EncodedAs(BARRICADE);
 
-        public static Parser<ITile> Goal()
+        private static Parser<ITile> Goal()
             => new Goal().EncodedAs(GOAL);
 
         // Pawns
         // # # # # # # # # # # # # # # # # #
 
-        public static Parser<ITile> AnyPawn()
+        private static Parser<ITile> AnyPawn()
             => Pawn(PlayerColor.Red).Or(Pawn(PlayerColor.Blue));
 
-        public static Parser<ITile> Pawn(PlayerColor playerColor)
+        private static Parser<ITile> Pawn(PlayerColor playerColor)
             => Models.Tiles.Tile.Pawn(playerColor).EncodedAs(PawnEncoding(playerColor));
 
         // Houses
         // # # # # # # # # # # # # # # # # #
 
-        public static Parser<ITile> AnyHouse()
+        private static Parser<ITile> AnyHouse()
             => House(PlayerColor.Red).Or(House(PlayerColor.Blue));
 
         private static Parser<ITile> House(PlayerColor playerColor) =>
@@ -94,7 +94,7 @@ namespace Malefics.Parsers.Ascii
         // Board Parser
         // ------------------------------------------------------------------
 
-        public static Parser<IEnumerable<ITile>> BoardRow()
+        private static Parser<IEnumerable<ITile>> BoardRow()
             => Tile().Until(Parse.LineTerminator);
 
         public static Parser<Board> Board()

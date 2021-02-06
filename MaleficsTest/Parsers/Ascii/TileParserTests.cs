@@ -28,12 +28,12 @@ namespace MaleficsTests.Parsers.Ascii
         [Test]
         public void Parsing_A_Tile_And_Modifying_It_Does_Not_Affect_Subsequent_Parses()
         {
-            var roadA = Grammar.Road().Parse(".");
+            var roadA = Grammar.Tile().Parse(".");
             Assert.That(roadA.IsOccupied, Is.False);
 
             roadA.Put(new Barricade());
 
-            var roadB = Grammar.Road().Parse(".");
+            var roadB = Grammar.Tile().Parse(".");
             Assert.That(roadB.IsOccupied, Is.False);
         }
 
