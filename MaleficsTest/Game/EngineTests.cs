@@ -14,6 +14,7 @@ using Position = Malefics.Models.Position;
 namespace MaleficsTests.Game
 {
     [TestFixture]
+    [Timeout(5000)] // To prevent infinite Run() loop on erroneous test setup
     public class EngineTests
     {
         // TODO: Move duplicated code somewhere so EngineTests and BoardTests both use it
