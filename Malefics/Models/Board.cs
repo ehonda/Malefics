@@ -36,7 +36,7 @@ namespace Malefics.Models
                 path,
                 path =>
                 {
-                    // TODO: Implement more cleanly - These ifs and throwing at the end are awkward!
+                    // TODO: Better implementation! This works, but doesn't feel as concise as it could be
                     if (!IsLegalPawnMovePath(path, pawn))
                         throw new InvalidOperationException($"Can't move {pawn} along illegal path");
 
@@ -46,22 +46,13 @@ namespace Malefics.Models
                         return new Victory(pawn.PlayerColor);
 
                     // Must be Road otherwise
-                    var pieceToCapture = destination.Peek();
-
-                    if (pieceToCapture is null)
+                    if (!destination.IsOccupied())
                     {
                         destination.Put(pawn);
                         return new TurnFinished();
                     }
 
-                    if (pieceToCapture is Pawn)
-                        return new PieceCaptured(destination.CaptureWith(pawn));
-
-                    if (pieceToCapture is Barricade)
-                        return new PieceCaptured(destination.CaptureWith(pawn));
-
-                    // Unreachable
-                    throw new InvalidOperationException("Unreachable path in MovePawn");
+                    return new PieceCaptured(destination.CaptureWith(pawn));
                 });
 
         public IEnumerable<IEnumerable<Position>> GetLegalPawnMovePathsOfDistanceFrom(
