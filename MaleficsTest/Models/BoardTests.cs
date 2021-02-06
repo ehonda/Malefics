@@ -312,12 +312,21 @@ namespace MaleficsTests.Models
                 Is.EqualTo(new TurnFinished()));
 
         [Test]
-        public void Moving_A_Pawn_Onto_A_Barricade_Returns_BarricadeCapture()
+        public void Moving_A_Pawn_Onto_A_Barricade_Returns_A_Barricade_Captured()
             => Assert.That(
                 FromRows("r.o")
                     .MovePawn(
                         new(PlayerColor.Red),
                         Path.AxisParallel(new(0, 0), new(2, 0))),
                 Is.EqualTo(new PieceCaptured(new Barricade())));
+
+        [Test]
+        public void Moving_A_Pawn_Onto_A_Pawn_Of_Another_Color_Returns_That_Pawn_Captured()
+            => Assert.That(
+                FromRows("r.b")
+                    .MovePawn(
+                        new(PlayerColor.Red),
+                        Path.AxisParallel(new(0, 0), new(2, 0))),
+                Is.EqualTo(new PieceCaptured(new Pawn(PlayerColor.Blue))));
     }
 }

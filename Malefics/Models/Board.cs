@@ -55,12 +55,7 @@ namespace Malefics.Models
                     }
 
                     if (pieceToCapture is Pawn)
-                    {
-                        // TODO: Put pawn back in its house
-                        var capturedPawn = destination.Take();
-                        destination.Put(pawn);
-                        return new TurnFinished();
-                    }
+                        return new PieceCaptured(destination.CaptureWith(pawn));
 
                     if (pieceToCapture is Barricade)
                         return new PieceCaptured(destination.CaptureWith(pawn));
