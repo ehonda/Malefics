@@ -2,7 +2,6 @@
 using Malefics.Game.Dice;
 using Malefics.Game.MoveResults;
 using Malefics.Models;
-using Malefics.Models.Pieces;
 using Malefics.Players;
 
 namespace Malefics.Game
@@ -24,21 +23,22 @@ namespace Malefics.Game
 
         public IPlayer Run()
         {
-            foreach (var player in _players)
+            while (true)
             {
-                var roll = _die.Roll();
-                if (_board.PlayerCanMoveAPawn(player.PlayerColor, roll))
+                foreach (var player in _players)
                 {
-                    // TODO: Check that move path has length of roll - Or should Player guarantee it?
-                    var move = player.RequestPawnMove(_board, roll);
+                    var roll = _die.Roll();
+                    if (_board.PlayerCanMoveAPawn(player.PlayerColor, roll))
+                    {
+                        // TODO: Check that move path has length of roll - Or should Player guarantee it?
+                        var move = player.RequestPawnMove(_board, roll);
 
-                    var moveResult = _board.MovePawn(new(player.PlayerColor), move);
-                    if (moveResult is Victory)
-                        return player;
+                        var moveResult = _board.MovePawn(new(player.PlayerColor), move);
+                        if (moveResult is Victory)
+                            return player;
+                    }
                 }
             }
-
-            return _players.First();
         }
     }
 }

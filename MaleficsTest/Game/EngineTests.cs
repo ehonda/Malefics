@@ -13,6 +13,7 @@ using Position = Malefics.Models.Position;
 
 namespace MaleficsTests.Game
 {
+    // TODO: Is there a way to make setup for these tests less verbose?
     [TestFixture]
     [Timeout(5000)] // To prevent infinite Run() loop on erroneous test setup
     public class EngineTests
@@ -106,6 +107,35 @@ namespace MaleficsTests.Game
             red.Verify(p => p.RequestPawnMove(
                 It.IsAny<Board>(),
                 It.IsAny<uint>()), Times.Never);
+        }
+
+        [Test]
+        public void Game_With_Multiple_Turns_Per_Player()
+        {
+            var red = PlayerMocks.CyclicMoveSequenceExecutor(
+                PlayerColor.Red,
+                new []
+                {
+                    Path.AxisParallel(new(0, 0), new(1, 0)),
+                    Path.AxisParallel(new(1, 0), new(2, 0))
+                });
+
+            var blue = PlayerMocks.CyclicMoveSequenceExecutor(
+                PlayerColor.Blue,
+                new[]
+                {
+                    Path.AxisParallel(new(7, 0), new(5, 0)),
+                    Path.AxisParallel(new(5, 0), new(3, 0))
+                });
+
+            var engine = new Engine(
+                FromRows("r..x...b"),
+                new[] { red.Object, blue.Object },
+                DieMocks.Cyclic(new[] { 1u, 2u }).Object);
+
+            var winner = engine.Run();
+
+            Assert.That(winner.PlayerColor, Is.EqualTo(PlayerColor.Blue));
         }
     }
 }
