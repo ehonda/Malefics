@@ -29,7 +29,7 @@ namespace Malefics.Game
                 var roll = _die.Roll();
                 if (_board.PlayerCanMoveAPawn(player.PlayerColor, roll))
                 {
-                    // TODO: Check that move path has length of roll
+                    // TODO: Check that move path has length of roll - Or should Player guarantee it?
                     var move = player.RequestPawnMove(_board, roll);
 
                     var moveResult = _board.MovePawn(new(player.PlayerColor), move);

@@ -25,9 +25,11 @@ namespace MaleficsTests.Game
         public void The_Engine_Requests_Moves_From_Every_Player()
         {
             var red = PlayerMocks.StaticPawnMoveExecutor(
-                PlayerColor.Red, Enumerable.Empty<Position>());
+                PlayerColor.Red,
+                Path.AxisParallel(new(0, 0), new(1, 0)));
             var blue = PlayerMocks.StaticPawnMoveExecutor(
-                PlayerColor.Blue, Enumerable.Empty<Position>());
+                PlayerColor.Blue,
+                Path.AxisParallel(new(6, 0), new(3, 0)));
 
             var engine = new Engine(
                 FromRows("r..x..b"),
@@ -67,7 +69,7 @@ namespace MaleficsTests.Game
         {
             var red = PlayerMocks.StaticPawnMoveExecutor(
                 PlayerColor.Red,
-                Path.AxisParallel(new(0, 0), new(3, 0)));
+                Path.AxisParallel(new(0, 0), new(2, 0)));
 
             var blue = PlayerMocks.StaticPawnMoveExecutor(
                 PlayerColor.Blue,
