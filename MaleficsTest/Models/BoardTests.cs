@@ -318,6 +318,6 @@ namespace MaleficsTests.Models
                     .MovePawn(
                         new(PlayerColor.Red),
                         Path.AxisParallel(new(0, 0), new(2, 0))),
-                Is.EqualTo(new BarricadeCaptured()));
+                Is.EqualTo(new PieceCaptured(new Barricade())));
     }
 }

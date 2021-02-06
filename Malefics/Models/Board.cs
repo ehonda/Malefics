@@ -66,7 +66,7 @@ namespace Malefics.Models
                     {
                         destination.Take();
                         destination.Put(pawn);
-                        return new BarricadeCaptured();
+                        return new PieceCaptured(new Barricade());
                     }
 
                     // Unreachable
