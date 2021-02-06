@@ -63,11 +63,7 @@ namespace Malefics.Models
                     }
 
                     if (pieceToCapture is Barricade)
-                    {
-                        destination.Take();
-                        destination.Put(pawn);
-                        return new PieceCaptured(new Barricade());
-                    }
+                        return new PieceCaptured(destination.CaptureWith(pawn));
 
                     // Unreachable
                     throw new InvalidOperationException("Unreachable path in MovePawn");

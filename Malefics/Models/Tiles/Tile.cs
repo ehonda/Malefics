@@ -35,5 +35,12 @@ namespace Malefics.Models.Tiles
                 Goal => true,
                 _ => false
             };
+
+        public static Piece CaptureWith(this ITile tile, Pawn pawn)
+        {
+            var captured = tile.Take();
+            tile.Put(pawn);
+            return captured;
+        }
     }
 }
