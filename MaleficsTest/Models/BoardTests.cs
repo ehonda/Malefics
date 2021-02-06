@@ -18,7 +18,7 @@ namespace MaleficsTests.Models
         private Board _board = new();
 
         private static Board FromRows(params string[] rows)
-            => Grammar.Board.Parse(string.Join('\n', rows));
+            => Grammar.Board().Parse(string.Join('\n', rows));
 
         [SetUp]
         public void Setup()

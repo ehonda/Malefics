@@ -21,7 +21,7 @@ namespace MaleficsTests.Parsers.Ascii
         [Test]
         public void Parse_Red_House_With_A_Pawn()
         {
-            var tile = Grammar.Tile.Parse("R1");
+            var tile = Grammar.Tile().Parse("R1");
 
             Assert.That(tile, Is.TypeOf<House>());
             Assert.That(tile.Contains(new Pawn(PlayerColor.Red)), Is.True);
@@ -35,12 +35,12 @@ namespace MaleficsTests.Parsers.Ascii
         [Test]
         public void Parsing_A_Tile_And_Modifying_It_Does_Not_Affect_Subsequent_Parses()
         {
-            var roadA = Grammar.Road.Parse(".");
+            var roadA = Grammar.Road().Parse(".");
             Assert.That(roadA.IsOccupied, Is.False);
 
             roadA.Put(new Barricade());
 
-            var roadB = Grammar.Road.Parse(".");
+            var roadB = Grammar.Road().Parse(".");
             Assert.That(roadB.IsOccupied, Is.False);
         }
 

@@ -1,9 +1,8 @@
 ﻿using Malefics.Enums;
 using Malefics.Models;
+using Malefics.Models.Tiles;
 using Sprache;
 using System.Collections.Generic;
-using System.Linq;
-using Malefics.Models.Tiles;
 
 namespace Malefics.Parsers.Ascii
 {
@@ -49,23 +48,23 @@ namespace Malefics.Parsers.Ascii
         // Simple terrain and pieces
         // # # # # # # # # # # # # # # # # #
 
-        public static readonly Parser<ITile> Rock
-            = Models.Tiles.Tile.Rock().EncodedAs(ROCK);
+        public static Parser<ITile> Rock()
+            => Models.Tiles.Tile.Rock().EncodedAs(ROCK);
 
-        public static readonly Parser<ITile> Road
-            = Models.Tiles.Tile.Road().EncodedAs(ROAD);
+        public static Parser<ITile> Road()
+            => Models.Tiles.Tile.Road().EncodedAs(ROAD);
 
-        public static readonly Parser<ITile> Barricade
-            = Models.Tiles.Tile.Barricade().EncodedAs(BARRICADE);
+        public static Parser<ITile> Barricade()
+            => Models.Tiles.Tile.Barricade().EncodedAs(BARRICADE);
 
-        public static readonly Parser<ITile> Goal
-            = new Goal().EncodedAs(GOAL);
+        public static Parser<ITile> Goal()
+            => new Goal().EncodedAs(GOAL);
 
         // Pawns
         // # # # # # # # # # # # # # # # # #
 
-        public static readonly Parser<ITile> AnyPawn
-            = Pawn(PlayerColor.Red).Or(Pawn(PlayerColor.Blue));
+        public static Parser<ITile> AnyPawn()
+            => Pawn(PlayerColor.Red).Or(Pawn(PlayerColor.Blue));
 
         public static Parser<ITile> Pawn(PlayerColor playerColor)
             => Models.Tiles.Tile.Pawn(playerColor).EncodedAs(PawnEncoding(playerColor));
@@ -73,8 +72,8 @@ namespace Malefics.Parsers.Ascii
         // Houses
         // # # # # # # # # # # # # # # # # #
 
-        public static readonly Parser<ITile> AnyHouse
-            = House(PlayerColor.Red).Or(House(PlayerColor.Blue));
+        public static Parser<ITile> AnyHouse()
+            => House(PlayerColor.Red).Or(House(PlayerColor.Blue));
 
         private static Parser<ITile> House(PlayerColor playerColor) =>
             from _ in Parse.Char(HouseEncoding(playerColor))
@@ -84,21 +83,21 @@ namespace Malefics.Parsers.Ascii
         // Main parser
         // # # # # # # # # # # # # # # # # #
 
-        public static readonly Parser<ITile> Tile
-            = Rock
-                .Or(Road)
-                .Or(Barricade)
-                .Or(AnyPawn)
-                .Or(AnyHouse)
-                .Or(Goal);
+        public static Parser<ITile> Tile()
+            => Rock()
+                .Or(Road())
+                .Or(Barricade())
+                .Or(AnyPawn())
+                .Or(AnyHouse())
+                .Or(Goal());
 
         // Board Parser
         // ------------------------------------------------------------------
 
-        public static readonly Parser<IEnumerable<ITile>> BoardRow =
-            Tile.Until(Parse.LineTerminator);
+        public static Parser<IEnumerable<ITile>> BoardRow()
+            => Tile().Until(Parse.LineTerminator);
 
-        public static readonly Parser<Board> Board 
-            = BoardRow.Many().Select(Models.Board.FromReversedTileRows);
+        public static Parser<Board> Board()
+            => BoardRow().Many().Select(Models.Board.FromReversedTileRows);
     }
 }

@@ -18,7 +18,7 @@ namespace MaleficsTests.Game
     {
         // TODO: Move duplicated code somewhere so EngineTests and BoardTests both use it
         private static Board FromRows(params string[] rows)
-            => Grammar.Board.Parse(string.Join('\n', rows));
+            => Grammar.Board().Parse(string.Join('\n', rows));
 
         [Test]
         public void The_Engine_Requests_Moves_From_Every_Player()
