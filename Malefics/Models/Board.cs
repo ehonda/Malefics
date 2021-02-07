@@ -123,6 +123,15 @@ namespace Malefics.Models
             => TileAt(position) is Road road
                && road.IsOccupied() is false;
 
+        public void PlaceBarricade(Position position)
+        {
+            if (IsLegalBarricadePlacement(position) is false)
+                // TODO: Custom exception, better error message (reason)
+                throw new InvalidOperationException($"Can't place barricade at {position}");
+
+            TileAt(position).Put(new Barricade());
+        }
+
         private ITile TileAt(Position position)
             => _tiles.TryGetValue(position, out var tile)
                 ? tile

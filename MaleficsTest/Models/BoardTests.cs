@@ -38,6 +38,22 @@ namespace MaleficsTests.Models
         public void A_Barricade_Can_Be_Placed_On_A_Non_Occupied_Road_Tile()
             => Assert.That(FromRows(".").IsLegalBarricadePlacement(new(0, 0)), Is.True);
 
+        [TestCase(" ")]
+        [TestCase("R0")]
+        [TestCase("x")]
+        [TestCase("o")]
+        [TestCase("r")]
+        public void Placing_Invalid_Barricade_Throws(string board)
+            => Assert.Catch<InvalidOperationException>(() 
+                => FromRows(board).PlaceBarricade(new(0, 0)));
+
+        [Test]
+        public void Place_A_Barricade_That_Then_Blocks_A_Pawns_Path()
+        {
+            _board = FromRows("r..");
+            _board.PlaceBarricade(new(1, 0));
+            Assert.That(_board.PlayerCanMoveAPawn(PlayerColor.Red, 2), Is.False);
+        }
 
         [Test]
         public void Adding_A_Pawn_Of_A_Player_With_No_House_Throws()
