@@ -1,12 +1,12 @@
-﻿using System;
-using Malefics.Enums;
+﻿using Malefics.Enums;
 using Malefics.Extensions;
+using Malefics.Game.MoveResults;
 using Malefics.Models.Pieces;
 using Malefics.Models.Tiles;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Malefics.Game.MoveResults;
 
 namespace Malefics.Models
 {
@@ -118,6 +118,10 @@ namespace Malefics.Models
                 .Where(positionAndTile => positionAndTile.Value.Contains(new Pawn(playerColor)))
                 .SelectMany(positionAndTile => GetLegalPawnMovePathsOfDistanceFrom(positionAndTile.Key, distance))
                 .Any();
+
+        public bool IsLegalBarricadePlacement(Position position)
+            => TileAt(position) is Road road
+               && road.IsOccupied() is false;
 
         private ITile TileAt(Position position)
             => _tiles.TryGetValue(position, out var tile)
