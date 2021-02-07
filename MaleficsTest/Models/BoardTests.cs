@@ -26,6 +26,25 @@ namespace MaleficsTests.Models
             _board = new();
         }
 
+        [Test]
+        public void Adding_A_Pawn_Of_A_Player_With_No_House_Throws()
+            => Assert.Catch<InvalidOperationException>(() =>
+                FromRows("").AddPawnToPlayerHouse(new(PlayerColor.Red)));
+
+        [Test]
+        public void Add_A_Pawn_To_A_House_Of_A_Player()
+        {
+            _board = FromRows(
+                ".",
+                "R0");
+
+            Assert.That(_board.PlayerCanMoveAPawn(PlayerColor.Red, 1), Is.False);
+
+            _board.AddPawnToPlayerHouse(new(PlayerColor.Red));
+
+            Assert.That(_board.PlayerCanMoveAPawn(PlayerColor.Red, 1), Is.True);
+        }
+
         // TODO: Test for barricade
         [Test]
         public void There_Are_No_Legal_Move_Paths_From_A_Tile_Without_A_Pawn()

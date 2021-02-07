@@ -55,6 +55,19 @@ namespace Malefics.Models
                     return new PieceCaptured(destination.CaptureWith(pawn));
                 });
 
+        public void AddPawnToPlayerHouse(Pawn pawn)
+        {
+            // ReSharper disable once VariableHidesOuterVariable
+            var house = _tiles.Values
+                .SingleOrDefault(tile => tile is House house && house.PlayerColor == pawn.PlayerColor);
+
+            // TODO: Custom exception type
+            if (house is null)
+                throw new InvalidOperationException($"No house to put {pawn} in on board.");
+
+            house.Put(pawn);
+        }
+
         public IEnumerable<IEnumerable<Position>> GetLegalPawnMovePathsOfDistanceFrom(
             Position position, uint distance)
             => TileAt(position).Peek() switch
