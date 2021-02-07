@@ -83,13 +83,18 @@ namespace Malefics.Parsers.Ascii
         // Main parser
         // # # # # # # # # # # # # # # # # #
 
+        // TODO: Needing to clone the parsed tiles is kind of awkward but necessary
+        //       - Otherwise, things like Tile().Until() will not work properly,
+        //         resulting in the same reference being returned for parsing e.g. "..."
+        //       - Is there a better way to solve this issue?
         public static Parser<ITile> Tile()
             => Rock()
                 .Or(Road())
                 .Or(Barricade())
                 .Or(AnyPawn())
                 .Or(AnyHouse())
-                .Or(Goal());
+                .Or(Goal())
+                .Select(tile => (tile.Clone() as ITile)!);
 
         // Board Parser
         // ------------------------------------------------------------------
