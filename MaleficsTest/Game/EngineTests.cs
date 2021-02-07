@@ -137,5 +137,26 @@ namespace MaleficsTests.Game
 
             Assert.That(winner.PlayerColor, Is.EqualTo(PlayerColor.Blue));
         }
+
+        [Test]
+        public void Captured_Pawns_Are_Put_Back_Into_Houses()
+        {
+            var red = PlayerMocks.StaticPawnMoveExecutor(
+                PlayerColor.Red,
+                Path.AxisParallel(new(0, 0), new(1, 0)));
+
+            var blue = PlayerMocks.StaticPawnMoveExecutor(
+                PlayerColor.Blue,
+                Path.AxisParallel(new(4, 0), new(3, 0)));
+
+            var engine = new Engine(
+                FromRows("rb xB0"),
+                new[] { red.Object, blue.Object },
+                DieMocks.Cyclic(new[] { 1u }).Object);
+
+            var winner = engine.Run();
+
+            Assert.That(winner.PlayerColor, Is.EqualTo(PlayerColor.Blue));
+        }
     }
 }

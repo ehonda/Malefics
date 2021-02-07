@@ -2,6 +2,7 @@
 using Malefics.Game.Dice;
 using Malefics.Game.MoveResults;
 using Malefics.Models;
+using Malefics.Models.Pieces;
 using Malefics.Players;
 
 namespace Malefics.Game
@@ -34,8 +35,15 @@ namespace Malefics.Game
                         var move = player.RequestPawnMove(_board, roll);
 
                         var moveResult = _board.MovePawn(new(player.PlayerColor), move);
+
                         if (moveResult is Victory)
                             return player;
+
+                        if (moveResult is PieceCaptured pieceCaptured)
+                        {
+                            if (pieceCaptured.Piece is Pawn pawn)
+                                _board.AddPawnToPlayerHouse(pawn);
+                        }
                     }
                 }
             }
