@@ -1,8 +1,11 @@
-﻿using Malefics.Models.Pieces;
+﻿using System;
+using Malefics.Models.Pieces;
 
 namespace Malefics.Models.Tiles
 {
-    public interface ITile
+    // TODO: We only implement ICloneable because of problems with the parsers
+    //       - Is there a better way to solve those problems?
+    public interface ITile : ICloneable
     {
         public bool Contains(Piece piece);
 

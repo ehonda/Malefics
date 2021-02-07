@@ -35,5 +35,12 @@ namespace Malefics.Models.Tiles
         public bool IsValidCaptureTargetFor(Piece piece) => false;
 
         #endregion
+
+        #region Implementation of ICloneable
+
+        /// <inheritdoc />
+        public object Clone() => new Rock();
+
+        #endregion
     }
 }

@@ -53,5 +53,12 @@ namespace Malefics.Models.Tiles
         }
 
         #endregion
+
+        #region Implementation of ICloneable
+
+        /// <inheritdoc />
+        public object Clone() => new Goal();
+
+        #endregion
     }
 }

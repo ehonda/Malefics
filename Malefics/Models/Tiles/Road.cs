@@ -61,5 +61,15 @@ namespace Malefics.Models.Tiles
                && _occupyingPiece != piece;
 
         #endregion
+
+        #region Implementation of ICloneable
+
+        /// <inheritdoc />
+        public object Clone()
+            => _occupyingPiece is not null
+                ? new(_occupyingPiece with { })
+                : new Road();
+
+        #endregion
     }
 }
