@@ -34,6 +34,7 @@ namespace Malefics.Game
                         // TODO: Check that move path has length of roll - Or should Player guarantee it?
                         var move = player.RequestPawnMove(_board, roll);
 
+                        // TODO: Check that move is valid?
                         var moveResult = _board.MovePawn(new(player.PlayerColor), move);
 
                         if (moveResult is Victory)
@@ -43,6 +44,8 @@ namespace Malefics.Game
                         {
                             if (pieceCaptured.Piece is Pawn pawn)
                                 _board.AddPawnToPlayerHouse(pawn);
+
+                            // TODO: Request barricade placements for captured barricades
                         }
                     }
                 }
