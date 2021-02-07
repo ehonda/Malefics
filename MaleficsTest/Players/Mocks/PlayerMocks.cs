@@ -11,24 +11,9 @@ namespace MaleficsTests.Players.Mocks
 {
     public static class PlayerMocks
     {
-        // TODO: Refactor to use cyclic move sequence executor
         public static Mock<IPlayer> StaticPawnMoveExecutor(
             PlayerColor playerColor, IEnumerable<Position> move)
-        {
-            var mock = new Mock<IPlayer>();
-
-            mock
-                .Setup(player => player.RequestPawnMove(
-                    It.IsAny<Board>(),
-                    It.IsAny<uint>()))
-                .Returns(move);
-
-            mock
-                .Setup(player => player.PlayerColor)
-                .Returns(playerColor);
-
-            return mock;
-        }
+            => CyclicMoveSequenceExecutor(playerColor, new[] { move });
 
         [SuppressMessage("ReSharper", "VariableHidesOuterVariable")]
         public static Mock<IPlayer> CyclicMoveSequenceExecutor(
@@ -41,11 +26,7 @@ namespace MaleficsTests.Players.Mocks
                         throw new ArgumentException(
                             "Can't construct cyclic move executor from empty move sequence.");
 
-                    // TODO: Extract Mock Setup for player color into separate method
-                    var mock = new Mock<IPlayer>();
-                    mock
-                        .Setup(player => player.PlayerColor)
-                        .Returns(playerColor);
+                    var mock = PlayerOfColor(playerColor);
 
                     // TODO: Refactor such that cyclic die and cyclic move executor reuse common logic
                     var moveEnumerator = moves.GetEnumerator();
@@ -65,10 +46,19 @@ namespace MaleficsTests.Players.Mocks
                             }
 
                             // TODO: This is kinda awkward, is there a better way to do this?
-                            return (IEnumerable<Position>)move!;
+                            return (IEnumerable<Position>) move!;
                         });
 
                     return mock;
                 });
+
+        private static Mock<IPlayer> PlayerOfColor(PlayerColor playerColor)
+        {
+            var mock = new Mock<IPlayer>();
+            mock
+                .Setup(player => player.PlayerColor)
+                .Returns(playerColor);
+            return mock;
+        }
     }
 }
