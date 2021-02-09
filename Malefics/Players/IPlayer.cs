@@ -10,5 +10,7 @@ namespace Malefics.Players
 
         // TODO: Replace Board access by something like a "view" access
         public IEnumerable<Position> RequestPawnMove(Board board, uint pips);
+
+        public Position RequestBarricadePlacement(Board board);
     }
 }
