@@ -158,5 +158,36 @@ namespace MaleficsTests.Game
 
             Assert.That(winner.PlayerColor, Is.EqualTo(PlayerColor.Blue));
         }
+
+        [Test]
+        public void Place_Captured_Barricade()
+        {
+            var red = PlayerMocks.CyclicMoveSequenceExecutor(
+                PlayerColor.Red,
+                new[]
+                {
+                    Path.AxisParallel(new(0, 0), new(1, 0)),
+                    Path.AxisParallel(new(1, 0), new(2, 0))
+                });
+
+            // TODO: Setup via PlayerMocks
+            red
+                .Setup(player =>
+                    player.RequestBarricadePlacement(It.IsAny<Board>()))
+                .Returns(new Position(3, 0));
+
+            var blue = PlayerMocks.StaticPawnMoveExecutor(
+                PlayerColor.Blue,
+                Path.AxisParallel(new(4, 0), new(2, 0)));
+
+            var engine = new Engine(
+                FromRows("rox.b"),
+                new[] { red.Object, blue.Object },
+                DieMocks.Cyclic(new[] { 1u, 2u }).Object);
+
+            var winner = engine.Run();
+
+            Assert.That(winner.PlayerColor, Is.EqualTo(PlayerColor.Red));
+        }
     }
 }
