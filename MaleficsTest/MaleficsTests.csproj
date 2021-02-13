@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CyclicEnumerables\CyclicEnumerables.csproj" />
     <ProjectReference Include="..\Malefics\Malefics.csproj" />
   </ItemGroup>
 

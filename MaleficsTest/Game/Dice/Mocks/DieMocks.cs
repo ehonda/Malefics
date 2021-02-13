@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using Malefics.Extensions;
+﻿using CyclicEnumerables;
 using Malefics.Game.Dice;
 using Moq;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MaleficsTests.Game.Dice.Mocks
 {
@@ -11,35 +10,20 @@ namespace MaleficsTests.Game.Dice.Mocks
     {
         [SuppressMessage("ReSharper", "VariableHidesOuterVariable")]
         public static Mock<IDie> Cyclic(IEnumerable<uint> rolls)
-            => With.Array(
-                rolls,
-                rolls =>
+        {
+            var mock = new Mock<IDie>();
+            // TODO: Why do we get ReSharper warning about disposing enumerator, do we need to fix it?
+            var rollEnumerator = rolls.Cycle().GetEnumerator();
+
+            mock
+                .Setup(die => die.Roll())
+                .Returns(() =>
                 {
-                    if (rolls.Length == 0)
-                        throw new ArgumentException(
-                            "Can't construct cyclic die mock from empty pip sequence.");
-
-                    var mock = new Mock<IDie>();
-
-                    // TODO: Implement more cleanly
-                    var pip = rolls.GetEnumerator();
-                    pip.MoveNext();
-
-                    mock
-                        .Setup(die => die.Roll())
-                        .Returns(() =>
-                        {
-                            var roll = pip.Current;
-                            if (!pip.MoveNext())
-                            {
-                                pip = rolls.GetEnumerator();
-                                pip.MoveNext();
-                            }
-
-                            return (uint)roll;
-                        });
-
-                    return mock;
+                    rollEnumerator.MoveNext();
+                    return rollEnumerator.Current;
                 });
+
+            return mock;
+        }
     }
 }
