@@ -21,8 +21,12 @@ namespace Malefics.Parsers.Ascii
         private const char ROAD = '.';
         private const char BARRICADE = 'o';
         private const char PAWN_RED = 'r';
+        private const char PAWN_GREEN = 'g';
+        private const char PAWN_YELLOW = 'y';
         private const char PAWN_BLUE = 'b';
         private const char HOUSE_RED = 'R';
+        private const char HOUSE_GREEN = 'G';
+        private const char HOUSE_YELLOW = 'Y';
         private const char HOUSE_BLUE = 'B';
         private const char GOAL = 'x';
 
@@ -30,6 +34,8 @@ namespace Malefics.Parsers.Ascii
             => playerColor switch
             {
                 PlayerColor.Red => PAWN_RED,
+                PlayerColor.Green => PAWN_GREEN,
+                PlayerColor.Yellow => PAWN_YELLOW,
                 PlayerColor.Blue => PAWN_BLUE,
                 _ => ' '
             };
@@ -38,6 +44,8 @@ namespace Malefics.Parsers.Ascii
             => playerColor switch
             {
                 PlayerColor.Red => HOUSE_RED,
+                PlayerColor.Green => HOUSE_GREEN,
+                PlayerColor.Yellow => HOUSE_YELLOW,
                 PlayerColor.Blue => HOUSE_BLUE,
                 _ => ' '
             };
@@ -64,7 +72,10 @@ namespace Malefics.Parsers.Ascii
         // # # # # # # # # # # # # # # # # #
 
         private static Parser<ITile> AnyPawn()
-            => Pawn(PlayerColor.Red).Or(Pawn(PlayerColor.Blue));
+            => Pawn(PlayerColor.Red)
+                .Or(Pawn(PlayerColor.Green))
+                .Or(Pawn(PlayerColor.Yellow))
+                .Or(Pawn(PlayerColor.Blue));
 
         private static Parser<ITile> Pawn(PlayerColor playerColor)
             => Models.Tiles.Tile.Pawn(playerColor).EncodedAs(PawnEncoding(playerColor));
@@ -73,7 +84,10 @@ namespace Malefics.Parsers.Ascii
         // # # # # # # # # # # # # # # # # #
 
         private static Parser<ITile> AnyHouse()
-            => House(PlayerColor.Red).Or(House(PlayerColor.Blue));
+            => House(PlayerColor.Red)
+                .Or(House(PlayerColor.Green))
+                .Or(House(PlayerColor.Yellow))
+                .Or(House(PlayerColor.Blue));
 
         private static Parser<ITile> House(PlayerColor playerColor) =>
             from _ in Parse.Char(HouseEncoding(playerColor))
