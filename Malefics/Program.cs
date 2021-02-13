@@ -1,7 +1,5 @@
-﻿using Malefics.Extensions;
-using Malefics.Models;
-using System;
-using System.Linq;
+﻿using Malefics.Models.Tiles;
+using Spectre.Console;
 
 namespace Malefics
 {
@@ -9,7 +7,11 @@ namespace Malefics
     {
         static void Main(string[] args)
         {
-            Console.WriteLine($"{Path.AxisParallelSegments(new Position(0, 0)).Any()}");
+            AnsiConsole.Render(new Rock());
+            AnsiConsole.Render(new Rock());
+            AnsiConsole.Render(new Rock());
+            AnsiConsole.Render(new Rock());
+            AnsiConsole.Render(new Goal());
         }
     }
 }

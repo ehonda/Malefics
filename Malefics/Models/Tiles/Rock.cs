@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Malefics.Exceptions;
 using Malefics.Models.Pieces;
+using Spectre.Console;
 using Spectre.Console.Rendering;
 
 namespace Malefics.Models.Tiles
@@ -49,9 +50,7 @@ namespace Malefics.Models.Tiles
 
         /// <inheritdoc />
         protected override IEnumerable<Segment> Render(RenderContext context, int maxWidth)
-        {
-            yield break;
-        }
+            => (new Markup(" ") as IRenderable).Render(context, maxWidth);
 
         #endregion
     }
