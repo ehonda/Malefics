@@ -1,11 +1,12 @@
 ﻿using System;
 using Malefics.Models.Pieces;
+using Spectre.Console.Rendering;
 
 namespace Malefics.Models.Tiles
 {
     // TODO: We only implement ICloneable because of problems with the parsers
     //       - Is there a better way to solve those problems?
-    public interface ITile : ICloneable
+    public interface ITile : ICloneable, IRenderable
     {
         public bool Contains(Piece piece);
 

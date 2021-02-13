@@ -1,9 +1,11 @@
-﻿using Malefics.Exceptions;
+﻿using System.Collections.Generic;
+using Malefics.Exceptions;
 using Malefics.Models.Pieces;
+using Spectre.Console.Rendering;
 
 namespace Malefics.Models.Tiles
 {
-    public class Road : ITile
+    public class Road : Renderable, ITile
     {
         private Piece? _occupyingPiece;
 
@@ -69,6 +71,16 @@ namespace Malefics.Models.Tiles
             => _occupyingPiece is not null
                 ? new(_occupyingPiece with { })
                 : new Road();
+
+        #endregion
+
+        #region Overrides of Renderable
+
+        /// <inheritdoc />
+        protected override IEnumerable<Segment> Render(RenderContext context, int maxWidth)
+        {
+            yield break;
+        }
 
         #endregion
     }

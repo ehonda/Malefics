@@ -1,9 +1,11 @@
-﻿using Malefics.Exceptions;
+﻿using System.Collections.Generic;
+using Malefics.Exceptions;
 using Malefics.Models.Pieces;
+using Spectre.Console.Rendering;
 
 namespace Malefics.Models.Tiles
 {
-    public class Rock : ITile
+    public class Rock : Renderable, ITile
     {
         #region Implementations of ITile
 
@@ -40,6 +42,16 @@ namespace Malefics.Models.Tiles
 
         /// <inheritdoc />
         public object Clone() => new Rock();
+
+        #endregion
+
+        #region Overrides of Renderable
+
+        /// <inheritdoc />
+        protected override IEnumerable<Segment> Render(RenderContext context, int maxWidth)
+        {
+            yield break;
+        }
 
         #endregion
     }

@@ -7,10 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Spectre.Console.Rendering;
 
 namespace Malefics.Models
 {
-    public class Board
+    // TODO: Should this implement Renderable directly, or have an associated view?
+    public class Board : Renderable
     {
         private readonly IDictionary<Position, ITile> _tiles
             = new Dictionary<Position, ITile>();
@@ -136,5 +138,15 @@ namespace Malefics.Models
             => _tiles.TryGetValue(position, out var tile)
                 ? tile
                 : Tile.Rock();
+
+        #region Overrides of Renderable
+
+        /// <inheritdoc />
+        protected override IEnumerable<Segment> Render(RenderContext context, int maxWidth)
+        {
+            yield break;
+        }
+
+        #endregion
     }
 }

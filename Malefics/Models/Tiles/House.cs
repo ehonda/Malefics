@@ -1,10 +1,12 @@
-﻿using Malefics.Enums;
+﻿using System.Collections.Generic;
+using Malefics.Enums;
 using Malefics.Exceptions;
 using Malefics.Models.Pieces;
+using Spectre.Console.Rendering;
 
 namespace Malefics.Models.Tiles
 {
-    public class House : ITile
+    public class House : Renderable, ITile
     {
         public PlayerColor PlayerColor { get; }
         private uint _pawns;
@@ -68,6 +70,16 @@ namespace Malefics.Models.Tiles
 
         /// <inheritdoc />
         public object Clone() => new House(PlayerColor, _pawns);
+
+        #endregion
+
+        #region Overrides of Renderable
+
+        /// <inheritdoc />
+        protected override IEnumerable<Segment> Render(RenderContext context, int maxWidth)
+        {
+            yield break;
+        }
 
         #endregion
     }

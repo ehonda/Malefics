@@ -1,9 +1,11 @@
-﻿using Malefics.Exceptions;
+﻿using System.Collections.Generic;
+using Malefics.Exceptions;
 using Malefics.Models.Pieces;
+using Spectre.Console.Rendering;
 
 namespace Malefics.Models.Tiles
 {
-    public class Goal : ITile
+    public class Goal : Renderable, ITile
     {
         // TODO: What to do about the other functions we need to implement?
         //       They aren't really meaningful since if a Pawn is placed on
@@ -58,6 +60,16 @@ namespace Malefics.Models.Tiles
 
         /// <inheritdoc />
         public object Clone() => new Goal();
+
+        #endregion
+
+        #region Overrides of Renderable
+
+        /// <inheritdoc />
+        protected override IEnumerable<Segment> Render(RenderContext context, int maxWidth)
+        {
+            yield break;
+        }
 
         #endregion
     }
