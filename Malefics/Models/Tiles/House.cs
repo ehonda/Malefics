@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
-using Malefics.Enums;
+﻿using Malefics.Enums;
 using Malefics.Exceptions;
 using Malefics.Models.Pieces;
+using Spectre.Console;
 using Spectre.Console.Rendering;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Malefics.Models.Tiles
 {
@@ -78,7 +81,32 @@ namespace Malefics.Models.Tiles
         /// <inheritdoc />
         protected override IEnumerable<Segment> Render(RenderContext context, int maxWidth)
         {
-            yield break;
+            // TODO: Implement more cleanly
+            var houseMarkup = PlayerColor switch
+            {
+                PlayerColor.Red => new Markup(Colorize("R")),
+                PlayerColor.Green => new(Colorize("G")),
+                PlayerColor.Yellow => new(Colorize("Y")),
+                PlayerColor.Blue => new(Colorize("B")),
+                _ => throw new InvalidOperationException(
+                    "Unknown player color cannot be rendered.")
+            };
+
+            var pawnMarkup = new Markup(Colorize(_pawns.ToString()));
+
+            return (houseMarkup as IRenderable).Render(context, maxWidth)
+                .Concat((pawnMarkup as IRenderable).Render(context, maxWidth));
+
+            string Colorize(string s) =>
+                PlayerColor switch
+                {
+                    PlayerColor.Red => $"[red]{s}[/]",
+                    PlayerColor.Green => $"[green]{s}[/]",
+                    PlayerColor.Yellow => $"[yellow]{s}[/]",
+                    PlayerColor.Blue => $"[blue]{s}[/]",
+                    _ => throw new InvalidOperationException(
+                        "Unknown player color cannot be rendered.")
+                };
         }
 
         #endregion

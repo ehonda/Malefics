@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Spectre.Console;
 using Spectre.Console.Rendering;
 
 namespace Malefics.Models
@@ -143,9 +144,13 @@ namespace Malefics.Models
 
         /// <inheritdoc />
         protected override IEnumerable<Segment> Render(RenderContext context, int maxWidth)
-        {
-            yield break;
-        }
+            => _tiles
+                .GroupBy(kv => kv.Key.Y)
+                .OrderByDescending(rowGroup => rowGroup.Key)
+                .SelectMany(rowGroup => rowGroup
+                    .OrderBy(kv => kv.Key.X)
+                    .SelectMany(kv => kv.Value.Render(context, maxWidth))
+                    .Concat((new Markup(Environment.NewLine) as IRenderable).Render(context, maxWidth)));
 
         #endregion
     }
