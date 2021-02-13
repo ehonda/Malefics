@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Malefics.Game.Dice;
+﻿using Malefics.Game.Dice;
 using Malefics.Game.MoveResults;
 using Malefics.Models;
 using Malefics.Models.Pieces;
@@ -24,6 +23,7 @@ namespace Malefics.Game
 
         public IPlayer Run()
         {
+            // TODO: Refactor into smaller functions
             while (true)
             {
                 foreach (var player in _players)
