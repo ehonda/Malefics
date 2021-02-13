@@ -34,9 +34,9 @@ namespace MaleficsTests.Game
 
             var engine = new Engine(
                 FromRows("r..x..b"),
-                new[] {red.Object, blue.Object},
+                new[] { red.Object, blue.Object },
                 DieMocks.Cyclic(new[] { 1u, 3u }).Object);
-            
+
             engine.Run();
 
             red.Verify(p => p.RequestPawnMove(
@@ -57,7 +57,7 @@ namespace MaleficsTests.Game
 
             var engine = new Engine(
                 FromRows("r..x"),
-                new[] {red.Object},
+                new[] { red.Object },
                 DieMocks.Cyclic(new[] { 3u }).Object);
 
             var winner = engine.Run();
@@ -114,7 +114,7 @@ namespace MaleficsTests.Game
         {
             var red = PlayerMocks.CyclicMoveSequenceExecutor(
                 PlayerColor.Red,
-                new []
+                new[]
                 {
                     Path.AxisParallel(new(0, 0), new(1, 0)),
                     Path.AxisParallel(new(1, 0), new(2, 0))
@@ -163,18 +163,13 @@ namespace MaleficsTests.Game
         public void Place_Captured_Barricade()
         {
             var red = PlayerMocks.CyclicMoveSequenceExecutor(
-                PlayerColor.Red,
-                new[]
-                {
-                    Path.AxisParallel(new(0, 0), new(1, 0)),
-                    Path.AxisParallel(new(1, 0), new(2, 0))
-                });
-
-            // TODO: Setup via PlayerMocks
-            red
-                .Setup(player =>
-                    player.RequestBarricadePlacement(It.IsAny<Board>()))
-                .Returns(new Position(3, 0));
+                    PlayerColor.Red,
+                    new[]
+                    {
+                        Path.AxisParallel(new(0, 0), new(1, 0)),
+                        Path.AxisParallel(new(1, 0), new(2, 0))
+                    })
+                .WithCyclicBarricadePlacements(new[] { new Position(3, 0) });
 
             var blue = PlayerMocks.StaticPawnMoveExecutor(
                 PlayerColor.Blue,

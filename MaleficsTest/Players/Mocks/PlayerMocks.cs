@@ -32,6 +32,23 @@ namespace MaleficsTests.Players.Mocks
             return mock;
         }
 
+        public static Mock<IPlayer> WithCyclicBarricadePlacements(
+            this Mock<IPlayer> mock, IEnumerable<Position> placements)
+        {
+            var placementsEnumerator = placements.Cycle().GetEnumerator();
+
+            mock
+                .Setup(player =>
+                    player.RequestBarricadePlacement(It.IsAny<Board>()))
+                .Returns(() =>
+                {
+                    placementsEnumerator.MoveNext();
+                    return placementsEnumerator.Current;
+                });
+
+            return mock;
+        }
+
         private static Mock<IPlayer> PlayerOfColor(PlayerColor playerColor)
         {
             var mock = new Mock<IPlayer>();
