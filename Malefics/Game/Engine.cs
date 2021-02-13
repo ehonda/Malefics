@@ -44,9 +44,11 @@ namespace Malefics.Game
                         {
                             if (pieceCaptured.Piece is Pawn pawn)
                                 _board.AddPawnToPlayerHouse(pawn);
-
-                            // TODO: Check that requested barricade placement is valid
-                            _board.PlaceBarricade(player.RequestBarricadePlacement(_board));
+                            else if (pieceCaptured.Piece is Barricade)
+                            {
+                                // TODO: Check that requested barricade placement is valid
+                                _board.PlaceBarricade(player.RequestBarricadePlacement(_board));
+                            }
                         }
                     }
                 }
