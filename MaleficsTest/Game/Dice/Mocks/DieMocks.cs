@@ -2,13 +2,11 @@
 using Malefics.Game.Dice;
 using Moq;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 
 namespace MaleficsTests.Game.Dice.Mocks
 {
     public static class DieMocks
     {
-        [SuppressMessage("ReSharper", "VariableHidesOuterVariable")]
         public static Mock<IDie> Cyclic(IEnumerable<uint> rolls)
         {
             var mock = new Mock<IDie>();

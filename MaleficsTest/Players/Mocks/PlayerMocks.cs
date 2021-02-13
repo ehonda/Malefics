@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using CyclicEnumerables;
+﻿using CyclicEnumerables;
 using Malefics.Enums;
-using Malefics.Extensions;
 using Malefics.Models;
 using Malefics.Players;
 using Moq;
+using System.Collections.Generic;
 
 namespace MaleficsTests.Players.Mocks
 {
@@ -16,7 +13,6 @@ namespace MaleficsTests.Players.Mocks
             PlayerColor playerColor, IEnumerable<Position> move)
             => CyclicMoveSequenceExecutor(playerColor, new[] { move });
 
-        [SuppressMessage("ReSharper", "VariableHidesOuterVariable")]
         public static Mock<IPlayer> CyclicMoveSequenceExecutor(
             PlayerColor playerColor, IEnumerable<IEnumerable<Position>> moves)
         {
