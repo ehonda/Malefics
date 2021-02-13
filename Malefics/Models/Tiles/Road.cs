@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Malefics.Enums;
 using Malefics.Exceptions;
 using Malefics.Models.Pieces;
+using Spectre.Console;
 using Spectre.Console.Rendering;
 
 namespace Malefics.Models.Tiles
@@ -79,7 +82,27 @@ namespace Malefics.Models.Tiles
         /// <inheritdoc />
         protected override IEnumerable<Segment> Render(RenderContext context, int maxWidth)
         {
-            yield break;
+            var markup = _occupyingPiece switch
+            {
+                null => new Markup("."),
+
+                Barricade => new("[white]o[/]"),
+
+                Pawn pawn => pawn.PlayerColor switch
+                {
+                    // TODO: Implement functions to retrieve color, character
+                    PlayerColor.Red => new("[red]r[/]"),
+                    PlayerColor.Green => new("[green]g[/]"),
+                    PlayerColor.Yellow => new("[yellow]y[/]"),
+                    PlayerColor.Blue => new("[blue]b[/]"),
+                    _ => throw new InvalidOperationException(
+                        "Unknown player color cannot be rendered.")
+                },
+
+                _ => throw new InvalidOperationException(
+                    $"Unknown piece {_occupyingPiece} cannot be rendered.")
+            };
+            return (markup as IRenderable).Render(context, maxWidth);
         }
 
         #endregion
