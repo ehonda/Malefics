@@ -32,5 +32,7 @@ namespace MaleficsTests.Players.AI
 
             Assert.That(move, Is.EquivalentTo(Path.AxisParallel(new(0, 0), new(1, 0))));
         }
+
+        // TODO: More tests that a random element is chosen
     }
 }
