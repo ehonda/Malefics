@@ -30,7 +30,7 @@ namespace MaleficsTests.Players.AI
 
             var move = _player.RequestPawnMove(_board, 1);
 
-            //Assert.That(move, Is.EquivalentTo(Path.AxisParallel(new(0, 0), new(1, 0))));
+            Assert.That(move, Is.EquivalentTo(Path.AxisParallel(new(0, 0), new(1, 0))));
         }
     }
 }
