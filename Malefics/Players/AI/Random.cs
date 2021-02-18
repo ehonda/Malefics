@@ -22,7 +22,10 @@ namespace Malefics.Players.AI
                 moves => moves.ElementAt(_rng.Next(moves.Length)));
 
         /// <inheritdoc />
-        public Position RequestBarricadePlacement(Board board) => null;
+        public Position RequestBarricadePlacement(Board board)
+            => With.Array(
+                board.GetLegalBarricadePlacements(),
+                placements => placements.ElementAt(_rng.Next(placements.Length)));
 
         #endregion
     }

@@ -33,6 +33,16 @@ namespace MaleficsTests.Players.AI
             Assert.That(move, Is.EquivalentTo(Path.AxisParallel(new(0, 0), new(1, 0))));
         }
 
+        [Test]
+        public void Random_Player_Chooses_From_Single_Legal_Barricade_Placement()
+        {
+            _board = ParseBoard.FromRows(".");
+
+            var placement = _player.RequestBarricadePlacement(_board);
+
+            Assert.That(placement, Is.EqualTo(new Position(0, 0)));
+        }
+
         // TODO: More tests that a random element is chosen
     }
 }

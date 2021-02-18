@@ -3,12 +3,12 @@ using Malefics.Extensions;
 using Malefics.Game.MoveResults;
 using Malefics.Models.Pieces;
 using Malefics.Models.Tiles;
+using Spectre.Console;
+using Spectre.Console.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Spectre.Console;
-using Spectre.Console.Rendering;
 
 namespace Malefics.Models
 {
@@ -97,7 +97,7 @@ namespace Malefics.Models
             => distance switch
             {
                 0u => TileAt(position).IsGeometricallyTraversable()
-                    ? new[] {new[] {position}}
+                    ? new[] { new[] { position } }
                     : Enumerable.Empty<IEnumerable<Position>>(),
 
                 _ => position
@@ -128,6 +128,13 @@ namespace Malefics.Models
         public bool IsLegalBarricadePlacement(Position position)
             => TileAt(position) is Road road
                && road.IsOccupied() is false;
+
+        public IEnumerable<Position> GetLegalBarricadePlacements()
+            => _tiles
+                .Where(positionAndTile =>
+                    positionAndTile.Value is Road road
+                    && road.IsOccupied() is false)
+                .Select(positionAndTile => positionAndTile.Key);
 
         public void PlaceBarricade(Position position)
         {
