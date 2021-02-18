@@ -71,6 +71,12 @@ namespace Malefics.Models
             house.Put(pawn);
         }
 
+        public IEnumerable<IEnumerable<Position>> GetLegalPawnMovesOfDistanceForPlayer(
+            PlayerColor playerColor, uint distance)
+            => _tiles
+                .Where(positionAndTile => positionAndTile.Value.Contains(new Pawn(playerColor)))
+                .SelectMany(positionAndTile => GetLegalPawnMovePathsOfDistanceFrom(positionAndTile.Key, distance));
+
         public IEnumerable<IEnumerable<Position>> GetLegalPawnMovePathsOfDistanceFrom(
             Position position, uint distance)
             => TileAt(position).Peek() switch
@@ -117,10 +123,7 @@ namespace Malefics.Models
                     && tilePath.Inner().All(tilePosition => tilePosition.Second.AllowsMovingOver()));
 
         public bool PlayerCanMoveAPawn(PlayerColor playerColor, uint distance)
-            => _tiles
-                .Where(positionAndTile => positionAndTile.Value.Contains(new Pawn(playerColor)))
-                .SelectMany(positionAndTile => GetLegalPawnMovePathsOfDistanceFrom(positionAndTile.Key, distance))
-                .Any();
+            => GetLegalPawnMovesOfDistanceForPlayer(playerColor, distance).Any();
 
         public bool IsLegalBarricadePlacement(Position position)
             => TileAt(position) is Road road
