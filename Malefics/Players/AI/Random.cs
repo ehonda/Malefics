@@ -6,6 +6,8 @@ namespace Malefics.Players.AI
 {
     public class Random : IPlayer
     {
+        private readonly System.Random _rng = new();
+
         #region Implementation of IPlayer
 
         /// <inheritdoc />
