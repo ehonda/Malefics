@@ -19,10 +19,10 @@ namespace Malefics
             // R2    B2");
 
             var board = Grammar.Board().Parse(
-                File.ReadAllText(@"C:\Users\dennis\source\repos\CSharp\Malefics\Malefics\boards\standard_malefiz_some_turns_played.txt"));
+                File.ReadAllText(@"..\..\..\boards\standard_malefiz_some_turns_played.txt"));
 
             //var board = Grammar.Board().Parse(
-            //    File.ReadAllText(@"C:\Users\dennis\source\repos\CSharp\Malefics\Malefics\boards\standard_malefiz.txt"));
+            //    File.ReadAllText(@"..\..\..\boards\standard_malefiz.txt"));
 
             AnsiConsole.Render(new Panel(board));
             //AnsiConsole.Render(board);
